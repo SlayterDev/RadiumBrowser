@@ -10,12 +10,18 @@
 		3CADC949B2736BBB3F7B5EF1 /* Pods_RadiumBrowserUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDF747E739C5CC832EEFB1A7 /* Pods_RadiumBrowserUITests.framework */; };
 		3CDDEBFD7B6642A2FEB0EEA5 /* Pods_RadiumBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283FB330E1E0BA712752A519 /* Pods_RadiumBrowser.framework */; };
 		41A567F31E40CB3B00470017 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A567F21E40CB3B00470017 /* AppDelegate.swift */; };
-		41A567F51E40CB3B00470017 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A567F41E40CB3B00470017 /* ViewController.swift */; };
 		41A567F81E40CB3B00470017 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41A567F61E40CB3B00470017 /* Main.storyboard */; };
 		41A567FA1E40CB3B00470017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41A567F91E40CB3B00470017 /* Assets.xcassets */; };
 		41A567FD1E40CB3B00470017 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41A567FB1E40CB3B00470017 /* LaunchScreen.storyboard */; };
 		41A568081E40CB3B00470017 /* RadiumBrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A568071E40CB3B00470017 /* RadiumBrowserTests.swift */; };
 		41A568131E40CB3B00470017 /* RadiumBrowserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A568121E40CB3B00470017 /* RadiumBrowserUITests.swift */; };
+		41DBC5EF1E411AE900913FAA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DBC5EE1E411AE900913FAA /* MainViewController.swift */; };
+		41DBC5F11E411B8B00913FAA /* AddressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DBC5F01E411B8B00913FAA /* AddressBar.swift */; };
+		41DBC5F31E411C7A00913FAA /* SharedConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DBC5F21E411C7A00913FAA /* SharedConfig.swift */; };
+		41DBC5F51E41204300913FAA /* SharedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DBC5F41E41204300913FAA /* SharedTextField.swift */; };
+		41DBC5FA1E412C8400913FAA /* TabContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DBC5F91E412C8400913FAA /* TabContainerView.swift */; };
+		41DBC5FC1E412CA500913FAA /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DBC5FB1E412CA500913FAA /* TabView.swift */; };
+		41DBC5FE1E412F0A00913FAA /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DBC5FD1E412F0A00913FAA /* UIViewExtensions.swift */; };
 		B044BD60EEF573A933285FB5 /* Pods_RadiumBrowserTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF7E37CD5794D1D23AADA22B /* Pods_RadiumBrowserTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +49,6 @@
 		283FB330E1E0BA712752A519 /* Pods_RadiumBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41A567EF1E40CB3B00470017 /* RadiumBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadiumBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41A567F21E40CB3B00470017 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		41A567F41E40CB3B00470017 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		41A567F71E40CB3B00470017 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		41A567F91E40CB3B00470017 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41A567FC1E40CB3B00470017 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +59,13 @@
 		41A5680E1E40CB3B00470017 /* RadiumBrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadiumBrowserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41A568121E40CB3B00470017 /* RadiumBrowserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiumBrowserUITests.swift; sourceTree = "<group>"; };
 		41A568141E40CB3B00470017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41DBC5EE1E411AE900913FAA /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		41DBC5F01E411B8B00913FAA /* AddressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBar.swift; sourceTree = "<group>"; };
+		41DBC5F21E411C7A00913FAA /* SharedConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedConfig.swift; sourceTree = "<group>"; };
+		41DBC5F41E41204300913FAA /* SharedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedTextField.swift; sourceTree = "<group>"; };
+		41DBC5F91E412C8400913FAA /* TabContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabContainerView.swift; sourceTree = "<group>"; };
+		41DBC5FB1E412CA500913FAA /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		41DBC5FD1E412F0A00913FAA /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		80BEA28035EFA3995BFC3E99 /* Pods-RadiumBrowserTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowserTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowserTests/Pods-RadiumBrowserTests.release.xcconfig"; sourceTree = "<group>"; };
 		BDE218EB2213DB9F87485559 /* Pods-RadiumBrowser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser.debug.xcconfig"; sourceTree = "<group>"; };
 		BF7E37CD5794D1D23AADA22B /* Pods_RadiumBrowserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,11 +137,15 @@
 			isa = PBXGroup;
 			children = (
 				41A567F21E40CB3B00470017 /* AppDelegate.swift */,
-				41A567F41E40CB3B00470017 /* ViewController.swift */,
 				41A567F61E40CB3B00470017 /* Main.storyboard */,
 				41A567F91E40CB3B00470017 /* Assets.xcassets */,
 				41A567FB1E40CB3B00470017 /* LaunchScreen.storyboard */,
 				41A567FE1E40CB3B00470017 /* Info.plist */,
+				41DBC5F21E411C7A00913FAA /* SharedConfig.swift */,
+				41DBC5FF1E412F1900913FAA /* Extensions */,
+				41DBC5F61E4123C200913FAA /* Controllers */,
+				41DBC5F71E4123E900913FAA /* Main Views */,
+				41DBC5F81E41241700913FAA /* Shared UI */,
 			);
 			path = RadiumBrowser;
 			sourceTree = "<group>";
@@ -150,6 +166,40 @@
 				41A568141E40CB3B00470017 /* Info.plist */,
 			);
 			path = RadiumBrowserUITests;
+			sourceTree = "<group>";
+		};
+		41DBC5F61E4123C200913FAA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				41DBC5EE1E411AE900913FAA /* MainViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		41DBC5F71E4123E900913FAA /* Main Views */ = {
+			isa = PBXGroup;
+			children = (
+				41DBC5F01E411B8B00913FAA /* AddressBar.swift */,
+				41DBC5F91E412C8400913FAA /* TabContainerView.swift */,
+				41DBC5FB1E412CA500913FAA /* TabView.swift */,
+			);
+			name = "Main Views";
+			sourceTree = "<group>";
+		};
+		41DBC5F81E41241700913FAA /* Shared UI */ = {
+			isa = PBXGroup;
+			children = (
+				41DBC5F41E41204300913FAA /* SharedTextField.swift */,
+			);
+			name = "Shared UI";
+			sourceTree = "<group>";
+		};
+		41DBC5FF1E412F1900913FAA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				41DBC5FD1E412F0A00913FAA /* UIViewExtensions.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		B5ADB7E7F0C02E009CB7D000 /* Pods */ = {
@@ -446,8 +496,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41A567F51E40CB3B00470017 /* ViewController.swift in Sources */,
+				41DBC5FA1E412C8400913FAA /* TabContainerView.swift in Sources */,
+				41DBC5F51E41204300913FAA /* SharedTextField.swift in Sources */,
+				41DBC5FE1E412F0A00913FAA /* UIViewExtensions.swift in Sources */,
+				41DBC5EF1E411AE900913FAA /* MainViewController.swift in Sources */,
+				41DBC5F11E411B8B00913FAA /* AddressBar.swift in Sources */,
+				41DBC5FC1E412CA500913FAA /* TabView.swift in Sources */,
 				41A567F31E40CB3B00470017 /* AppDelegate.swift in Sources */,
+				41DBC5F31E411C7A00913FAA /* SharedConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,6 +756,7 @@
 				41A568191E40CB3B00470017 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		41A5681A1E40CB3B00470017 /* Build configuration list for PBXNativeTarget "RadiumBrowserTests" */ = {
 			isa = XCConfigurationList;
@@ -708,6 +765,7 @@
 				41A5681C1E40CB3B00470017 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		41A5681D1E40CB3B00470017 /* Build configuration list for PBXNativeTarget "RadiumBrowserUITests" */ = {
 			isa = XCConfigurationList;
@@ -716,6 +774,7 @@
 				41A5681F1E40CB3B00470017 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
