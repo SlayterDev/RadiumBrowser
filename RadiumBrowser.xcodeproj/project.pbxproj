@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		41A567F31E40CB3B00470017 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A567F21E40CB3B00470017 /* AppDelegate.swift */; };
+		41A567F51E40CB3B00470017 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A567F41E40CB3B00470017 /* ViewController.swift */; };
+		41A567F81E40CB3B00470017 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41A567F61E40CB3B00470017 /* Main.storyboard */; };
+		41A567FA1E40CB3B00470017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41A567F91E40CB3B00470017 /* Assets.xcassets */; };
+		41A567FD1E40CB3B00470017 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41A567FB1E40CB3B00470017 /* LaunchScreen.storyboard */; };
+		41A568081E40CB3B00470017 /* RadiumBrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A568071E40CB3B00470017 /* RadiumBrowserTests.swift */; };
+		41A568131E40CB3B00470017 /* RadiumBrowserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A568121E40CB3B00470017 /* RadiumBrowserUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		41A568041E40CB3B00470017 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41A567E71E40CB3A00470017 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41A567EE1E40CB3B00470017;
+			remoteInfo = RadiumBrowser;
+		};
+		41A5680F1E40CB3B00470017 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41A567E71E40CB3A00470017 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 41A567EE1E40CB3B00470017;
+			remoteInfo = RadiumBrowser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		41A567EF1E40CB3B00470017 /* RadiumBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadiumBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		41A567F21E40CB3B00470017 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		41A567F41E40CB3B00470017 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		41A567F71E40CB3B00470017 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		41A567F91E40CB3B00470017 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		41A567FC1E40CB3B00470017 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		41A567FE1E40CB3B00470017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41A568031E40CB3B00470017 /* RadiumBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadiumBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		41A568071E40CB3B00470017 /* RadiumBrowserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiumBrowserTests.swift; sourceTree = "<group>"; };
+		41A568091E40CB3B00470017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41A5680E1E40CB3B00470017 /* RadiumBrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RadiumBrowserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		41A568121E40CB3B00470017 /* RadiumBrowserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiumBrowserUITests.swift; sourceTree = "<group>"; };
+		41A568141E40CB3B00470017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		41A567EC1E40CB3B00470017 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41A568001E40CB3B00470017 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41A5680B1E40CB3B00470017 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		41A567E61E40CB3A00470017 = {
+			isa = PBXGroup;
+			children = (
+				41A567F11E40CB3B00470017 /* RadiumBrowser */,
+				41A568061E40CB3B00470017 /* RadiumBrowserTests */,
+				41A568111E40CB3B00470017 /* RadiumBrowserUITests */,
+				41A567F01E40CB3B00470017 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		41A567F01E40CB3B00470017 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				41A567EF1E40CB3B00470017 /* RadiumBrowser.app */,
+				41A568031E40CB3B00470017 /* RadiumBrowserTests.xctest */,
+				41A5680E1E40CB3B00470017 /* RadiumBrowserUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		41A567F11E40CB3B00470017 /* RadiumBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				41A567F21E40CB3B00470017 /* AppDelegate.swift */,
+				41A567F41E40CB3B00470017 /* ViewController.swift */,
+				41A567F61E40CB3B00470017 /* Main.storyboard */,
+				41A567F91E40CB3B00470017 /* Assets.xcassets */,
+				41A567FB1E40CB3B00470017 /* LaunchScreen.storyboard */,
+				41A567FE1E40CB3B00470017 /* Info.plist */,
+			);
+			path = RadiumBrowser;
+			sourceTree = "<group>";
+		};
+		41A568061E40CB3B00470017 /* RadiumBrowserTests */ = {
+			isa = PBXGroup;
+			children = (
+				41A568071E40CB3B00470017 /* RadiumBrowserTests.swift */,
+				41A568091E40CB3B00470017 /* Info.plist */,
+			);
+			path = RadiumBrowserTests;
+			sourceTree = "<group>";
+		};
+		41A568111E40CB3B00470017 /* RadiumBrowserUITests */ = {
+			isa = PBXGroup;
+			children = (
+				41A568121E40CB3B00470017 /* RadiumBrowserUITests.swift */,
+				41A568141E40CB3B00470017 /* Info.plist */,
+			);
+			path = RadiumBrowserUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		41A567EE1E40CB3B00470017 /* RadiumBrowser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41A568171E40CB3B00470017 /* Build configuration list for PBXNativeTarget "RadiumBrowser" */;
+			buildPhases = (
+				41A567EB1E40CB3B00470017 /* Sources */,
+				41A567EC1E40CB3B00470017 /* Frameworks */,
+				41A567ED1E40CB3B00470017 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RadiumBrowser;
+			productName = RadiumBrowser;
+			productReference = 41A567EF1E40CB3B00470017 /* RadiumBrowser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		41A568021E40CB3B00470017 /* RadiumBrowserTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41A5681A1E40CB3B00470017 /* Build configuration list for PBXNativeTarget "RadiumBrowserTests" */;
+			buildPhases = (
+				41A567FF1E40CB3B00470017 /* Sources */,
+				41A568001E40CB3B00470017 /* Frameworks */,
+				41A568011E40CB3B00470017 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				41A568051E40CB3B00470017 /* PBXTargetDependency */,
+			);
+			name = RadiumBrowserTests;
+			productName = RadiumBrowserTests;
+			productReference = 41A568031E40CB3B00470017 /* RadiumBrowserTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		41A5680D1E40CB3B00470017 /* RadiumBrowserUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41A5681D1E40CB3B00470017 /* Build configuration list for PBXNativeTarget "RadiumBrowserUITests" */;
+			buildPhases = (
+				41A5680A1E40CB3B00470017 /* Sources */,
+				41A5680B1E40CB3B00470017 /* Frameworks */,
+				41A5680C1E40CB3B00470017 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				41A568101E40CB3B00470017 /* PBXTargetDependency */,
+			);
+			name = RadiumBrowserUITests;
+			productName = RadiumBrowserUITests;
+			productReference = 41A5680E1E40CB3B00470017 /* RadiumBrowserUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		41A567E71E40CB3A00470017 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = bslayter;
+				TargetAttributes = {
+					41A567EE1E40CB3B00470017 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					41A568021E40CB3B00470017 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 41A567EE1E40CB3B00470017;
+					};
+					41A5680D1E40CB3B00470017 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 41A567EE1E40CB3B00470017;
+					};
+				};
+			};
+			buildConfigurationList = 41A567EA1E40CB3A00470017 /* Build configuration list for PBXProject "RadiumBrowser" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 41A567E61E40CB3A00470017;
+			productRefGroup = 41A567F01E40CB3B00470017 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				41A567EE1E40CB3B00470017 /* RadiumBrowser */,
+				41A568021E40CB3B00470017 /* RadiumBrowserTests */,
+				41A5680D1E40CB3B00470017 /* RadiumBrowserUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		41A567ED1E40CB3B00470017 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41A567FD1E40CB3B00470017 /* LaunchScreen.storyboard in Resources */,
+				41A567FA1E40CB3B00470017 /* Assets.xcassets in Resources */,
+				41A567F81E40CB3B00470017 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41A568011E40CB3B00470017 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41A5680C1E40CB3B00470017 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		41A567EB1E40CB3B00470017 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41A567F51E40CB3B00470017 /* ViewController.swift in Sources */,
+				41A567F31E40CB3B00470017 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41A567FF1E40CB3B00470017 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41A568081E40CB3B00470017 /* RadiumBrowserTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41A5680A1E40CB3B00470017 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41A568131E40CB3B00470017 /* RadiumBrowserUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		41A568051E40CB3B00470017 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41A567EE1E40CB3B00470017 /* RadiumBrowser */;
+			targetProxy = 41A568041E40CB3B00470017 /* PBXContainerItemProxy */;
+		};
+		41A568101E40CB3B00470017 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 41A567EE1E40CB3B00470017 /* RadiumBrowser */;
+			targetProxy = 41A5680F1E40CB3B00470017 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		41A567F61E40CB3B00470017 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				41A567F71E40CB3B00470017 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		41A567FB1E40CB3B00470017 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				41A567FC1E40CB3B00470017 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		41A568151E40CB3B00470017 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		41A568161E40CB3B00470017 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		41A568181E40CB3B00470017 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RadiumBrowser/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		41A568191E40CB3B00470017 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RadiumBrowser/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		41A5681B1E40CB3B00470017 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RadiumBrowserTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RadiumBrowser.app/RadiumBrowser";
+			};
+			name = Debug;
+		};
+		41A5681C1E40CB3B00470017 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RadiumBrowserTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RadiumBrowser.app/RadiumBrowser";
+			};
+			name = Release;
+		};
+		41A5681E1E40CB3B00470017 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = RadiumBrowserUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowserUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = RadiumBrowser;
+			};
+			name = Debug;
+		};
+		41A5681F1E40CB3B00470017 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = RadiumBrowserUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowserUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = RadiumBrowser;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		41A567EA1E40CB3A00470017 /* Build configuration list for PBXProject "RadiumBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41A568151E40CB3B00470017 /* Debug */,
+				41A568161E40CB3B00470017 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		41A568171E40CB3B00470017 /* Build configuration list for PBXNativeTarget "RadiumBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41A568181E40CB3B00470017 /* Debug */,
+				41A568191E40CB3B00470017 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		41A5681A1E40CB3B00470017 /* Build configuration list for PBXNativeTarget "RadiumBrowserTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41A5681B1E40CB3B00470017 /* Debug */,
+				41A5681C1E40CB3B00470017 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		41A5681D1E40CB3B00470017 /* Build configuration list for PBXNativeTarget "RadiumBrowserUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41A5681E1E40CB3B00470017 /* Debug */,
+				41A5681F1E40CB3B00470017 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 41A567E71E40CB3A00470017 /* Project object */;
+}
