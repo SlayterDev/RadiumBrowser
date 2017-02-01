@@ -33,7 +33,7 @@ class TabContainerView: UIView, TabViewDelegate {
         self.backgroundColor = Colors.radiumDarkGray
 		
 		addTabButton = UIButton().then { [unowned self] in
-			$0.setImage(self.imageFrom(systemItem: .add), for: .normal)
+			$0.setImage(UIImage.imageFrom(systemItem: .add), for: .normal)
 			
 			self.addSubview($0)
 			$0.snp.makeConstraints { (make) in
@@ -48,23 +48,6 @@ class TabContainerView: UIView, TabViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-	
-	func imageFrom(systemItem: UIBarButtonSystemItem) -> UIImage? {
-		let tempItem = UIBarButtonItem(barButtonSystemItem: systemItem, target: nil, action: nil)
-		
-		// add to toolbar and render it
-		UIToolbar().setItems([tempItem], animated: false)
-		
-		// got image from real uibutton
-		let itemView = tempItem.value(forKey: "view") as! UIView
-		for view in itemView.subviews {
-			if let button = view as? UIButton, let imageView = button.imageView {
-				return imageView.image
-			}
-		}
-		
-		return nil
-	}
 	
 	func addNewTab(container: UIView) {
 		let newTab = TabView(parentView: container).then { [unowned self] in
@@ -97,6 +80,8 @@ class TabContainerView: UIView, TabViewDelegate {
         }
     }
 	
+	// MARK: - Tab Delegate
+	
 	func didTap(tab: TabView) {
 		let prevIndex = selectedTabIndex
 		if let index = tabList.index(of: tab) {
@@ -115,6 +100,10 @@ class TabContainerView: UIView, TabViewDelegate {
 		prevTab?.webContainer?.removeFromView()
 		newTab.webContainer?.addToView()
 		addressBar?.addressField?.text = newTab.webContainer?.webView?.url?.absoluteString
+	}
+	
+	func close(tab: TabView) {
+		// TODO: remove tab
 	}
 	
 	// MARK: - Web Navigation
