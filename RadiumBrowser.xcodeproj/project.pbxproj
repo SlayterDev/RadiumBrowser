@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02A5CBE41E41652000269FE6 /* WebContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5CBE31E41652000269FE6 /* WebContainer.swift */; };
+		02A5CBE61E417F6400269FE6 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5CBE51E417F6400269FE6 /* StringExtensions.swift */; };
 		3CADC949B2736BBB3F7B5EF1 /* Pods_RadiumBrowserUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDF747E739C5CC832EEFB1A7 /* Pods_RadiumBrowserUITests.framework */; };
 		3CDDEBFD7B6642A2FEB0EEA5 /* Pods_RadiumBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283FB330E1E0BA712752A519 /* Pods_RadiumBrowser.framework */; };
 		41A567F31E40CB3B00470017 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A567F21E40CB3B00470017 /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		02A5CBE31E41652000269FE6 /* WebContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebContainer.swift; sourceTree = "<group>"; };
+		02A5CBE51E417F6400269FE6 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		0B353FD7BD9E780C914BBF1B /* Pods-RadiumBrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser.release.xcconfig"; sourceTree = "<group>"; };
 		13D2A99460A62596A30DA13C /* Pods-RadiumBrowserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowserTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowserTests/Pods-RadiumBrowserTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1D2F335FDE500B6A311FB334 /* Pods-RadiumBrowserUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowserUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowserUITests/Pods-RadiumBrowserUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				41DBC5FD1E412F0A00913FAA /* UIViewExtensions.swift */,
+				02A5CBE51E417F6400269FE6 /* StringExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 			files = (
 				41DBC5FA1E412C8400913FAA /* TabContainerView.swift in Sources */,
 				41DBC5F51E41204300913FAA /* SharedTextField.swift in Sources */,
+				02A5CBE61E417F6400269FE6 /* StringExtensions.swift in Sources */,
 				41DBC5FE1E412F0A00913FAA /* UIViewExtensions.swift in Sources */,
 				02A5CBE41E41652000269FE6 /* WebContainer.swift in Sources */,
 				41DBC5EF1E411AE900913FAA /* MainViewController.swift in Sources */,

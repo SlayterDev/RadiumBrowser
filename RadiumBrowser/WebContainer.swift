@@ -78,8 +78,11 @@ class WebContainer: UIView, WKNavigationDelegate {
 	
 	func loadQuery(string: String) {
 		var urlString = string
-		if !urlString.hasPrefix("https://") {
-			urlString = "https://" + urlString
+		if !urlString.isURL() {
+			let searchTerms = urlString.replacingOccurrences(of: " ", with: "+")
+			urlString = "http://google.com/search?q=" + searchTerms
+		} else if !urlString.hasPrefix("http://") || !urlString.hasPrefix("https://") {
+			urlString = "http://" + urlString
 		}
 		
 		if let url = URL(string: urlString) {
