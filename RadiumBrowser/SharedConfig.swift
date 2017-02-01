@@ -14,3 +14,5 @@ struct Colors {
     static let radiumDarkGray = UIColor(red: 0.686, green: 0.706, blue: 0.706, alpha: 1.0)
     static let radiumUnselected = UIColor(red: 0.784, green: 0.784, blue: 0.784, alpha: 1.0)
 }
+
+let isiPadUI = UI_USER_INTERFACE_IDIOM() == .pad

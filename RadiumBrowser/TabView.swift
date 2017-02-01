@@ -31,7 +31,7 @@ class TabView: UIView {
         self.backgroundColor = Colors.radiumGray
         
         tabTitleLabel = UILabel().then { [unowned self] in
-            $0.text = "Google"
+            $0.text = "New Tab"
             
             self.addSubview($0)
             $0.snp.makeConstraints { (make) in

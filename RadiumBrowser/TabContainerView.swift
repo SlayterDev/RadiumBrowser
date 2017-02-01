@@ -24,6 +24,8 @@ class TabContainerView: UIView, TabViewDelegate {
 			setTabColors()
 		}
 	}
+	
+	weak var addressBar: AddressBar?
 		
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -112,12 +114,32 @@ class TabContainerView: UIView, TabViewDelegate {
 	func switchVisibleWebView(prevTab: TabView?, newTab: TabView) {
 		prevTab?.webContainer?.removeFromView()
 		newTab.webContainer?.addToView()
+		addressBar?.addressField?.text = newTab.webContainer?.webView?.url?.absoluteString
 	}
+	
+	// MARK: - Web Navigation
 	
 	func loadQuery(string: String?) {
 		guard let string = string else { return }
 		
 		let tab = tabList[selectedTabIndex]
 		tab.webContainer?.loadQuery(string: string)
+	}
+	
+	func goBack(sender: UIButton) {
+		let tab = tabList[selectedTabIndex]
+		let _ = tab.webContainer?.webView?.goBack()
+	}
+	
+	func goForward(sender: UIButton) {
+		let tab = tabList[selectedTabIndex]
+		let _ = tab.webContainer?.webView?.goForward()
+	}
+	
+	func updateNavButtons() {
+		let tab = tabList[selectedTabIndex]
+		
+		addressBar?.backButton?.isEnabled = tab.webContainer?.webView?.canGoBack ?? false
+		addressBar?.forwardButton?.isEnabled = tab.webContainer?.webView?.canGoForward ?? false
 	}
 }

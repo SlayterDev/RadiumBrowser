@@ -43,6 +43,10 @@ class MainViewController: UIViewController {
         
         let addressBar = AddressBar(frame: .zero).then { [unowned self] in
 			$0.tabContainer = self.tabContainer
+			self.tabContainer?.addressBar = $0
+			
+			$0.backButton?.addTarget(self.tabContainer!, action: #selector(self.tabContainer?.goBack(sender:)), for: .touchUpInside)
+			$0.forwardButton?.addTarget(self.tabContainer!, action: #selector(self.tabContainer?.goForward(sender:)), for: .touchUpInside)
 			
             self.view.addSubview($0)
             $0.snp.makeConstraints { (make) in
