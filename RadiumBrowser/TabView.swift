@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TabViewDelegate {
+	func didTap(tab: TabView)
+}
+
 class TabView: UIView {
     
     var tabTitle: String? {
@@ -16,9 +20,13 @@ class TabView: UIView {
         }
     }
     var tabTitleLabel: UILabel?
+	
+	var delegate: TabViewDelegate?
+	
+	var webContainer: WebContainer?
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+	init(parentView: UIView) {
+        super.init(frame: .zero)
         
         self.backgroundColor = Colors.radiumGray
         
@@ -30,6 +38,15 @@ class TabView: UIView {
                 make.edges.equalTo(self).inset(UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
             }
         }
+		
+		let gesture = UITapGestureRecognizer()
+		gesture.numberOfTapsRequired = 1
+		gesture.addTarget(self, action: #selector(tappedTab))
+		self.addGestureRecognizer(gesture)
+		self.isUserInteractionEnabled = true
+		
+		webContainer = WebContainer(parent: parentView)
+		webContainer?.tabView = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,5 +58,8 @@ class TabView: UIView {
         
         self.blendCorner(corner: .All, length: 10)
     }
-
+	
+	func tappedTab(sender: UITapGestureRecognizer) {
+		delegate?.didTap(tab: self)
+	}
 }

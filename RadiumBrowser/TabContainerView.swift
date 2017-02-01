@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabContainerView: UIView {
+class TabContainerView: UIView, TabViewDelegate {
     
     static let standardHeight: CGFloat = 40
     
@@ -16,24 +16,59 @@ class TabContainerView: UIView {
     static let defaultTabHeight: CGFloat = TabContainerView.standardHeight - 4
     
     lazy var tabList: [TabView] = []
+	
+	var addTabButton: UIButton?
     
-    var selectedTabIndex = 1
-    
+	var selectedTabIndex = 0 {
+		didSet {
+			setTabColors()
+		}
+	}
+		
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         self.backgroundColor = Colors.radiumDarkGray
-        addNewTab()
-        addNewTab()
+		
+		addTabButton = UIButton().then { [unowned self] in
+			$0.setImage(self.imageFrom(systemItem: .add), for: .normal)
+			
+			self.addSubview($0)
+			$0.snp.makeConstraints { (make) in
+				make.height.equalTo(TabContainerView.standardHeight - 5)
+				make.width.equalTo(TabContainerView.standardHeight - 5)
+				make.centerY.equalTo(self)
+				make.right.equalTo(self).offset(-8)
+			}
+		}
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func addNewTab() {
-        let newTab = TabView(frame: .zero).then { [unowned self] in
-            self.addSubview($0)
+	
+	func imageFrom(systemItem: UIBarButtonSystemItem) -> UIImage? {
+		let tempItem = UIBarButtonItem(barButtonSystemItem: systemItem, target: nil, action: nil)
+		
+		// add to toolbar and render it
+		UIToolbar().setItems([tempItem], animated: false)
+		
+		// got image from real uibutton
+		let itemView = tempItem.value(forKey: "view") as! UIView
+		for view in itemView.subviews {
+			if let button = view as? UIButton, let imageView = button.imageView {
+				return imageView.image
+			}
+		}
+		
+		return nil
+	}
+	
+	func addNewTab(container: UIView) {
+		let newTab = TabView(parentView: container).then { [unowned self] in
+			$0.delegate = self
+			
+			self.addSubview($0)
             self.sendSubview(toBack: $0)
             $0.snp.makeConstraints { (make) in
                 make.bottom.equalTo(self)
@@ -47,7 +82,7 @@ class TabContainerView: UIView {
             }
         }
         tabList.append(newTab)
-        setTabColors()
+        didTap(tab: newTab)
     }
     
     func setTabColors() {
@@ -59,5 +94,30 @@ class TabContainerView: UIView {
             }
         }
     }
-
+	
+	func didTap(tab: TabView) {
+		let prevIndex = selectedTabIndex
+		if let index = tabList.index(of: tab) {
+			selectedTabIndex = index
+			
+			var prevTab: TabView?
+			if tabList.count > 1 {
+				prevTab = tabList[prevIndex]
+			}
+			
+			switchVisibleWebView(prevTab: prevTab, newTab: tab)
+		}
+	}
+	
+	func switchVisibleWebView(prevTab: TabView?, newTab: TabView) {
+		prevTab?.webContainer?.removeFromView()
+		newTab.webContainer?.addToView()
+	}
+	
+	func loadQuery(string: String?) {
+		guard let string = string else { return }
+		
+		let tab = tabList[selectedTabIndex]
+		tab.webContainer?.loadQuery(string: string)
+	}
 }

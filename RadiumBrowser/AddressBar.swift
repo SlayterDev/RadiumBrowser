@@ -8,11 +8,13 @@
 
 import UIKit
 
-class AddressBar: UIView {
+class AddressBar: UIView, UITextFieldDelegate {
     
     static let standardHeight: CGFloat = 44
     
     var addressField: UITextField?
+	
+	weak var tabContainer: TabContainerView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,6 +34,7 @@ class AddressBar: UIView {
             $0.autocorrectionType = .no
             $0.autocapitalizationType = .none
             $0.keyboardType = .URL
+			$0.delegate = self
             
             self.addSubview($0)
             $0.snp.makeConstraints { (make) in
@@ -43,5 +46,11 @@ class AddressBar: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		tabContainer?.loadQuery(string: textField.text)
+		
+		return true
+	}
 
 }

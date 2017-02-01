@@ -10,6 +10,9 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+	var container: UIView?
+	var tabContainer: TabContainerView?
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +29,9 @@ class MainViewController: UIViewController {
             }
         }
         
-        let tabContainer = TabContainerView(frame: .zero).then { [unowned self] in
+        tabContainer = TabContainerView(frame: .zero).then { [unowned self] in
+			$0.addTabButton?.addTarget(self, action: #selector(self.addTab), for: .touchUpInside)
+			
             self.view.addSubview($0)
             $0.snp.makeConstraints { (make) in
                 make.top.equalTo(padding.snp.bottom)
@@ -36,14 +41,28 @@ class MainViewController: UIViewController {
             }
         }
         
-        let _ = AddressBar(frame: .zero).then { [unowned self] in
+        let addressBar = AddressBar(frame: .zero).then { [unowned self] in
+			$0.tabContainer = self.tabContainer
+			
             self.view.addSubview($0)
             $0.snp.makeConstraints { (make) in
-                make.top.equalTo(tabContainer.snp.bottom)
+                make.top.equalTo(self.tabContainer!.snp.bottom)
                 make.width.equalTo(self.view)
                 make.height.equalTo(AddressBar.standardHeight)
             }
         }
+		
+		container = UIView().then { [unowned self] in
+			self.view.addSubview($0)
+			$0.snp.makeConstraints { (make) in
+				make.top.equalTo(addressBar.snp.bottom)
+				make.width.equalTo(self.view)
+				make.bottom.equalTo(self.view)
+				make.left.equalTo(self.view)
+			}
+		}
+		
+		tabContainer?.addNewTab(container: container!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,14 +71,8 @@ class MainViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+	func addTab() {
+		tabContainer?.addNewTab(container: container!)
+	}
 
 }
