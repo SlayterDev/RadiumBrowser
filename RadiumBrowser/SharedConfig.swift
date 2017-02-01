@@ -15,4 +15,8 @@ struct Colors {
     static let radiumUnselected = UIColor(red: 0.784, green: 0.784, blue: 0.784, alpha: 1.0)
 }
 
+struct Tags {
+    static let tabOutlineTag = 999
+}
+
 let isiPadUI = UI_USER_INTERFACE_IDIOM() == .pad

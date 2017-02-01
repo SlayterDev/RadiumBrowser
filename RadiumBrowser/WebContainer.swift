@@ -13,13 +13,16 @@ class WebContainer: UIView, WKNavigationDelegate {
 	
 	weak var parentView: UIView?
 	var webView: WKWebView?
+    var isObserving = false
 	
 	weak var tabView: TabView?
 	
 	var progressView: UIProgressView?
 	
 	deinit {
-		webView?.removeObserver(self, forKeyPath: "estimatedProgress")
+        if isObserving {
+            webView?.removeObserver(self, forKeyPath: "estimatedProgress")
+        }
 	}
 	
 	init(parent: UIView) {
@@ -65,13 +68,19 @@ class WebContainer: UIView, WKNavigationDelegate {
 		}
 		
 		webView?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        isObserving = true
 	}
 	
 	func removeFromView() {
 		guard let _ = parentView else { return }
 		
 		// Remove ourself as the observer
-		webView?.removeObserver(self, forKeyPath: "estimatedProgress")
+        if isObserving {
+            webView?.removeObserver(self, forKeyPath: "estimatedProgress")
+            isObserving = false
+            progressView?.setProgress(0, animated: false)
+            progressView?.isHidden = true
+        }
 		
 		self.removeFromSuperview()
 	}
@@ -94,9 +103,13 @@ class WebContainer: UIView, WKNavigationDelegate {
 		if (keyPath == "estimatedProgress") {
 			progressView?.isHidden = webView?.estimatedProgress == 1
 			progressView?.setProgress(Float(webView!.estimatedProgress), animated: true)
+            
+            if webView?.estimatedProgress == 1 {
+                progressView?.setProgress(0, animated: false)
+            }
 		}
 	}
-	
+    
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 		tabView?.tabTitle = webView.title
 		

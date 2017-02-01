@@ -74,7 +74,14 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func viewDidLayoutSubviews() {
+        tabContainer?.setUpTabConstraints()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        tabContainer?.setUpTabConstraints()
+    }
+    
 	func addTab() {
 		tabContainer?.addNewTab(container: container!)
 	}

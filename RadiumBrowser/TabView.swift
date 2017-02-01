@@ -15,6 +15,8 @@ protocol TabViewDelegate {
 
 class TabView: UIView {
     
+    var shapeLayer: CAShapeLayer?
+    
     var tabTitle: String? {
         didSet {
             tabTitleLabel?.text = tabTitle
@@ -46,12 +48,13 @@ class TabView: UIView {
 		
 		tabTitleLabel = UILabel().then { [unowned self] in
 			$0.text = "New Tab"
+            $0.font = UIFont.systemFont(ofSize: UIFont.systemFontSize - 0.5)
 			
 			self.addSubview($0)
 			$0.snp.makeConstraints { (make) in
 				make.left.equalTo(self).offset(16)
 				make.top.equalTo(self).offset(8)
-				make.bottom.equalTo(self).offset(-8)
+				make.bottom.equalTo(self).offset(-6)
 				make.right.equalTo(closeBtn.snp.left).offset(-4)
 			}
 		}
@@ -73,7 +76,8 @@ class TabView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.blendCorner(corner: .All, length: 10)
+//        self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        self.blendCorner(corner: .All, shapeLayer: &shapeLayer, length: 10)
     }
 	
 	func tappedTab(sender: UITapGestureRecognizer) {

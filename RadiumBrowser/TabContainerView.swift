@@ -10,10 +10,10 @@ import UIKit
 
 class TabContainerView: UIView, TabViewDelegate {
     
-    static let standardHeight: CGFloat = 40
+    static let standardHeight: CGFloat = 35
     
     static let defaultTabWidth: CGFloat = 150
-    static let defaultTabHeight: CGFloat = TabContainerView.standardHeight - 4
+    static let defaultTabHeight: CGFloat = TabContainerView.standardHeight - 2
     
     lazy var tabList: [TabView] = []
 	
@@ -55,19 +55,31 @@ class TabContainerView: UIView, TabViewDelegate {
 			
 			self.addSubview($0)
             self.sendSubview(toBack: $0)
-            $0.snp.makeConstraints { (make) in
+        }
+        tabList.append(newTab)
+        didTap(tab: newTab)
+        setUpTabConstraints()
+    }
+    
+    func setUpTabConstraints() {
+        for (i, tab) in tabList.enumerated() {
+            let tabWidth = min(TabContainerView.defaultTabWidth, self.frame.width / CGFloat(tabList.count) - (TabContainerView.defaultTabHeight - 10))
+            tab.snp.remakeConstraints { (make) in
                 make.bottom.equalTo(self)
                 make.height.equalTo(TabContainerView.defaultTabHeight)
-                if let lastTab = self.tabList.last {
+                if i > 0 {
+                    let lastTab = self.tabList[i - 1]
                     make.left.equalTo(lastTab.snp.right).offset(-6)
                 } else {
                     make.left.equalTo(self)
                 }
-                make.width.equalTo(TabContainerView.defaultTabWidth)
+                make.width.equalTo(tabWidth)
             }
         }
-        tabList.append(newTab)
-        didTap(tab: newTab)
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            self.layoutIfNeeded()
+        })
     }
     
     func setTabColors() {
@@ -103,7 +115,17 @@ class TabContainerView: UIView, TabViewDelegate {
 	}
 	
 	func close(tab: TabView) {
-		// TODO: remove tab
+        guard tabList.count > 1 else { return }
+        guard let indexToRemove = tabList.index(of: tab) else { return }
+        
+        tabList.remove(at: indexToRemove)
+        tab.removeFromSuperview()
+        if selectedTabIndex >= indexToRemove {
+            selectedTabIndex = max(0, selectedTabIndex - 1)
+            switchVisibleWebView(prevTab: tab, newTab: tabList[selectedTabIndex])
+        }
+        
+        setUpTabConstraints()
 	}
 	
 	// MARK: - Web Navigation

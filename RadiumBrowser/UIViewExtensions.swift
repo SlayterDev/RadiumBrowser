@@ -18,7 +18,7 @@ extension UIView {
         case All
     }
     
-    public func blendCorner(corner: Corner, length: CGFloat = 8.0) {
+    public func blendCorner(corner: Corner, shapeLayer: inout CAShapeLayer?, length: CGFloat = 8.0) {
         let maskLayer = CAShapeLayer()
         let path: CGPath
         let outlinePath: UIBezierPath
@@ -37,13 +37,17 @@ extension UIView {
         maskLayer.path = path
         self.layer.mask = maskLayer
         
-        let shape = CAShapeLayer()
-        shape.frame = self.bounds
-        shape.path = outlinePath.cgPath
-        shape.lineWidth = 1.0
-        shape.strokeColor = UIColor.gray.cgColor
-        shape.fillColor = UIColor.clear.cgColor
-        self.layer.addSublayer(shape)
+        if shapeLayer == nil {
+            shapeLayer = CAShapeLayer()
+        }
+        shapeLayer?.frame = self.bounds
+        shapeLayer?.path = outlinePath.cgPath
+        shapeLayer?.lineWidth = 1.0
+        shapeLayer?.strokeColor = UIColor.gray.cgColor
+        shapeLayer?.fillColor = UIColor.clear.cgColor
+        if shapeLayer?.superlayer == nil {
+            self.layer.addSublayer(shapeLayer!)
+        }
     }
     
     private func makeAnglePathWithRect(_ rect: CGRect, topLeftSize tl: CGFloat, topRightSize tr: CGFloat, bottomLeftSize bl: CGFloat, bottomRightSize br: CGFloat) -> (CGPath, UIBezierPath) {
