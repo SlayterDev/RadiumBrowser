@@ -20,5 +20,11 @@ class SharedTextField: UITextField {
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return textRect(forBounds: bounds)
     }
-    
+	
+	override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+		var rect = super.rightViewRect(forBounds: bounds)
+		rect.origin.x -= 7
+		return rect
+	}
+	
 }

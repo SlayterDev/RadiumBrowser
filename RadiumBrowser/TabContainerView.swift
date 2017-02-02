@@ -63,7 +63,7 @@ class TabContainerView: UIView, TabViewDelegate {
     
     func setUpTabConstraints() {
         for (i, tab) in tabList.enumerated() {
-            let tabWidth = min(TabContainerView.defaultTabWidth, self.frame.width / CGFloat(tabList.count) - (TabContainerView.defaultTabHeight - 10))
+            let tabWidth = min(TabContainerView.defaultTabWidth, self.frame.width / CGFloat(tabList.count))// - (TabContainerView.defaultTabHeight - 10))
             tab.snp.remakeConstraints { (make) in
                 make.bottom.equalTo(self)
                 make.height.equalTo(TabContainerView.defaultTabHeight)
@@ -145,6 +145,11 @@ class TabContainerView: UIView, TabViewDelegate {
 	func goForward(sender: UIButton) {
 		let tab = tabList[selectedTabIndex]
 		let _ = tab.webContainer?.webView?.goForward()
+	}
+	
+	func refresh(sender: UIButton) {
+		let tab = tabList[selectedTabIndex]
+		let _ = tab.webContainer?.webView?.reload()
 	}
 	
 	func updateNavButtons() {

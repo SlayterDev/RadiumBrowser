@@ -14,6 +14,7 @@ class AddressBar: UIView, UITextFieldDelegate {
 	
 	var backButton: UIButton?
 	var forwardButton: UIButton?
+	var refreshButton: UIButton?
     var addressField: UITextField?
 	
 	weak var tabContainer: TabContainerView?
@@ -67,7 +68,7 @@ class AddressBar: UIView, UITextFieldDelegate {
             $0.autocapitalizationType = .none
             $0.keyboardType = .URL
 			$0.delegate = self
-			$0.clearButtonMode = .always
+			$0.clearButtonMode = .whileEditing
             
             self.addSubview($0)
             $0.snp.makeConstraints { (make) in
@@ -81,6 +82,13 @@ class AddressBar: UIView, UITextFieldDelegate {
 				make.right.equalTo(self).offset(-8)
             }
         }
+		
+		refreshButton = UIButton(frame: CGRect(x: -5, y: 0, width: 12.5, height: 12.5)).then {
+			$0.setImage(UIImage.imageFrom(systemItem: .refresh)?.withRenderingMode(.alwaysTemplate), for: .normal)
+			$0.tintColor = .gray
+			addressField?.rightView = $0
+			addressField?.rightViewMode = .unlessEditing
+		}
     }
     
     required init?(coder aDecoder: NSCoder) {

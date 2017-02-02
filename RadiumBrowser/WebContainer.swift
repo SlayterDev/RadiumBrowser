@@ -67,8 +67,10 @@ class WebContainer: UIView, WKNavigationDelegate {
 			make.edges.equalTo(parentView!)
 		}
 		
-		webView?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-        isObserving = true
+		if !isObserving {
+			webView?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+			isObserving = true
+		}
 	}
 	
 	func removeFromView() {
