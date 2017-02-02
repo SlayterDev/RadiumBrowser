@@ -63,7 +63,7 @@ class TabContainerView: UIView, TabViewDelegate {
     
     func setUpTabConstraints() {
         for (i, tab) in tabList.enumerated() {
-            let tabWidth = min(TabContainerView.defaultTabWidth, self.frame.width / CGFloat(tabList.count))// - (TabContainerView.defaultTabHeight - 10))
+            let tabWidth = min(TabContainerView.defaultTabWidth, self.frame.width / CGFloat(tabList.count))
             tab.snp.remakeConstraints { (make) in
                 make.bottom.equalTo(self)
                 make.height.equalTo(TabContainerView.defaultTabHeight)
