@@ -48,6 +48,7 @@ class MainViewController: UIViewController {
 			$0.backButton?.addTarget(self.tabContainer!, action: #selector(self.tabContainer?.goBack(sender:)), for: .touchUpInside)
 			$0.forwardButton?.addTarget(self.tabContainer!, action: #selector(self.tabContainer?.goForward(sender:)), for: .touchUpInside)
 			$0.refreshButton?.addTarget(self.tabContainer!, action: #selector(self.tabContainer?.refresh(sender:)), for: .touchUpInside)
+			$0.menuButton?.addTarget(self, action: #selector(self.showMenu(sender:)), for: .touchUpInside)
 			
             self.view.addSubview($0)
             $0.snp.makeConstraints { (make) in
@@ -86,5 +87,25 @@ class MainViewController: UIViewController {
 	func addTab() {
 		tabContainer?.addNewTab(container: container!)
 	}
-
+	
+	func showMenu(sender: UIButton) {
+		let shareAction = MenuItem.item(named: "Share", action: { [unowned self] in
+			self.shareLink()
+		})
+		let extensionAction = MenuItem.item(named: "Extension", action: nil)
+		
+		let menu = SharedDropdownMenu(menuItems: [shareAction, extensionAction])
+		let convertedPoint = sender.convert(sender.center, to: self.view)
+		menu.show(in: self.view, from: convertedPoint)
+	}
+	
+	func shareLink() {
+		guard let tabContainer = self.tabContainer else { return }
+		let selectedTab = tabContainer.tabList[tabContainer.selectedTabIndex]
+		
+		guard let url = selectedTab.webContainer?.webView?.url else { return }
+		let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+		activityVC.excludedActivityTypes = [.print]
+		self.present(activityVC, animated: true, completion: nil)
+	}
 }

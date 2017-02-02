@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		023BB5881E42D3E0001498FA /* SharedDropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BB5871E42D3E0001498FA /* SharedDropdownMenu.swift */; };
 		02A5CBE41E41652000269FE6 /* WebContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5CBE31E41652000269FE6 /* WebContainer.swift */; };
 		02A5CBE61E417F6400269FE6 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5CBE51E417F6400269FE6 /* StringExtensions.swift */; };
 		02A5CBE81E41820000269FE6 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5CBE71E41820000269FE6 /* UIImageExtensions.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		023BB5871E42D3E0001498FA /* SharedDropdownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedDropdownMenu.swift; sourceTree = "<group>"; };
 		02A5CBE31E41652000269FE6 /* WebContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebContainer.swift; sourceTree = "<group>"; };
 		02A5CBE51E417F6400269FE6 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		02A5CBE71E41820000269FE6 /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				41DBC5F41E41204300913FAA /* SharedTextField.swift */,
+				023BB5871E42D3E0001498FA /* SharedDropdownMenu.swift */,
 			);
 			name = "Shared UI";
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				023BB5881E42D3E0001498FA /* SharedDropdownMenu.swift in Sources */,
 				41DBC5FA1E412C8400913FAA /* TabContainerView.swift in Sources */,
 				02A5CBE81E41820000269FE6 /* UIImageExtensions.swift in Sources */,
 				41DBC5F51E41204300913FAA /* SharedTextField.swift in Sources */,

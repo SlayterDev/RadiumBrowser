@@ -16,6 +16,7 @@ class AddressBar: UIView, UITextFieldDelegate {
 	var forwardButton: UIButton?
 	var refreshButton: UIButton?
     var addressField: UITextField?
+	var menuButton: UIButton?
 	
 	weak var tabContainer: TabContainerView?
     
@@ -55,7 +56,19 @@ class AddressBar: UIView, UITextFieldDelegate {
 				}
 			}
 		}
-        
+		
+		menuButton = UIButton().then { [unowned self] in
+			$0.setImage(UIImage(named: "menu"), for: .normal)
+			
+			self.addSubview($0)
+			$0.snp.makeConstraints { (make) in
+				make.width.equalTo(25)
+				make.height.equalTo(25)
+				make.centerY.equalTo(self)
+				make.right.equalTo(self).offset(-8)
+			}
+		}
+		
         addressField = SharedTextField().then { [unowned self] in
             $0.placeholder = "Address"
             $0.backgroundColor = .white
@@ -79,11 +92,11 @@ class AddressBar: UIView, UITextFieldDelegate {
 				}
 				make.top.equalTo(self).offset(8)
 				make.bottom.equalTo(self).offset(-8)
-				make.right.equalTo(self).offset(-8)
+				make.right.equalTo(self.menuButton!.snp.left).offset(-8)
             }
         }
 		
-		refreshButton = UIButton(frame: CGRect(x: -5, y: 0, width: 12.5, height: 12.5)).then {
+		refreshButton = UIButton(frame: CGRect(x: -5, y: 0, width: 12.5, height: 15)).then {
 			$0.setImage(UIImage.imageFrom(systemItem: .refresh)?.withRenderingMode(.alwaysTemplate), for: .normal)
 			$0.tintColor = .gray
 			addressField?.rightView = $0
