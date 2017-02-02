@@ -114,14 +114,11 @@ class SharedDropdownMenu: UIView, UIGestureRecognizerDelegate {
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         let point = touch.location(in: nil)
-        if let window = UIApplication.shared.delegate?.window {
-            let pointInSubView = self.convert(point, from: window)
-            if !self.frame.contains(pointInSubView) {
-                self.dismiss()
-                return false
-            }
+        if !self.frame.contains(point) {
+            self.dismiss()
+            return false
         }
-        return true
+        return false
     }
 
 }

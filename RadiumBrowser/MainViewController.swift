@@ -94,7 +94,9 @@ class MainViewController: UIViewController {
 		let shareAction = MenuItem.item(named: "Share", action: { [unowned self] in
 			self.shareLink()
 		})
-		let extensionAction = MenuItem.item(named: "Extension", action: nil)
+        let extensionAction = MenuItem.item(named: "Extension", action: { [unowned self] in
+            self.showExtensions()
+        })
 		
 		let menu = SharedDropdownMenu(menuItems: [shareAction, extensionAction])
 		let convertedPoint = sender.convert(sender.center, to: self.view)
@@ -110,4 +112,15 @@ class MainViewController: UIViewController {
 		activityVC.excludedActivityTypes = [.print]
 		self.present(activityVC, animated: true, completion: nil)
 	}
+    
+    func showExtensions() {
+        let vc = ExtensionsTableViewController(style: .grouped)
+        let nav = UINavigationController(rootViewController: vc)
+        
+        if isiPadUI {
+            nav.modalPresentationStyle = .formSheet
+        }
+        
+        self.present(nav, animated: true, completion: nil)
+    }
 }
