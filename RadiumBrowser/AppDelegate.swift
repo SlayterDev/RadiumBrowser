@@ -18,7 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+		
+		#if arch(i386) || arch(x86_64)
+			let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+			NSLog("Document Path: %@", documentsPath)
+		#endif
+		
         self.window?.rootViewController = MainViewController()
         self.window?.makeKeyAndVisible()
         

@@ -14,7 +14,7 @@ class ExtensionModel: Object {
     dynamic var id = ""
     dynamic var name = ""
     
-    override static func primaryKey() -> String? {
+    override class func primaryKey() -> String? {
         return "id"
     }
 }

@@ -11,11 +11,15 @@ import RealmSwift
 
 class ExtensionsTableViewController: UITableViewController {
 
-    var extensions = List<ExtensionModel>()
+	var extensions: Results<ExtensionModel>?
     
     var notificationToken: NotificationToken!
     var realm: Realm!
-    
+	
+	deinit {
+		notificationToken.stop()
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,9 +30,14 @@ class ExtensionsTableViewController: UITableViewController {
         
         do {
             self.realm = try Realm()
-            self.extensions = realm.objects(ExtensionModel.self).first
-        } catch {
-            print("Error occured opening realm")
+			self.notificationToken = realm.addNotificationBlock { notification, realm in
+				DispatchQueue.main.async {
+					self.tableView.reloadSections([1], with: .automatic)
+				}
+			}
+            self.extensions = realm.objects(ExtensionModel.self)
+        } catch let error as NSError {
+            print("Error occured opening realm: \(error.localizedDescription)")
         }
     }
 
@@ -43,6 +52,14 @@ class ExtensionsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		if indexPath.section == 1 {
+			return true
+		}
+		
+		return false
+	}
+	
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -52,7 +69,7 @@ class ExtensionsTableViewController: UITableViewController {
             return 1
         }
         
-        return extensions.count
+        return extensions?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,8 +78,9 @@ class ExtensionsTableViewController: UITableViewController {
         if indexPath.section == 0 {
             cell.textLabel?.text = "Add new extension"
         } else {
-            let item = extensions[indexPath.row]
-            cell.textLabel?.text = item.name
+			if let item = extensions?[indexPath.row] {
+				cell.textLabel?.text = item.name
+			}
         }
 
         return cell
@@ -72,9 +90,30 @@ class ExtensionsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section == 0 {
-            self.extensions.append(ExtensionModel(value: ["source": "document.body.style.background = \"#777\";", "name": "Bacground Red"]))
+			do {
+				try realm.write {
+					let id = UUID().uuidString
+					realm.add(ExtensionModel(value: ["source": "document.body.style.background = \"#777\";", "name": "Background Red", "id": id]))
+				}
+			} catch {
+				print("Could not write extension")
+			}
             self.tableView.reloadSections([1], with: .automatic)
         }
     }
+	
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+		guard editingStyle == .delete else { return }
+		guard let _ = extensions else { return }
+		guard let _ = realm else { return }
+		
+		do {
+			try realm.write {
+				realm.delete(extensions![indexPath.row])
+			}
+		} catch let error as NSError {
+			print("Could not delete object: \(error.localizedDescription)")
+		}
+	}
 
 }
