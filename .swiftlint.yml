@@ -1,0 +1,23 @@
+disabled_rules:
+  - type_body_length
+  - trailing_whitespace
+  - file_length
+  - variable_name
+  - valid_docs
+  - vertical_whitespace
+
+excluded:
+  - Pods
+  - AxxessCARETests
+  - DuctTapeUITests
+
+force_cast: warning
+
+line_length:
+  - 150 # Warning
+
+function_body_length:
+  - 150 # Warning
+  - 250 # Error
+
+reporter: "checkstyle"

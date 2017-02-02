@@ -24,15 +24,20 @@ extension UIView {
         let outlinePath: UIBezierPath
         switch corner {
         case .All:
-            (path, outlinePath) = self.makeAnglePathWithRect(self.bounds, topLeftSize: length, topRightSize: length, bottomLeftSize: 0.0, bottomRightSize: 0.0)
+            (path, outlinePath) = self.makeAnglePathWithRect(self.bounds, topLeftSize: length, topRightSize: length,
+                                                             bottomLeftSize: 0.0, bottomRightSize: 0.0)
         case .TopRight:
-            (path, outlinePath) = self.makeAnglePathWithRect(self.bounds, topLeftSize: 0.0, topRightSize: length, bottomLeftSize: 0.0, bottomRightSize: 0.0)
+            (path, outlinePath) = self.makeAnglePathWithRect(self.bounds, topLeftSize: 0.0, topRightSize: length,
+                                                             bottomLeftSize: 0.0, bottomRightSize: 0.0)
         case .TopLeft:
-            (path, outlinePath) = self.makeAnglePathWithRect(self.bounds, topLeftSize: length, topRightSize: 0.0, bottomLeftSize: 0.0, bottomRightSize: 0.0)
+            (path, outlinePath) = self.makeAnglePathWithRect(self.bounds, topLeftSize: length, topRightSize: 0.0,
+                                                             bottomLeftSize: 0.0, bottomRightSize: 0.0)
         case .BottomRight:
-            (path, outlinePath) = self.makeAnglePathWithRect(self.bounds, topLeftSize: 0.0, topRightSize: 0.0, bottomLeftSize: 0.0, bottomRightSize: length)
+            (path, outlinePath) = self.makeAnglePathWithRect(self.bounds, topLeftSize: 0.0, topRightSize: 0.0,
+                                                             bottomLeftSize: 0.0, bottomRightSize: length)
         case .BottomLeft:
-            (path, outlinePath) = self.makeAnglePathWithRect(self.bounds, topLeftSize: 0.0, topRightSize: 0.0, bottomLeftSize: length, bottomRightSize: 0.0)
+            (path, outlinePath) = self.makeAnglePathWithRect(self.bounds, topLeftSize: 0.0, topRightSize: 0.0,
+                                                             bottomLeftSize: length, bottomRightSize: 0.0)
         }
         maskLayer.path = path
         self.layer.mask = maskLayer
@@ -50,7 +55,8 @@ extension UIView {
         }
     }
     
-    private func makeAnglePathWithRect(_ rect: CGRect, topLeftSize tl: CGFloat, topRightSize tr: CGFloat, bottomLeftSize bl: CGFloat, bottomRightSize br: CGFloat) -> (CGPath, UIBezierPath) {
+    private func makeAnglePathWithRect(_ rect: CGRect, topLeftSize tl: CGFloat, topRightSize tr: CGFloat,
+                                       bottomLeftSize bl: CGFloat, bottomRightSize br: CGFloat) -> (CGPath, UIBezierPath) {
         var points = [CGPoint]()
         
         points.append(CGPoint(x: rect.origin.x + tl, y: rect.origin.y))

@@ -70,7 +70,7 @@ class MainViewController: UIViewController {
 			}
 		}
 		
-		tabContainer?.addNewTab(container: container!)
+		let _ = tabContainer?.addNewTab(container: container!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,7 +87,7 @@ class MainViewController: UIViewController {
     }
     
 	func addTab() {
-		tabContainer?.addNewTab(container: container!)
+		let _ = tabContainer?.addNewTab(container: container!)
 	}
 	
 	func showMenu(sender: UIButton) {

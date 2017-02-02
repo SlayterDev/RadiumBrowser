@@ -103,7 +103,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	}
 	
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-		if (keyPath == "estimatedProgress") {
+		if keyPath == "estimatedProgress" {
 			progressView?.isHidden = webView?.estimatedProgress == 1
 			progressView?.setProgress(Float(webView!.estimatedProgress), animated: true)
             
@@ -122,7 +122,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		}
 	}
     
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
+                 for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if let tabContainer = tabView?.superview as? TabContainerView, navigationAction.targetFrame == nil {
             tabContainer.addNewTab(withRequest: navigationAction.request)
         }

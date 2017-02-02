@@ -16,12 +16,13 @@ extension UIImage {
 		UIToolbar().setItems([tempItem], animated: false)
 		
 		// got image from real uibutton
-		let itemView = tempItem.value(forKey: "view") as! UIView
-		for view in itemView.subviews {
-			if let button = view as? UIButton, let imageView = button.imageView {
-				return imageView.image
-			}
-		}
+        if let itemView = tempItem.value(forKey: "view") as? UIView {
+            for view in itemView.subviews {
+                if let button = view as? UIButton, let imageView = button.imageView {
+                    return imageView.image
+                }
+            }
+        }
 		
 		return nil
 	}
