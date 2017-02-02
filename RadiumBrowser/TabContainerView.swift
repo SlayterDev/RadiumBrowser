@@ -15,6 +15,8 @@ class TabContainerView: UIView, TabViewDelegate {
     static let defaultTabWidth: CGFloat = 150
     static let defaultTabHeight: CGFloat = TabContainerView.standardHeight - 2
     
+    weak var containerView: UIView?
+    
     lazy var tabList: [TabView] = []
 	
 	var addTabButton: UIButton?
@@ -49,7 +51,7 @@ class TabContainerView: UIView, TabViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 	
-	func addNewTab(container: UIView) {
+	func addNewTab(container: UIView) -> TabView {
 		let newTab = TabView(parentView: container).then { [unowned self] in
 			$0.delegate = self
 			
@@ -59,6 +61,15 @@ class TabContainerView: UIView, TabViewDelegate {
         tabList.append(newTab)
         didTap(tab: newTab)
         setUpTabConstraints()
+        
+        return newTab
+    }
+    
+    func addNewTab(withRequest request: URLRequest) {
+        guard let container = self.containerView else { return }
+        
+        let newTab = addNewTab(container: container)
+        let _ = newTab.webContainer?.webView?.load(request)
     }
     
     func setUpTabConstraints() {

@@ -20,7 +20,7 @@ struct MenuItem {
 	}
 }
 
-class SharedDropdownMenu: UIView {
+class SharedDropdownMenu: UIView, UIGestureRecognizerDelegate {
 	
 	static let defaultMenuItemHeight: CGFloat = 44
 	static let defaultMenuWidth: CGFloat = 250
@@ -94,15 +94,14 @@ class SharedDropdownMenu: UIView {
 		view.addSubview(self)
 		
 		dismissGesture = UITapGestureRecognizer()
+        dismissGesture?.delegate = self
 		dismissGesture?.numberOfTapsRequired = 1
-		dismissGesture?.addTarget(self, action: #selector(self.dismiss))
-		view.isUserInteractionEnabled = true
-		view.addGestureRecognizer(dismissGesture!)
+		view.window?.addGestureRecognizer(dismissGesture!)
 	}
 	
 	func dismiss() {
 		if let _ = dismissGesture {
-			dismissGesture?.view?.removeGestureRecognizer(dismissGesture!)
+			self.window?.removeGestureRecognizer(dismissGesture!)
 		}
 		self.removeFromSuperview()
 	}
@@ -112,5 +111,17 @@ class SharedDropdownMenu: UIView {
 		guard let item = menuItems?[sender.tag] else { return }
 		item.action?()
 	}
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let point = touch.location(in: nil)
+        if let window = UIApplication.shared.delegate?.window {
+            let pointInSubView = self.convert(point, from: window)
+            if !self.frame.contains(pointInSubView) {
+                self.dismiss()
+                return false
+            }
+        }
+        return true
+    }
 
 }

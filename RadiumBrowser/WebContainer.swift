@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class WebContainer: UIView, WKNavigationDelegate {
+class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	
 	weak var parentView: UIView?
 	var webView: WKWebView?
@@ -34,6 +34,7 @@ class WebContainer: UIView, WKNavigationDelegate {
 			$0.allowsLinkPreview = true
 			$0.allowsBackForwardNavigationGestures = true
 			$0.navigationDelegate = self
+            $0.uiDelegate = self
 			
 			self.addSubview($0)
 			$0.snp.makeConstraints { (make) in
@@ -92,7 +93,7 @@ class WebContainer: UIView, WKNavigationDelegate {
 		if !urlString.isURL() {
 			let searchTerms = urlString.replacingOccurrences(of: " ", with: "+")
 			urlString = "http://google.com/search?q=" + searchTerms
-		} else if !urlString.hasPrefix("http://") || !urlString.hasPrefix("https://") {
+		} else if !urlString.hasPrefix("http://") && !urlString.hasPrefix("https://") {
 			urlString = "http://" + urlString
 		}
 		
@@ -120,4 +121,11 @@ class WebContainer: UIView, WKNavigationDelegate {
 			tabContainer.updateNavButtons()
 		}
 	}
+    
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if let tabContainer = tabView?.superview as? TabContainerView, navigationAction.targetFrame == nil {
+            tabContainer.addNewTab(withRequest: navigationAction.request)
+        }
+        return nil
+    }
 }

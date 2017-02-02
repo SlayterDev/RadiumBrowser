@@ -59,6 +59,8 @@ class MainViewController: UIViewController {
         }
 		
 		container = UIView().then { [unowned self] in
+            self.tabContainer?.containerView = $0
+            
 			self.view.addSubview($0)
 			$0.snp.makeConstraints { (make) in
 				make.top.equalTo(addressBar.snp.bottom)
