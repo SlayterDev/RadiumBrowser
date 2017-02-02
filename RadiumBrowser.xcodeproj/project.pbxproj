@@ -304,10 +304,12 @@
 				TargetAttributes = {
 					41A567EE1E40CB3B00470017 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Z67LVNYQSE;
 						ProvisioningStyle = Automatic;
 					};
 					41A568021E40CB3B00470017 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Z67LVNYQSE;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 41A567EE1E40CB3B00470017;
 					};
@@ -672,6 +674,7 @@
 			baseConfigurationReference = BDE218EB2213DB9F87485559 /* Pods-RadiumBrowser.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Z67LVNYQSE;
 				INFOPLIST_FILE = RadiumBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -686,6 +689,7 @@
 			baseConfigurationReference = 0B353FD7BD9E780C914BBF1B /* Pods-RadiumBrowser.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Z67LVNYQSE;
 				INFOPLIST_FILE = RadiumBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -701,6 +705,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = Z67LVNYQSE;
 				INFOPLIST_FILE = RadiumBrowserTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -717,6 +722,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = Z67LVNYQSE;
 				INFOPLIST_FILE = RadiumBrowserTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

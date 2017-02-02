@@ -27,6 +27,8 @@ class SharedDropdownMenu: UIView {
 	
 	var menuItems: [MenuItem]?
 	
+	var dismissGesture: UITapGestureRecognizer?
+	
 	init(menuItems: [MenuItem]) {
 		super.init(frame: .zero)
 		
@@ -46,18 +48,17 @@ class SharedDropdownMenu: UIView {
 	func setupMenu() {
 		var itemViews = [UIView]()
 		for (i, menuItem) in menuItems!.enumerated() {
-			let _ = UILabel().then { [unowned self] in
-				$0.text = menuItem.name
+			let _ = UIButton().then { [unowned self] in
+				$0.setTitle(menuItem.name, for: .normal)
+				$0.setTitleColor(.black, for: .normal)
+				$0.setTitleColor(.lightGray, for: .highlighted)
+				$0.contentHorizontalAlignment = .left
 				$0.backgroundColor = Colors.radiumGray
-				$0.layer.borderWidth = 0.25
+				$0.layer.borderWidth = 0.5
 				$0.layer.borderColor = UIColor.gray.cgColor
 				$0.tag = i
 				
-				let gesture = UITapGestureRecognizer()
-				gesture.numberOfTapsRequired = 1
-				gesture.addTarget(self, action: #selector(self.tappedItem(sender:)))
-				$0.addGestureRecognizer(gesture)
-				$0.isUserInteractionEnabled = true
+				$0.addTarget(self, action: #selector(self.tappedItem(sender:)), for: .touchUpInside)
 				
 				self.addSubview($0)
 				$0.snp.makeConstraints { (make) in
@@ -91,15 +92,24 @@ class SharedDropdownMenu: UIView {
 		
 		self.frame = CGRect(x: x, y: point.y, width: width, height: height)
 		view.addSubview(self)
+		
+		dismissGesture = UITapGestureRecognizer()
+		dismissGesture?.numberOfTapsRequired = 1
+		dismissGesture?.addTarget(self, action: #selector(self.dismiss))
+		view.isUserInteractionEnabled = true
+		view.addGestureRecognizer(dismissGesture!)
 	}
 	
 	func dismiss() {
+		if let _ = dismissGesture {
+			dismissGesture?.view?.removeGestureRecognizer(dismissGesture!)
+		}
 		self.removeFromSuperview()
 	}
 	
-	func tappedItem(sender: UIGestureRecognizer) {
+	func tappedItem(sender: UIButton) {
 		dismiss()
-		guard let item = menuItems?[sender.view!.tag] else { return }
+		guard let item = menuItems?[sender.tag] else { return }
 		item.action?()
 	}
 
