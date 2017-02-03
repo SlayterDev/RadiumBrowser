@@ -53,10 +53,17 @@ class ScriptEditorViewController: UIViewController {
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		
-		let notificationCenter = NotificationCenter.default
+        
+        let notificationCenter = NotificationCenter.default
 		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+//        let av = UIAlertController(title: "Save?", message: "Would you like to save your changes?", preferredStyle: .alert)
+//        av.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+//            self.saveChanges()
+//        }))
+//        av.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+//        self.present(av, animated: true, completion: nil)
 	}
 
     override func didReceiveMemoryWarning() {
@@ -65,21 +72,25 @@ class ScriptEditorViewController: UIViewController {
     }
 
 	func done(sender: UIBarButtonItem) {
-		if let model = prevModel {
-			do {
-				let realm = try Realm()
-				try realm.write {
-					model.source = textView!.text
-				}
-			} catch let error {
-				logRealmError(error: error)
-			}
-		} else {
-			delegate?.addScript(named: scriptName, source: textView?.text)
-		}
+		saveChanges()
 		let _ = self.navigationController?.popViewController(animated: true)
 	}
 	
+    func saveChanges() {
+        if let model = prevModel {
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    model.source = textView!.text
+                }
+            } catch let error {
+                logRealmError(error: error)
+            }
+        } else {
+            delegate?.addScript(named: scriptName, source: textView?.text)
+        }
+    }
+    
 	func getTextViewInsets(keyboardHeight: CGFloat) -> CGFloat {
 		// Calculate the offset of our tableView in the
 		// coordinate space of of our window
@@ -99,7 +110,7 @@ class ScriptEditorViewController: UIViewController {
 	func keyboardWillShow(notification: NSNotification) {
 		let userInfo = notification.userInfo!
 		guard let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
-		
+        
 		if isiPadUI {
 			textView?.snp.remakeConstraints { (make) in
 				make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 0, left: 0,

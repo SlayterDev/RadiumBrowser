@@ -76,8 +76,9 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         if indexPath.section == 0 {
-            cell.textLabel?.text = "Add new extension"
+            cell.textLabel?.text = "Add new extension..."
         } else {
+            cell.accessoryType = .disclosureIndicator
 			if let item = extensions?[indexPath.row] {
 				cell.textLabel?.text = item.name
 			}
@@ -103,7 +104,9 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 	
 	func promptForScriptName() {
 		let av = UIAlertController(title: "New Extension", message: "Please provide a name for your extension.", preferredStyle: .alert)
-		av.addTextField(configurationHandler: nil)
+        av.addTextField(configurationHandler: { (textField) in
+            textField.autocapitalizationType = .words
+        })
 		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
 			if let nameText = av.textFields?.first?.text, nameText != "" {
 				self.presentEditor(name: nameText)
