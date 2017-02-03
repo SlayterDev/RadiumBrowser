@@ -62,9 +62,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         do {
             let realm = try Realm()
             self.notificationToken = realm.addNotificationBlock { notification, realm in
-                DispatchQueue.main.async {
-                    self.reloadExtensions()
-                }
+                self.reloadExtensions()
             }
         } catch let error as NSError {
             print("Error occured opening realm: \(error.localizedDescription)")
