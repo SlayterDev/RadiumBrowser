@@ -19,11 +19,14 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	weak var tabView: TabView?
 	
 	var progressView: UIProgressView?
+    
+    var notificationToken: NotificationToken!
 	
 	deinit {
         if isObserving {
             webView?.removeObserver(self, forKeyPath: "estimatedProgress")
         }
+        notificationToken.stop()
 	}
 	
 	init(parent: UIView) {
@@ -42,7 +45,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 				make.edges.equalTo(self)
 			}
 		}
-		
+        
 		progressView = UIProgressView().then { [unowned self] in
 			$0.isHidden = true
 			
@@ -55,6 +58,17 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		}
 		
 		let _ = webView?.load(URLRequest(url: URL(string: "https://google.com")!))
+        
+        do {
+            let realm = try Realm()
+            self.notificationToken = realm.addNotificationBlock { notification, realm in
+                DispatchQueue.main.async {
+                    self.reloadExtensions()
+                }
+            }
+        } catch let error as NSError {
+            print("Error occured opening realm: \(error.localizedDescription)")
+        }
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -67,8 +81,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		let config = WKWebViewConfiguration()
 		
 		let contentController = WKUserContentController()
-		for script in loadExtensions() {
-			contentController.addUserScript(script)
+		let _ = loadExtensions().map {
+			contentController.addUserScript($0)
 		}
 		
 		config.userContentController = contentController
@@ -95,6 +109,14 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		
 		return extensions
 	}
+    
+    func reloadExtensions() {
+        // Called when a new extension is added to Realm
+        webView?.configuration.userContentController.removeAllUserScripts()
+        let _ = loadExtensions().map {
+            webView?.configuration.userContentController.addUserScript($0)
+        }
+    }
 	
     // MARK: - View Managment
     
