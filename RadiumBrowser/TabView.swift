@@ -76,7 +76,6 @@ class TabView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-//        self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         self.blendCorner(corner: .All, shapeLayer: &shapeLayer, length: 10)
     }
 	

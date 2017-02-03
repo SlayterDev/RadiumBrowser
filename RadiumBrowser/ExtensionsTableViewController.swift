@@ -101,6 +101,22 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 			self.navigationController?.pushViewController(editor, animated: true)
 		}
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        guard let _ = extensions else { return }
+        guard let _ = realm else { return }
+        
+        do {
+            try realm.write {
+                realm.delete(extensions![indexPath.row])
+            }
+        } catch let error as NSError {
+            print("Could not delete object: \(error.localizedDescription)")
+        }
+    }
+    
+    // MARK: - Actions
 	
 	func promptForScriptName() {
 		let av = UIAlertController(title: "New Extension", message: "Please provide a name for your extension.", preferredStyle: .alert)
@@ -122,20 +138,6 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 		editor.delegate = self
 		editor.scriptName = name
 		self.navigationController?.pushViewController(editor, animated: true)
-	}
-	
-	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-		guard editingStyle == .delete else { return }
-		guard let _ = extensions else { return }
-		guard let _ = realm else { return }
-		
-		do {
-			try realm.write {
-				realm.delete(extensions![indexPath.row])
-			}
-		} catch let error as NSError {
-			print("Could not delete object: \(error.localizedDescription)")
-		}
 	}
 	
 	func addScript(named name: String?, source: String?) {

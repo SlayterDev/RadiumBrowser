@@ -86,7 +86,6 @@ extension UIView {
                 outlinePath.addLine(to: point)
             }
         }
-//        outlinePath.addLine(to: outlinePoints.first!)
         
         return (path, outlinePath)
     }

@@ -50,6 +50,8 @@ class TabContainerView: UIView, TabViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Tab Management
 	
 	func addNewTab(container: UIView) -> TabView {
 		let newTab = TabView(parentView: container).then { [unowned self] in

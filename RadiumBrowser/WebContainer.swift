@@ -61,6 +61,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+    // MARK: - Configuration Setup
+    
 	func loadConfiguration() -> WKWebViewConfiguration {
 		let config = WKWebViewConfiguration()
 		
@@ -94,6 +96,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		return extensions
 	}
 	
+    // MARK: - View Managment
+    
 	func addToView() {
 		guard let _ = parentView else { return }
 		
@@ -136,6 +140,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		}
 	}
 	
+    // MARK: - Webview Delegate
+    
 	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 		if keyPath == "estimatedProgress" {
 			progressView?.isHidden = webView?.estimatedProgress == 1

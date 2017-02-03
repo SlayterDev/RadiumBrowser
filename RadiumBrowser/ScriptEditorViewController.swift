@@ -57,19 +57,14 @@ class ScriptEditorViewController: UIViewController {
         let notificationCenter = NotificationCenter.default
 		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-//        let av = UIAlertController(title: "Save?", message: "Would you like to save your changes?", preferredStyle: .alert)
-//        av.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-//            self.saveChanges()
-//        }))
-//        av.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-//        self.present(av, animated: true, completion: nil)
 	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Saving
 
 	func done(sender: UIBarButtonItem) {
 		saveChanges()
@@ -91,6 +86,8 @@ class ScriptEditorViewController: UIViewController {
         }
     }
     
+    // MARK: - Keyboard Methods
+    
 	func getTextViewInsets(keyboardHeight: CGFloat) -> CGFloat {
 		// Calculate the offset of our tableView in the
 		// coordinate space of of our window
@@ -106,7 +103,7 @@ class ScriptEditorViewController: UIViewController {
 			   44 :
 			   0)
 	}
-	
+    
 	func keyboardWillShow(notification: NSNotification) {
 		let userInfo = notification.userInfo!
 		guard let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
