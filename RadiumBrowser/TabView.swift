@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol TabViewDelegate {
+protocol TabViewDelegate: class {
 	func didTap(tab: TabView)
 	func close(tab: TabView)
 }
@@ -24,7 +24,7 @@ class TabView: UIView {
     }
     var tabTitleLabel: UILabel?
 	
-	var delegate: TabViewDelegate?
+	weak var delegate: TabViewDelegate?
 	
 	var webContainer: WebContainer?
 

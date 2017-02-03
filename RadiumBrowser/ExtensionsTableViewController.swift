@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class ExtensionsTableViewController: UITableViewController {
+class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate {
 
 	var extensions: Results<ExtensionModel>?
     
@@ -90,17 +90,36 @@ class ExtensionsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section == 0 {
-			do {
-				try realm.write {
-					let id = UUID().uuidString
-					realm.add(ExtensionModel(value: ["source": "document.body.style.background = \"#FF0000\";", "name": "Background Red", "id": id]))
-				}
-			} catch {
-				print("Could not write extension")
-			}
-            self.tableView.reloadSections([1], with: .automatic)
-        }
+			promptForScriptName()
+		} else {
+			guard let model = extensions?[indexPath.row] else { return }
+			let editor = ScriptEditorViewController()
+			editor.delegate = self
+			editor.prevModel = model
+			editor.scriptName = model.name
+			self.navigationController?.pushViewController(editor, animated: true)
+		}
     }
+	
+	func promptForScriptName() {
+		let av = UIAlertController(title: "New Extension", message: "Please provide a name for your extension.", preferredStyle: .alert)
+		av.addTextField(configurationHandler: nil)
+		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+			if let nameText = av.textFields?.first?.text, nameText != "" {
+				self.presentEditor(name: nameText)
+			}
+		}))
+		av.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		
+		self.present(av, animated: true, completion: nil)
+	}
+	
+	func presentEditor(name: String) {
+		let editor = ScriptEditorViewController()
+		editor.delegate = self
+		editor.scriptName = name
+		self.navigationController?.pushViewController(editor, animated: true)
+	}
 	
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		guard editingStyle == .delete else { return }
@@ -113,6 +132,20 @@ class ExtensionsTableViewController: UITableViewController {
 			}
 		} catch let error as NSError {
 			print("Could not delete object: \(error.localizedDescription)")
+		}
+	}
+	
+	func addScript(named name: String?, source: String?) {
+		guard let name = name else { return }
+		guard let source = source else { return }
+		
+		do {
+			try realm.write {
+				let id = UUID().uuidString
+				realm.add(ExtensionModel(value: ["source": source, "name": name, "id": id]))
+			}
+		} catch let error {
+			logRealmError(error: error)
 		}
 	}
 

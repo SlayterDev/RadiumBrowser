@@ -87,7 +87,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		}
 		
 		for model in Array(models!) {
-			let script = WKUserScript(source: model.source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+			let script = WKUserScript(source: model.source, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
 			extensions.append(script)
 		}
 		

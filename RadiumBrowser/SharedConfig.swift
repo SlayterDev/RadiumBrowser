@@ -16,3 +16,7 @@ struct Colors {
 }
 
 let isiPadUI = UI_USER_INTERFACE_IDIOM() == .pad
+
+func logRealmError(error: Error) {
+	print("## Realm Error: \(error.localizedDescription)")
+}
