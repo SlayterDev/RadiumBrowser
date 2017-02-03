@@ -71,7 +71,15 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
         
         return extensions?.count ?? 0
     }
-
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Extensions (tap to edit)"
+        }
+        
+        return ""
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
@@ -81,6 +89,11 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
             cell.accessoryType = .disclosureIndicator
 			if let item = extensions?[indexPath.row] {
 				cell.textLabel?.text = item.name
+                cell.accessoryView = UISwitch().then { [unowned self] in
+                    $0.isOn = item.active
+                    $0.tag = indexPath.row
+                    $0.addTarget(self, action: #selector(self.toggleScript(sender:)), for: .valueChanged)
+                }
 			}
         }
 
@@ -147,11 +160,23 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 		do {
 			try realm.write {
 				let id = UUID().uuidString
-				realm.add(ExtensionModel(value: ["source": source, "name": name, "id": id]))
+				realm.add(ExtensionModel(value: ["source": source, "name": name, "id": id, "active": true]))
 			}
 		} catch let error {
 			logRealmError(error: error)
 		}
 	}
+    
+    func toggleScript(sender: UISwitch) {
+        guard let model = extensions?[sender.tag] else { return }
+        
+        do {
+            try realm.write {
+                model.active = sender.isOn
+            }
+        } catch let error {
+            logRealmError(error: error)
+        }
+    }
 
 }

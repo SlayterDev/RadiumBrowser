@@ -116,6 +116,7 @@ class MainViewController: UIViewController {
     func showExtensions() {
         let vc = ExtensionsTableViewController(style: .grouped)
         let nav = UINavigationController(rootViewController: vc)
+        nav.navigationBar.barTintColor = Colors.radiumGray
         
         if isiPadUI {
             nav.modalPresentationStyle = .formSheet

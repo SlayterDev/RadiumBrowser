@@ -27,7 +27,7 @@ class ScriptEditorViewController: UIViewController {
 
         title = scriptName
 		
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.done(sender:)))
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(self.done(sender:)))
 		
 		textView = UITextView().then { [unowned self] in
 			$0.autocorrectionType = .no

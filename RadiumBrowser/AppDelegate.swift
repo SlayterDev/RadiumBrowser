@@ -23,6 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 			NSLog("Document Path: %@", documentsPath)
 		#endif
+        
+        let realmConfig = Realm.Configuration(
+            schemaVersion: 1,
+            migrationBlock: { migration, oldSchemaVersion in
+                if oldSchemaVersion < 1 {
+                    migration.enumerateObjects(ofType: ExtensionModel.className()) { oldObject, newObject in
+                        newObject?["active"] = true
+                    }
+                }
+            }
+        )
+        
+        Realm.Configuration.defaultConfiguration = realmConfig
 		
         self.window?.rootViewController = MainViewController()
         self.window?.makeKeyAndVisible()
