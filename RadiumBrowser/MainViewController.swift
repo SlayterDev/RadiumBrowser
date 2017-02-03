@@ -94,7 +94,7 @@ class MainViewController: UIViewController {
 		let shareAction = MenuItem.item(named: "Share", action: { [unowned self] in
 			self.shareLink()
 		})
-        let extensionAction = MenuItem.item(named: "Extension", action: { [unowned self] in
+        let extensionAction = MenuItem.item(named: "Extensions", action: { [unowned self] in
             self.showExtensions()
         })
 		

@@ -32,7 +32,7 @@ class ScriptEditorViewController: UIViewController {
 		textView = UITextView().then { [unowned self] in
 			$0.autocorrectionType = .no
 			$0.autocapitalizationType = .none
-			$0.font = UIFont(name: "SF Mono Regular", size: UIFont.systemFontSize)
+			$0.font = UIFont(name: "Menlo Regular", size: UIFont.systemFontSize)
 			
 			if let prevModel = self.prevModel {
 				$0.text = prevModel.source
