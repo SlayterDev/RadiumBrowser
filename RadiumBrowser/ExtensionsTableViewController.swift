@@ -93,7 +93,7 @@ class ExtensionsTableViewController: UITableViewController {
 			do {
 				try realm.write {
 					let id = UUID().uuidString
-					realm.add(ExtensionModel(value: ["source": "document.body.style.background = \"#777\";", "name": "Background Red", "id": id]))
+					realm.add(ExtensionModel(value: ["source": "document.body.style.background = \"#FF0000\";", "name": "Background Red", "id": id]))
 				}
 			} catch {
 				print("Could not write extension")

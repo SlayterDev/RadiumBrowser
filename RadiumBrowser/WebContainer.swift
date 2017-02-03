@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import RealmSwift
 
 class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	
@@ -30,7 +31,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		
 		self.parentView = parent
 		
-		webView = WKWebView().then { [unowned self] in
+		webView = WKWebView(frame: .zero, configuration: loadConfiguration()).then { [unowned self] in
 			$0.allowsLinkPreview = true
 			$0.allowsBackForwardNavigationGestures = true
 			$0.navigationDelegate = self
@@ -58,6 +59,39 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+	
+	func loadConfiguration() -> WKWebViewConfiguration {
+		let config = WKWebViewConfiguration()
+		
+		let contentController = WKUserContentController()
+		for script in loadExtensions() {
+			contentController.addUserScript(script)
+		}
+		
+		config.userContentController = contentController
+		
+		return config
+	}
+	
+	func loadExtensions() -> [WKUserScript] {
+		var extensions = [WKUserScript]()
+		
+		var models: Results<ExtensionModel>?
+		do {
+			let realm = try Realm()
+			models = realm.objects(ExtensionModel.self)
+		} catch let error {
+			print("Could not load extensions: \(error.localizedDescription)")
+			return []
+		}
+		
+		for model in Array(models!) {
+			let script = WKUserScript(source: model.source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+			extensions.append(script)
+		}
+		
+		return extensions
 	}
 	
 	func addToView() {
