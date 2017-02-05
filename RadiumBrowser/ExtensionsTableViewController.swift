@@ -153,14 +153,16 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 		self.navigationController?.pushViewController(editor, animated: true)
 	}
 	
-	func addScript(named name: String?, source: String?) {
+	func addScript(named name: String?, source: String?, injectionTime: Int) {
 		guard let name = name else { return }
 		guard let source = source else { return }
 		
 		do {
 			try realm.write {
 				let id = UUID().uuidString
-				realm.add(ExtensionModel(value: ["source": source, "name": name, "id": id, "active": true]))
+				realm.add(ExtensionModel(value: ["source": source, "name": name,
+				                                 "id": id, "active": true,
+				                                 "injectionTime": injectionTime]))
 			}
 		} catch let error {
 			logRealmError(error: error)

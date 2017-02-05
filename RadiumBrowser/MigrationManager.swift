@@ -14,7 +14,7 @@ class MigrationManager: NSObject {
 	
 	func attemptMigration() {
 		let realmConfig = Realm.Configuration(
-			schemaVersion: 2,
+			schemaVersion: 3,
 			migrationBlock: { migration, oldSchemaVersion in
 				if oldSchemaVersion < 1 {
 					migration.enumerateObjects(ofType: ExtensionModel.className()) { oldObject, newObject in
@@ -25,6 +25,12 @@ class MigrationManager: NSObject {
 				if oldSchemaVersion < 2 {
 					migration.enumerateObjects(ofType: BrowsingSession.className()) { oldObject, newObject in
 						newObject?["selectedTabIndex"] = 0
+					}
+				}
+				
+				if oldSchemaVersion < 3 {
+					migration.enumerateObjects(ofType: ExtensionModel.className()) { oldObject, newObject in
+						newObject?["injectionTime"] = 1
 					}
 				}
 			}

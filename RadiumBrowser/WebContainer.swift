@@ -102,7 +102,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		
 		for model in models! {
             guard model.active else { continue }
-			let script = WKUserScript(source: model.source, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+			let injectionTime: WKUserScriptInjectionTime = (model.injectionTime == 0) ? .atDocumentStart : .atDocumentEnd
+			let script = WKUserScript(source: model.source, injectionTime: injectionTime, forMainFrameOnly: false)
 			extensions.append(script)
 		}
 		
@@ -190,4 +191,43 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         }
         return nil
     }
+	
+	// MARK: - Alert Methods
+	
+	func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String,
+	             initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+		let av = UIAlertController(title: webView.title, message: message, preferredStyle: .alert)
+		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(action) in
+			completionHandler()
+		}))
+		self.parentViewController?.present(av, animated: true, completion: nil)
+	}
+	
+	func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String,
+	             initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+		let av = UIAlertController(title: webView.title, message: message, preferredStyle: .alert)
+		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(action) in
+			completionHandler(true)
+		}))
+		av.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in
+			completionHandler(false)
+		}))
+		self.parentViewController?.present(av, animated: true, completion: nil)
+	}
+	
+	func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String,
+	             defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
+		let av = UIAlertController(title: webView.title, message: prompt, preferredStyle: .alert)
+		av.addTextField(configurationHandler: { (textField) in
+			textField.placeholder = prompt
+			textField.text = defaultText
+		})
+		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(action) in
+			completionHandler(av.textFields?.first?.text)
+		}))
+		av.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in
+			completionHandler(nil)
+		}))
+		self.parentViewController?.present(av, animated: true, completion: nil)
+	}
 }

@@ -10,12 +10,13 @@ import UIKit
 import RealmSwift
 
 protocol ScriptEditorDelegate: class {
-	func addScript(named name: String?, source: String?)
+	func addScript(named name: String?, source: String?, injectionTime: Int)
 }
 
 class ScriptEditorViewController: UIViewController {
 	
 	var textView: UITextView?
+	var injectionTimeSelector: UISegmentedControl?
 	var scriptName: String?
 	
 	var prevModel: ExtensionModel?
@@ -25,7 +26,7 @@ class ScriptEditorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = scriptName
+        self.navigationItem.prompt = scriptName
 		
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(self.done(sender:)))
 		
@@ -42,6 +43,17 @@ class ScriptEditorViewController: UIViewController {
 			$0.snp.makeConstraints { (make) in
 				make.edges.equalTo(self.view)
 			}
+		}
+		
+		injectionTimeSelector = UISegmentedControl(items: ["At Start", "At End"]).then { [unowned self] in
+			$0.sizeToFit()
+			
+			if let prevModel = self.prevModel {
+				$0.selectedSegmentIndex = prevModel.injectionTime
+			} else {
+				$0.selectedSegmentIndex = 1
+			}
+			self.navigationItem.titleView = $0
 		}
 		
 		let notificationCenter = NotificationCenter.default
@@ -77,12 +89,13 @@ class ScriptEditorViewController: UIViewController {
                 let realm = try Realm()
                 try realm.write {
                     model.source = textView!.text
+					model.injectionTime = injectionTimeSelector!.selectedSegmentIndex
                 }
             } catch let error {
                 logRealmError(error: error)
             }
         } else {
-            delegate?.addScript(named: scriptName, source: textView?.text)
+            delegate?.addScript(named: scriptName, source: textView?.text, injectionTime: injectionTimeSelector!.selectedSegmentIndex)
         }
     }
     

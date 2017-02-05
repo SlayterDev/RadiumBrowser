@@ -14,6 +14,7 @@ class ExtensionModel: Object {
     dynamic var id = ""
     dynamic var name = ""
     dynamic var active = true
+	dynamic var injectionTime = 1 // 0 == Start, 1 == End
     
     override class func primaryKey() -> String? {
         return "id"
