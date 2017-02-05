@@ -84,6 +84,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		}
 		
 		config.userContentController = contentController
+		config.processPool = WebViewManager.sharedProcessPool
 		
 		return config
 	}
