@@ -30,4 +30,21 @@ class WebViewManager: NSObject {
 			logRealmError(error: error)
 		}
 	}
+	
+	func getColoredURL(url: URL?) -> NSAttributedString {
+		guard let url = url else { return NSAttributedString(string: "") }
+		let urlString = url.absoluteString as NSString
+		
+		let mutableAttributedString = NSMutableAttributedString(string: urlString as String,
+		                                                        attributes: [NSForegroundColorAttributeName: UIColor.gray])
+		if url.scheme == "https" {
+			let range = urlString.range(of: url.scheme!)
+			mutableAttributedString.addAttribute(NSForegroundColorAttributeName, value: Colors.urlGreen, range: range)
+		}
+		
+		let domainRange = urlString.range(of: url.host!)
+		mutableAttributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: domainRange)
+		
+		return mutableAttributedString
+	}
 }

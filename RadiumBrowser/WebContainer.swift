@@ -182,7 +182,12 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		tabView?.tabTitle = webView.title
 		
 		if let tabContainer = tabView?.superview as? TabContainerView, isObserving {
-			tabContainer.addressBar?.setAddressText(webView.url?.absoluteString)
+			let attrUrl = WebViewManager.shared.getColoredURL(url: webView.url)
+			if attrUrl.string == "" {
+				tabContainer.addressBar?.setAddressText(webView.url?.absoluteString)
+			} else {
+				tabContainer.addressBar?.setAttributedAddressText(attrUrl)
+			}
 			tabContainer.updateNavButtons()
 		}
 	}

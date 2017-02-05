@@ -117,6 +117,14 @@ class AddressBar: UIView, UITextFieldDelegate {
 			addressField?.text = text
 		}
 	}
+	
+	func setAttributedAddressText(_ text: NSAttributedString) {
+		guard let _ = addressField else { return }
+		
+		if !addressField!.isFirstResponder {
+			addressField?.attributedText = text
+		}
+	}
     
     // MARK: - Textfield Delegate
 	
@@ -127,6 +135,10 @@ class AddressBar: UIView, UITextFieldDelegate {
 	}
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+		if let string = textField.attributedText?.mutableCopy() as? NSMutableAttributedString {
+			string.setAttributes([:], range: NSRange(0..<string.length))
+			textField.attributedText = string
+		}
         textField.selectAll(nil)
     }
 
