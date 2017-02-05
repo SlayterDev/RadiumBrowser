@@ -15,6 +15,8 @@ import RealmSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+	
+	var tabContainer: TabContainerView?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,13 +27,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		#endif
         
         let realmConfig = Realm.Configuration(
-            schemaVersion: 1,
+            schemaVersion: 2,
             migrationBlock: { migration, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
                     migration.enumerateObjects(ofType: ExtensionModel.className()) { oldObject, newObject in
                         newObject?["active"] = true
                     }
                 }
+				
+				if oldSchemaVersion < 2 {
+					migration.enumerateObjects(ofType: BrowsingSession.className()) { oldObject, newObject in
+						newObject?["selectedTabIndex"] = 0
+					}
+				}
             }
         )
         
@@ -68,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        tabContainer?.saveBrowsingSession()
     }
 
 }

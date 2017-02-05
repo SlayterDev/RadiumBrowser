@@ -69,8 +69,8 @@ class MainViewController: UIViewController {
 				make.left.equalTo(self.view)
 			}
 		}
-		
-		let _ = tabContainer?.addNewTab(container: container!)
+
+		tabContainer?.loadBrowsingSession()
     }
 
     override func didReceiveMemoryWarning() {

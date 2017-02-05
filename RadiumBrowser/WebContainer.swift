@@ -177,8 +177,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 		tabView?.tabTitle = webView.title
 		
-		if let tabContainer = tabView?.superview as? TabContainerView {
-			tabContainer.addressBar?.addressField?.text = webView.url?.absoluteString
+		if let tabContainer = tabView?.superview as? TabContainerView, isObserving {
+			tabContainer.addressBar?.setAddressText(webView.url?.absoluteString)
 			tabContainer.updateNavButtons()
 		}
 	}

@@ -95,7 +95,7 @@ class ScriptEditorViewController: UIViewController {
 		let tableViewFrame = textView!.superview!.convert(textView!.frame, to: window)
 		
 		// BottomInset = part of keyboard that is covering the tableView
-		let bottomInset = keyboardHeight - ( window.frame.height - tableViewFrame.height - tableViewFrame.origin.y )
+		let bottomInset = keyboardHeight - (window.frame.height - tableViewFrame.height - tableViewFrame.origin.y)
 		
 		// Return the new insets + update this if you have custom insets
 		return bottomInset -

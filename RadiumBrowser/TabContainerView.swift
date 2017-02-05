@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TabContainerView: UIView, TabViewDelegate {
     
@@ -28,10 +29,14 @@ class TabContainerView: UIView, TabViewDelegate {
 	}
 	
 	weak var addressBar: AddressBar?
-		
+	
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+		
+		if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+			appDelegate.tabContainer = self
+		}
+		
         self.backgroundColor = Colors.radiumDarkGray
 		
 		addTabButton = UIButton().then { [unowned self] in
@@ -172,5 +177,66 @@ class TabContainerView: UIView, TabViewDelegate {
 		
 		addressBar?.backButton?.isEnabled = tab.webContainer?.webView?.canGoBack ?? false
 		addressBar?.forwardButton?.isEnabled = tab.webContainer?.webView?.canGoForward ?? false
+	}
+	
+	// MARK: - Data Managment
+	
+	func saveBrowsingSession() {
+		let session = BrowsingSession()
+		let models = List<URLModel>()
+		for tab in tabList {
+			let model = URLModel()
+			model.urlString = tab.webContainer?.webView?.url?.absoluteString ?? ""
+			model.pageTitle = tab.tabTitle ?? ""
+			models.append(model)
+		}
+		session.tabs.append(objectsIn: models)
+		session.selectedTabIndex = Int32(selectedTabIndex)
+		
+		do {
+			let realm = try Realm()
+			try realm.write {
+				let _ = models.map {
+					realm.add($0)
+				}
+				realm.add(session)
+			}
+		} catch let error {
+			logRealmError(error: error)
+		}
+	}
+	
+	func loadBrowsingSession() {
+		var tabModels: List<URLModel>?
+		var session: BrowsingSession?
+		var realm: Realm?
+		do {
+			realm = try Realm()
+			session = realm?.objects(BrowsingSession.self).first
+			tabModels = session?.tabs
+		} catch let error {
+			logRealmError(error: error)
+		}
+		
+		guard tabModels != nil else {
+			let _ = addNewTab(container: containerView!)
+			return
+		}
+		
+		for model in tabModels! {
+			let request = URLRequest(url: URL(string: model.urlString)!)
+			addNewTab(withRequest: request)
+		}
+		didTap(tab: tabList[Int(session!.selectedTabIndex)])
+		
+		// Remove data from database
+		do {
+			try realm?.write {
+				realm?.delete(tabModels!)
+				realm?.delete(session!)
+			}
+		} catch let error {
+			logRealmError(error: error)
+		}
 	}
 }

@@ -79,7 +79,7 @@ class AddressBar: UIView, UITextFieldDelegate {
             
             $0.autocorrectionType = .no
             $0.autocapitalizationType = .none
-            $0.keyboardType = .URL
+            $0.keyboardType = .webSearch
 			$0.delegate = self
 			$0.clearButtonMode = .whileEditing
             
@@ -107,6 +107,16 @@ class AddressBar: UIView, UITextFieldDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+	
+	// MARK: - Actions
+	
+	func setAddressText(_ text: String?) {
+		guard let _ = addressField else { return }
+		
+		if !addressField!.isFirstResponder {
+			addressField?.text = text
+		}
+	}
     
     // MARK: - Textfield Delegate
 	
