@@ -14,6 +14,7 @@
 		02CC79A51E440DE6006FD9DE /* ScriptEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CC79A41E440DE6006FD9DE /* ScriptEditorViewController.swift */; };
 		02DF6C531E478FE30088BDEB /* BrowsingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF6C521E478FE30088BDEB /* BrowsingSession.swift */; };
 		02DF6C551E4795180088BDEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02DF6C541E4795180088BDEB /* Main.storyboard */; };
+		02DF6C571E47AADA0088BDEB /* MigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF6C561E47AADA0088BDEB /* MigrationManager.swift */; };
 		3CADC949B2736BBB3F7B5EF1 /* Pods_RadiumBrowserUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDF747E739C5CC832EEFB1A7 /* Pods_RadiumBrowserUITests.framework */; };
 		3CDDEBFD7B6642A2FEB0EEA5 /* Pods_RadiumBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283FB330E1E0BA712752A519 /* Pods_RadiumBrowser.framework */; };
 		41A567F31E40CB3B00470017 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A567F21E40CB3B00470017 /* AppDelegate.swift */; };
@@ -58,6 +59,7 @@
 		02CC79A41E440DE6006FD9DE /* ScriptEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScriptEditorViewController.swift; sourceTree = "<group>"; };
 		02DF6C521E478FE30088BDEB /* BrowsingSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowsingSession.swift; sourceTree = "<group>"; };
 		02DF6C541E4795180088BDEB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		02DF6C561E47AADA0088BDEB /* MigrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationManager.swift; sourceTree = "<group>"; };
 		0B353FD7BD9E780C914BBF1B /* Pods-RadiumBrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser.release.xcconfig"; sourceTree = "<group>"; };
 		13D2A99460A62596A30DA13C /* Pods-RadiumBrowserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowserTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowserTests/Pods-RadiumBrowserTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1D2F335FDE500B6A311FB334 /* Pods-RadiumBrowserUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowserUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowserUITests/Pods-RadiumBrowserUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +119,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02DF6C581E47AC270088BDEB /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				02DF6C561E47AADA0088BDEB /* MigrationManager.swift */,
+			);
+			name = Singletons;
+			sourceTree = "<group>";
+		};
 		30F71CDE5CA2D69D8F2BBBCB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +173,7 @@
 				41DBC5F61E4123C200913FAA /* Controllers */,
 				41DBC5F71E4123E900913FAA /* Main Views */,
 				41DBC5F81E41241700913FAA /* Shared UI */,
+				02DF6C581E47AC270088BDEB /* Singletons */,
 			);
 			path = RadiumBrowser;
 			sourceTree = "<group>";
@@ -556,6 +567,7 @@
 				41DBC5EF1E411AE900913FAA /* MainViewController.swift in Sources */,
 				41DBC5F11E411B8B00913FAA /* AddressBar.swift in Sources */,
 				41DBC5FC1E412CA500913FAA /* TabView.swift in Sources */,
+				02DF6C571E47AADA0088BDEB /* MigrationManager.swift in Sources */,
 				41F8F7561E43CB4B00029B56 /* ExtensionModel.swift in Sources */,
 				41A567F31E40CB3B00470017 /* AppDelegate.swift in Sources */,
 				41DBC5F31E411C7A00913FAA /* SharedConfig.swift in Sources */,

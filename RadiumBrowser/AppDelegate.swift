@@ -26,24 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			NSLog("Document Path: %@", documentsPath)
 		#endif
         
-        let realmConfig = Realm.Configuration(
-            schemaVersion: 2,
-            migrationBlock: { migration, oldSchemaVersion in
-                if oldSchemaVersion < 1 {
-                    migration.enumerateObjects(ofType: ExtensionModel.className()) { oldObject, newObject in
-                        newObject?["active"] = true
-                    }
-                }
-				
-				if oldSchemaVersion < 2 {
-					migration.enumerateObjects(ofType: BrowsingSession.className()) { oldObject, newObject in
-						newObject?["selectedTabIndex"] = 0
-					}
-				}
-            }
-        )
-        
-        Realm.Configuration.defaultConfiguration = realmConfig
+        MigrationManager.shared.attemptMigration()
 		
         self.window?.rootViewController = MainViewController()
         self.window?.makeKeyAndVisible()
