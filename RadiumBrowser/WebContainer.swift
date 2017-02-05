@@ -177,6 +177,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	}
     
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+		WebViewManager.shared.logPageVisit(url: webView.url?.absoluteString, pageTitle: webView.title)
+		
 		tabView?.tabTitle = webView.title
 		
 		if let tabContainer = tabView?.superview as? TabContainerView, isObserving {
