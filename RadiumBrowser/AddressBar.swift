@@ -28,9 +28,11 @@ class AddressBar: UIView, UITextFieldDelegate {
         self.layer.borderWidth = 0.5
 		
 		backButton = UIButton().then { [unowned self] in
-			$0.setTitle("<-", for: .normal)
+//			$0.setTitle("<-", for: .normal)
+            $0.setImage(UIImage(named: "back")?.withRenderingMode(.alwaysTemplate), for: .normal)
 			$0.setTitleColor(.black, for: .normal)
 			$0.setTitleColor(.lightGray, for: .disabled)
+            $0.tintColor = .lightGray
 			$0.isEnabled = false
 			
 			self.addSubview($0)
@@ -43,10 +45,12 @@ class AddressBar: UIView, UITextFieldDelegate {
 		
 		if isiPadUI {
 			forwardButton = UIButton().then { [unowned self] in
-				$0.setTitle("->", for: .normal)
+//				$0.setTitle("->", for: .normal)
+                $0.setImage(UIImage(named: "forward")?.withRenderingMode(.alwaysTemplate), for: .normal)
 				$0.setTitleColor(.black, for: .normal)
 				$0.setTitleColor(.lightGray, for: .disabled)
 				$0.isEnabled = false
+                $0.tintColor = .lightGray
 				
 				self.addSubview($0)
 				$0.snp.makeConstraints { (make) in

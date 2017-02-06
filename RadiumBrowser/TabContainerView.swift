@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import WebKit
 
 class TabContainerView: UIView, TabViewDelegate {
     
@@ -160,11 +161,13 @@ class TabContainerView: UIView, TabViewDelegate {
 	func goBack(sender: UIButton) {
 		let tab = tabList[selectedTabIndex]
 		let _ = tab.webContainer?.webView?.goBack()
-	}
+        tab.webContainer?.finishedLoadUpdates()
+    }
 	
 	func goForward(sender: UIButton) {
 		let tab = tabList[selectedTabIndex]
 		let _ = tab.webContainer?.webView?.goForward()
+        tab.webContainer?.finishedLoadUpdates()
 	}
 	
 	func refresh(sender: UIButton) {
@@ -176,7 +179,9 @@ class TabContainerView: UIView, TabViewDelegate {
 		let tab = tabList[selectedTabIndex]
 		
 		addressBar?.backButton?.isEnabled = tab.webContainer?.webView?.canGoBack ?? false
+        addressBar?.backButton?.tintColor = (tab.webContainer?.webView?.canGoBack ?? false) ? .black : .lightGray
 		addressBar?.forwardButton?.isEnabled = tab.webContainer?.webView?.canGoForward ?? false
+        addressBar?.forwardButton?.tintColor = (tab.webContainer?.webView?.canGoForward ?? false) ? .black : .lightGray
 	}
 	
 	// MARK: - Data Managment

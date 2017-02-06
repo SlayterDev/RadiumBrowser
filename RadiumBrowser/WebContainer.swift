@@ -177,21 +177,27 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	}
     
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-		WebViewManager.shared.logPageVisit(url: webView.url?.absoluteString, pageTitle: webView.title)
-		
-		tabView?.tabTitle = webView.title
-        tryToGetFavicon(for: webView.url)
-		
-		if let tabContainer = tabView?.superview as? TabContainerView, isObserving {
-			let attrUrl = WebViewManager.shared.getColoredURL(url: webView.url)
-			if attrUrl.string == "" {
-				tabContainer.addressBar?.setAddressText(webView.url?.absoluteString)
-			} else {
-				tabContainer.addressBar?.setAttributedAddressText(attrUrl)
-			}
-			tabContainer.updateNavButtons()
-		}
+		finishedLoadUpdates()
 	}
+    
+    func finishedLoadUpdates() {
+        guard let webView = webView else { return }
+        
+        WebViewManager.shared.logPageVisit(url: webView.url?.absoluteString, pageTitle: webView.title)
+        
+        tabView?.tabTitle = webView.title
+        tryToGetFavicon(for: webView.url)
+        
+        if let tabContainer = tabView?.superview as? TabContainerView, isObserving {
+            let attrUrl = WebViewManager.shared.getColoredURL(url: webView.url)
+            if attrUrl.string == "" {
+                tabContainer.addressBar?.setAddressText(webView.url?.absoluteString)
+            } else {
+                tabContainer.addressBar?.setAttributedAddressText(attrUrl)
+            }
+            tabContainer.updateNavButtons()
+        }
+    }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
                  for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
