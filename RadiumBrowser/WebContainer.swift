@@ -205,6 +205,12 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         }
         return nil
     }
+    
+    func webViewDidClose(_ webView: WKWebView) {
+        if let tabContainer = tabView?.superview as? TabContainerView {
+            tabContainer.close(tab: tabView!)
+        }
+    }
 	
 	// MARK: - Alert Methods
 	

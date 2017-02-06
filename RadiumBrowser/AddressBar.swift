@@ -28,7 +28,6 @@ class AddressBar: UIView, UITextFieldDelegate {
         self.layer.borderWidth = 0.5
 		
 		backButton = UIButton().then { [unowned self] in
-//			$0.setTitle("<-", for: .normal)
             $0.setImage(UIImage(named: "back")?.withRenderingMode(.alwaysTemplate), for: .normal)
 			$0.setTitleColor(.black, for: .normal)
 			$0.setTitleColor(.lightGray, for: .disabled)
@@ -45,7 +44,6 @@ class AddressBar: UIView, UITextFieldDelegate {
 		
 		if isiPadUI {
 			forwardButton = UIButton().then { [unowned self] in
-//				$0.setTitle("->", for: .normal)
                 $0.setImage(UIImage(named: "forward")?.withRenderingMode(.alwaysTemplate), for: .normal)
 				$0.setTitleColor(.black, for: .normal)
 				$0.setTitleColor(.lightGray, for: .disabled)
