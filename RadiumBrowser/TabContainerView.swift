@@ -105,11 +105,7 @@ class TabContainerView: UIView, TabViewDelegate {
     
     func setTabColors() {
         for (i, tab) in tabList.enumerated() {
-            if i == selectedTabIndex {
-                tab.backgroundColor = Colors.radiumGray
-            } else {
-                tab.backgroundColor = Colors.radiumUnselected
-            }
+            tab.backgroundColor = (i == selectedTabIndex) ? Colors.radiumGray : Colors.radiumUnselected
         }
     }
 	
@@ -132,7 +128,13 @@ class TabContainerView: UIView, TabViewDelegate {
 	func switchVisibleWebView(prevTab: TabView?, newTab: TabView) {
 		prevTab?.webContainer?.removeFromView()
 		newTab.webContainer?.addToView()
-		addressBar?.addressField?.text = newTab.webContainer?.webView?.url?.absoluteString
+        
+        let attrUrl = WebViewManager.shared.getColoredURL(url: newTab.webContainer?.webView?.url)
+        if attrUrl.string != "" {
+            addressBar?.setAttributedAddressText(attrUrl)
+        } else {
+            addressBar?.setAddressText(newTab.webContainer?.webView?.url?.absoluteString)
+        }
 	}
 	
 	func close(tab: TabView) {

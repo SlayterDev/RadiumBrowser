@@ -34,6 +34,7 @@ class ScriptEditorViewController: UIViewController {
 			$0.autocorrectionType = .no
 			$0.autocapitalizationType = .none
 			$0.font = UIFont(name: "Menlo-Regular", size: UIFont.systemFontSize + 3)
+            $0.inputAccessoryView = DoneAccessoryView(targetView: $0, width: self.view.frame.width)
 			
 			if let prevModel = self.prevModel {
 				$0.text = prevModel.source

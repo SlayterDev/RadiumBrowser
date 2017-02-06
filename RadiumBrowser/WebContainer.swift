@@ -95,14 +95,13 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		var models: Results<ExtensionModel>?
 		do {
 			let realm = try Realm()
-			models = realm.objects(ExtensionModel.self)
+			models = realm.objects(ExtensionModel.self).filter("active = true")
 		} catch let error {
 			print("Could not load extensions: \(error.localizedDescription)")
 			return []
 		}
 		
 		for model in models! {
-            guard model.active else { continue }
 			let injectionTime: WKUserScriptInjectionTime = (model.injectionTime == 0) ? .atDocumentStart : .atDocumentEnd
 			let script = WKUserScript(source: model.source, injectionTime: injectionTime, forMainFrameOnly: false)
 			extensions.append(script)
