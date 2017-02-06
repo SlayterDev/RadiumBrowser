@@ -180,6 +180,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		WebViewManager.shared.logPageVisit(url: webView.url?.absoluteString, pageTitle: webView.title)
 		
 		tabView?.tabTitle = webView.title
+        tryToGetFavicon(for: webView.url)
 		
 		if let tabContainer = tabView?.superview as? TabContainerView, isObserving {
 			let attrUrl = WebViewManager.shared.getColoredURL(url: webView.url)
@@ -238,4 +239,16 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		}))
 		self.parentViewController?.present(av, animated: true, completion: nil)
 	}
+    
+    // MARK: - Helper methods
+    
+    func tryToGetFavicon(for url: URL?) {
+        guard let url = url else { return }
+        guard let scheme = url.scheme else { return }
+        guard let host = url.host else { return }
+        
+        let faviconURL = scheme + "://" + host + "/favicon.ico"
+        
+        tabView?.tabImageView?.sd_setImage(with: URL(string: faviconURL), placeholderImage: UIImage(named: "globe"))
+    }
 }

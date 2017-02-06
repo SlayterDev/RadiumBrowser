@@ -88,6 +88,7 @@
 		41DBC5FD1E412F0A00913FAA /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		41F8F7521E43CAEC00029B56 /* ExtensionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTableViewController.swift; sourceTree = "<group>"; };
 		41F8F7551E43CB4B00029B56 /* ExtensionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionModel.swift; sourceTree = "<group>"; };
+		41F8F7571E48C3A400029B56 /* RadiumBrowser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RadiumBrowser-Bridging-Header.h"; sourceTree = "<group>"; };
 		80BEA28035EFA3995BFC3E99 /* Pods-RadiumBrowserTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowserTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowserTests/Pods-RadiumBrowserTests.release.xcconfig"; sourceTree = "<group>"; };
 		BDE218EB2213DB9F87485559 /* Pods-RadiumBrowser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser.debug.xcconfig"; sourceTree = "<group>"; };
 		BF7E37CD5794D1D23AADA22B /* Pods_RadiumBrowserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +172,7 @@
 				02DF6C541E4795180088BDEB /* Main.storyboard */,
 				41A567FB1E40CB3B00470017 /* LaunchScreen.storyboard */,
 				41A567FE1E40CB3B00470017 /* Info.plist */,
+				41F8F7571E48C3A400029B56 /* RadiumBrowser-Bridging-Header.h */,
 				41A567F21E40CB3B00470017 /* AppDelegate.swift */,
 				41DBC5F21E411C7A00913FAA /* SharedConfig.swift */,
 				41F8F7541E43CB3500029B56 /* Models */,
@@ -343,6 +345,7 @@
 					41A567EE1E40CB3B00470017 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = Z67LVNYQSE;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					41A568021E40CB3B00470017 = {
@@ -724,12 +727,15 @@
 			baseConfigurationReference = BDE218EB2213DB9F87485559 /* Pods-RadiumBrowser.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = Z67LVNYQSE;
 				INFOPLIST_FILE = RadiumBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RadiumBrowser/RadiumBrowser-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -739,12 +745,14 @@
 			baseConfigurationReference = 0B353FD7BD9E780C914BBF1B /* Pods-RadiumBrowser.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = Z67LVNYQSE;
 				INFOPLIST_FILE = RadiumBrowser/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RadiumBrowser/RadiumBrowser-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

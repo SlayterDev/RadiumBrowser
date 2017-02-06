@@ -18,6 +18,8 @@ def all_pods
     pod 'Then'
     # Realm database
     pod 'RealmSwift'
+    # async images
+    pod 'SDWebImage', '~> 3.8'
 
     project 'RadiumBrowser.xcodeproj'
 

@@ -23,6 +23,7 @@ class TabView: UIView {
         }
     }
     var tabTitleLabel: UILabel?
+    var tabImageView: UIImageView?
 	
 	weak var delegate: TabViewDelegate?
 	
@@ -33,7 +34,7 @@ class TabView: UIView {
         
         self.backgroundColor = Colors.radiumGray
 		
-		let closeBtn = UIButton().then {
+		let closeBtn = UIButton().then { [unowned self] in
 			$0.setImage(UIImage.imageFrom(systemItem: .stop)?.makeThumbnailOfSize(size: CGSize(width: 15, height: 15)), for: .normal)
 			$0.addTarget(self, action: #selector(self.close(sender:)), for: .touchUpInside)
 			
@@ -45,6 +46,19 @@ class TabView: UIView {
 				make.centerY.equalTo(self)
 			}
 		}
+        
+        tabImageView = UIImageView().then { [unowned self] in
+            $0.image = UIImage(named: "globe")
+            $0.contentMode = .scaleAspectFit
+            
+            self.addSubview($0)
+            $0.snp.makeConstraints { (make) in
+                make.width.equalTo(15)
+                make.height.equalTo(15)
+                make.left.equalTo(self).offset(13)
+                make.centerY.equalTo(self)
+            }
+        }
 		
 		tabTitleLabel = UILabel().then { [unowned self] in
 			$0.text = "New Tab"
@@ -52,8 +66,8 @@ class TabView: UIView {
 			
 			self.addSubview($0)
 			$0.snp.makeConstraints { (make) in
-				make.left.equalTo(self).offset(16)
-				make.top.equalTo(self).offset(8)
+				make.left.equalTo(self.tabImageView!.snp.right).offset(4)
+				make.top.equalTo(self).offset(6)
 				make.bottom.equalTo(self).offset(-6)
 				make.right.equalTo(closeBtn.snp.left).offset(-4)
 			}
