@@ -196,7 +196,7 @@ class TabContainerView: UIView, TabViewDelegate {
 			models.append(model)
 		}
 		session.tabs.append(objectsIn: models)
-		session.selectedTabIndex = Int32(selectedTabIndex)
+		session.selectedTabIndex = selectedTabIndex
 		
 		do {
 			let realm = try Realm()
@@ -232,7 +232,7 @@ class TabContainerView: UIView, TabViewDelegate {
 			let request = URLRequest(url: URL(string: model.urlString)!)
 			addNewTab(withRequest: request)
 		}
-		didTap(tab: tabList[Int(session!.selectedTabIndex)])
+		didTap(tab: tabList[session!.selectedTabIndex])
 		
 		// Remove data from database
 		do {

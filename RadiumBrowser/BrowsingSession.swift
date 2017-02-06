@@ -16,5 +16,5 @@ class URLModel: Object {
 
 class BrowsingSession: Object {
 	let tabs = List<URLModel>()
-	dynamic var selectedTabIndex: Int32 = 0
+	dynamic var selectedTabIndex = 0
 }
