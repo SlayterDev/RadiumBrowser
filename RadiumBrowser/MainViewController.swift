@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, HistoryNavigationDelegate {
 
 	var container: UIView?
 	var tabContainer: TabContainerView?
@@ -130,6 +130,7 @@ class MainViewController: UIViewController {
 	
 	func showHistory() {
 		let vc = HistoryTableViewController()
+        vc.delegate = self
 		let nav = UINavigationController(rootViewController: vc)
 		nav.navigationBar.barTintColor = Colors.radiumGray
 		
@@ -139,4 +140,9 @@ class MainViewController: UIViewController {
 		
 		self.present(nav, animated: true, completion: nil)
 	}
+    
+    func didSelectEntry(with url: URL?) {
+        guard let url = url else { return }
+        tabContainer?.loadQuery(string: url.absoluteString)
+    }
 }

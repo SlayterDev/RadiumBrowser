@@ -9,8 +9,14 @@
 import UIKit
 import RealmSwift
 
-class HistoryTableViewController: UITableViewController {
+protocol HistoryNavigationDelegate: class {
+    func didSelectEntry(with url: URL?)
+}
 
+class HistoryTableViewController: UITableViewController {
+    
+    weak var delegate: HistoryNavigationDelegate?
+    
 	var notificationToken: NotificationToken!
 	var realm: Realm!
 	
@@ -31,12 +37,25 @@ class HistoryTableViewController: UITableViewController {
 		
 		do {
 			realm = try Realm()
-			notificationToken = realm.addNotificationBlock { notification, realm in
-				DispatchQueue.main.async {
-					self.tableView.reloadSections([0], with: .automatic)
-				}
+            history = realm.objects(HistoryEntry.self)
+            notificationToken = history?.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+                guard let tableView = self?.tableView else { return }
+                switch changes {
+                case .initial:
+                    tableView.reloadData()
+                case .update(_, let deletions, let insertions, let modifications):
+                    tableView.beginUpdates()
+                    tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                         with: .automatic)
+                    tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                         with: .automatic)
+                    tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                         with: .automatic)
+                    tableView.endUpdates()
+                case .error(let error):
+                    logRealmError(error: error)
+                }
 			}
-			history = realm.objects(HistoryEntry.self)
 		} catch let error {
 			logRealmError(error: error)
 		}
@@ -76,6 +95,16 @@ class HistoryTableViewController: UITableViewController {
 		cell?.detailTextLabel?.text = entry?.pageURL
 
         return cell!
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        defer {
+            self.dismiss(animated: true, completion: nil)
+        }
+        guard let pageURL = history?[indexPath.row].pageURL else { return }
+        
+        let url = URL(string: pageURL)
+        delegate?.didSelectEntry(with: url)
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
