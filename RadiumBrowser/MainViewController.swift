@@ -97,8 +97,11 @@ class MainViewController: UIViewController {
         let extensionAction = MenuItem.item(named: "Extensions", action: { [unowned self] in
             self.showExtensions()
         })
+		let historyAction = MenuItem.item(named: "History", action: { [unowned self] in
+			self.showHistory()
+		})
 		
-		let menu = SharedDropdownMenu(menuItems: [shareAction, extensionAction])
+		let menu = SharedDropdownMenu(menuItems: [shareAction, extensionAction, historyAction])
 		let convertedPoint = sender.convert(sender.center, to: self.view)
 		menu.show(in: self.view, from: convertedPoint)
 	}
@@ -124,4 +127,16 @@ class MainViewController: UIViewController {
         
         self.present(nav, animated: true, completion: nil)
     }
+	
+	func showHistory() {
+		let vc = HistoryTableViewController()
+		let nav = UINavigationController(rootViewController: vc)
+		nav.navigationBar.barTintColor = Colors.radiumGray
+		
+		if isiPadUI {
+			nav.modalPresentationStyle = .formSheet
+		}
+		
+		self.present(nav, animated: true, completion: nil)
+	}
 }
