@@ -20,6 +20,8 @@ def all_pods
     pod 'RealmSwift'
     # async images
     pod 'SDWebImage', '~> 3.8'
+    # Color utilities
+    pod 'BSColorUtils', :git => 'https://github.com/SlayterDev/BSColorUtils'
 
     project 'RadiumBrowser.xcodeproj'
 

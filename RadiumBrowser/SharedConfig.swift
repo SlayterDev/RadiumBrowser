@@ -8,12 +8,13 @@
 
 import Foundation
 import UIKit
+import BSColorUtils
 
 struct Colors {
-    static let radiumGray = UIColor(red: 0.937, green: 0.937, blue: 0.937, alpha: 1.0)
-    static let radiumDarkGray = UIColor(red: 0.686, green: 0.706, blue: 0.706, alpha: 1.0)
-    static let radiumUnselected = UIColor(red: 0.784, green: 0.784, blue: 0.784, alpha: 1.0)
-	static let urlGreen = UIColor(red: 0.016, green: 0.427, blue: 0.137, alpha: 1.0)
+    static let radiumGray = UIColor.with(hex: "#EFEFEF")
+    static let radiumDarkGray = UIColor.with(hex: "#AFB4B4")
+    static let radiumUnselected = UIColor.with(hex: "#C8C8C8")
+    static let urlGreen = UIColor.with(hex: "#046D23")
 }
 
 let isiPadUI = UI_USER_INTERFACE_IDIOM() == .pad

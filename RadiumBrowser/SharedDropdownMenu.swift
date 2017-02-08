@@ -12,7 +12,7 @@ struct MenuItem {
 	var name: String?
 	var action: (() -> ())?
 	
-	static func item(named name: String, action: (() ->())?) -> MenuItem {
+	static func item(named name: String, action: (() -> ())?) -> MenuItem {
 		var menuItem = MenuItem()
 		menuItem.name = "  " + name
 		menuItem.action = action
