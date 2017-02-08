@@ -17,6 +17,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
     var isObserving = false
 	
 	weak var tabView: TabView?
+    var pageIconUrl: String?
+    var builtinExtensions: [BuiltinExtension]?
 	
 	var progressView: UIProgressView?
     
@@ -56,8 +58,6 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 				make.left.equalTo(self)
 			}
 		}
-		
-		let _ = webView?.load(URLRequest(url: URL(string: "https://google.com")!))
         
         do {
             let realm = try Realm()
@@ -67,6 +67,10 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         } catch let error as NSError {
             print("Error occured opening realm: \(error.localizedDescription)")
         }
+        
+        loadBuiltins()
+		
+		let _ = webView?.load(URLRequest(url: URL(string: "https://google.com")!))
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -74,6 +78,15 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	}
 	
     // MARK: - Configuration Setup
+    
+    func loadBuiltins() {
+        builtinExtensions = WebViewManager.shared.loadBuiltinExtensions(webContainer: self)
+        builtinExtensions?.forEach {
+            if let handler = $0 as? WKScriptMessageHandler, let handlerName = $0.scriptHandlerName {
+                webView?.configuration.userContentController.add(handler, name: handlerName)
+            }
+        }
+    }
     
 	func loadConfiguration() -> WKWebViewConfiguration {
 		let config = WKWebViewConfiguration()
@@ -115,6 +128,11 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         webView?.configuration.userContentController.removeAllUserScripts()
         let _ = loadExtensions().map {
             webView?.configuration.userContentController.addUserScript($0)
+        }
+        builtinExtensions?.forEach {
+            if let userScript = $0.webScript {
+                webView?.configuration.userContentController.addUserScript(userScript)
+            }
         }
     }
 	
@@ -174,6 +192,10 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
             }
 		}
 	}
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        pageIconUrl = nil
+    }
     
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 		finishedLoadUpdates()

@@ -37,7 +37,7 @@ class HistoryTableViewController: UITableViewController {
 		
 		do {
 			realm = try Realm()
-            history = realm.objects(HistoryEntry.self)
+            history = realm.objects(HistoryEntry.self).sorted(byKeyPath: "visitDate", ascending: false)
             notificationToken = history?.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
                 guard let tableView = self?.tableView else { return }
                 switch changes {

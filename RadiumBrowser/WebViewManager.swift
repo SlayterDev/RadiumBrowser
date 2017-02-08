@@ -10,6 +10,8 @@ import UIKit
 import RealmSwift
 import WebKit
 
+typealias ScriptHandler = (WKUserContentController, WKScriptMessage) -> ()
+
 class WebViewManager: NSObject {
 	static let shared = WebViewManager()
 	static let sharedProcessPool = WKProcessPool()
@@ -48,4 +50,10 @@ class WebViewManager: NSObject {
 		
 		return mutableAttributedString
 	}
+    
+    func loadBuiltinExtensions(webContainer: WebContainer) -> [BuiltinExtension] {
+        let faviconGetter = FaviconGetter(container: webContainer)
+        
+        return [faviconGetter]
+    }
 }
