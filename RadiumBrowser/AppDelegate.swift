@@ -28,17 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         MigrationManager.shared.attemptMigration()
 		
-//		do {
-//			let realm = try Realm()
-//			try realm.write {
-//				realm.add(Bookmark(value: ["name": "Stackoverflow", "pageURL": "https://stackoverflow.com",
-//										   "iconURL": "https://www.google.com/images/branding/googleg/1x/googleg_standard_color_56dp.png",
-//										   "id": UUID().uuidString]))
-//			}
-//		} catch {
-//			
-//		}
-		
         self.window?.rootViewController = MainViewController()
         self.window?.makeKeyAndVisible()
         

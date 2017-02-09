@@ -26,6 +26,8 @@ class BookmarkTableViewCell: UITableViewCell {
         
         titleTextField = SharedTextField().then { [unowned self] in
             $0.inset = 8
+            $0.placeholder = "Bookmark Name"
+            $0.clearButtonMode = .always
             
             self.contentView.addSubview($0)
             $0.snp.makeConstraints { (make) in
@@ -38,6 +40,8 @@ class BookmarkTableViewCell: UITableViewCell {
         
         urlTextField = SharedTextField().then { [unowned self] in
             $0.inset = 8
+            $0.placeholder = "Bookmark URL"
+            $0.clearButtonMode = .always
             
             self.contentView.addSubview($0)
             $0.snp.makeConstraints { (make) in

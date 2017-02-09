@@ -34,7 +34,7 @@ class AddBookmarkTableViewController: UITableViewController {
         
         self.navigationController?.navigationBar.barTintColor = Colors.radiumGray
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(done))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(done))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancel))
 
         tableView.register(BookmarkTableViewCell.self, forCellReuseIdentifier: reuseidentifier)
@@ -48,13 +48,19 @@ class AddBookmarkTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func displayValidationError(for field: String) {
+        let av = UIAlertController(title: "Error", message: "Please enter a \(field) for your bookmark.", preferredStyle: .alert)
+        av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        self.present(av, animated: true, completion: nil)
+    }
+    
     func done() {
-        guard let title = titleTextField?.text else {
-            // TODO: validation
+        guard let title = titleTextField?.text, title != "" else {
+            displayValidationError(for: "title")
             return
         }
-        guard let url = urlTextField?.text else {
-            // TODO: validation
+        guard let url = urlTextField?.text, url != "" else {
+            displayValidationError(for: "URL")
             return
         }
         
