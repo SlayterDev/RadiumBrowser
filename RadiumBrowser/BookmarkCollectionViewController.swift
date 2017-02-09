@@ -17,14 +17,15 @@ class BookmarkCollectionViewController: UICollectionViewController {
 	var realm: Realm!
 	
 	var bookmarks: Results<Bookmark>?
+    
+    weak var delegate: HistoryNavigationDelegate?
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
 		title = "Bookmarks"
 		
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.navigationController?.navigationBar.barTintColor = Colors.radiumGray
 		
 		self.collectionView?.backgroundColor = .white
 		self.collectionView?.contentInset = UIEdgeInsets(top: 16, left: 8, bottom: 0, right: 8)
@@ -77,9 +78,11 @@ class BookmarkCollectionViewController: UICollectionViewController {
 		
 		let bookmark = bookmarks?[indexPath.row]
 		cell?.textLabel?.text = bookmark?.name
-		if let imgURL = URL(string: bookmark!.iconURL) {
+		if let iconURL = bookmark?.iconURL, iconURL != "", let imgURL = URL(string: bookmark!.iconURL) {
 			cell?.imageView?.sd_setImage(with: imgURL, placeholderImage: UIImage(named: "globe"))
-		}
+        } else {
+            cell?.imageView?.image = UIImage(named: "globe")
+        }
 		
         return cell!
     }
@@ -92,12 +95,19 @@ class BookmarkCollectionViewController: UICollectionViewController {
         return true
     }
     */
-
-    /*
+    
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    */
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        defer {
+            self.dismiss(animated: true, completion: nil)
+        }
+        guard let bookmark = bookmarks?[indexPath.row] else { return }
+        
+        delegate?.didSelectEntry(with: URL(string: bookmark.pageURL))
+    }
 
 }

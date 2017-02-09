@@ -33,7 +33,7 @@ class BookmarkCollectionViewCell: UICollectionViewCell {
 			$0.adjustsFontSizeToFitWidth = true
 //			$0.numberOfLines = 2
 			$0.lineBreakMode = .byTruncatingTail
-			$0.minimumScaleFactor = 0.01
+			$0.minimumScaleFactor = 0.8
 			$0.font = .systemFont(ofSize: 14)
 			
 			self.contentView.addSubview($0)

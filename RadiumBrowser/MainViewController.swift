@@ -91,6 +91,14 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 	}
 	
 	func showMenu(sender: UIButton) {
+        let convertedPoint = sender.convert(sender.center, to: self.view)
+        
+        let addBookmarkAction = MenuItem.item(named: "Add Bookmark", action: { [unowned self] in
+            self.addBookmark(btn: sender)
+        })
+        let bookmarkAction = MenuItem.item(named: "Bookmarks", action: { [unowned self] in
+            self.showBookmarks()
+        })
 		let shareAction = MenuItem.item(named: "Share", action: { [unowned self] in
 			self.shareLink()
 		})
@@ -100,12 +108,8 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		let historyAction = MenuItem.item(named: "History", action: { [unowned self] in
 			self.showHistory()
 		})
-		let bookmarkAction = MenuItem.item(named: "Bookmarks", action: { [unowned self] in
-			self.showBookmarks()
-		})
 		
-		let menu = SharedDropdownMenu(menuItems: [shareAction, extensionAction, historyAction, bookmarkAction])
-		let convertedPoint = sender.convert(sender.center, to: self.view)
+		let menu = SharedDropdownMenu(menuItems: [addBookmarkAction, bookmarkAction, shareAction, extensionAction, historyAction])
 		menu.show(in: self.view, from: convertedPoint)
 	}
 	
@@ -148,6 +152,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.itemSize = CGSize(width: 80, height: 97.5)
 		let vc = BookmarkCollectionViewController(collectionViewLayout: flowLayout)
+        vc.delegate = self
 		let nav = UINavigationController(rootViewController: vc)
 		nav.navigationBar.barTintColor = Colors.radiumGray
 		
@@ -157,6 +162,23 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		
 		self.present(nav, animated: true, completion: nil)
 	}
+    
+    func addBookmark(btn: UIView) {
+        let vc = AddBookmarkTableViewController(style: .grouped)
+        vc.pageIconURL = tabContainer?.currentTab?.webContainer?.pageIconUrl
+        vc.pageTitle = tabContainer?.currentTab?.webContainer?.webView?.title
+        vc.pageURL = tabContainer?.currentTab?.webContainer?.webView?.url?.absoluteString
+        let nav = UINavigationController(rootViewController: vc)
+        
+        if isiPadUI {
+            nav.modalPresentationStyle = .popover
+            nav.popoverPresentationController?.permittedArrowDirections = .up
+            nav.popoverPresentationController?.sourceView = btn
+            nav.popoverPresentationController?.sourceRect = btn.bounds
+        }
+        
+        self.present(nav, animated: true, completion: nil)
+    }
     
     func didSelectEntry(with url: URL?) {
         guard let url = url else { return }

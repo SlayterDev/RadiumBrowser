@@ -27,6 +27,8 @@
 		4163EDF51E4BB8F600E02E65 /* BuiltinExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4163EDF41E4BB8F600E02E65 /* BuiltinExtension.swift */; };
 		4163EDF81E4BB9D600E02E65 /* Favicons.js in Resources */ = {isa = PBXBuildFile; fileRef = 4163EDF71E4BB9D600E02E65 /* Favicons.js */; };
 		4163EDFA1E4BBA1500E02E65 /* FaviconGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4163EDF91E4BBA1500E02E65 /* FaviconGetter.swift */; };
+		4163EDFC1E4CA40E00E02E65 /* AddBookmarkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4163EDFB1E4CA40E00E02E65 /* AddBookmarkTableViewController.swift */; };
+		4163EDFE1E4CA48600E02E65 /* BookmarkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4163EDFD1E4CA48600E02E65 /* BookmarkTableViewCell.swift */; };
 		41A567F31E40CB3B00470017 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A567F21E40CB3B00470017 /* AppDelegate.swift */; };
 		41A567FA1E40CB3B00470017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41A567F91E40CB3B00470017 /* Assets.xcassets */; };
 		41A567FD1E40CB3B00470017 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41A567FB1E40CB3B00470017 /* LaunchScreen.storyboard */; };
@@ -84,6 +86,8 @@
 		4163EDF41E4BB8F600E02E65 /* BuiltinExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuiltinExtension.swift; sourceTree = "<group>"; };
 		4163EDF71E4BB9D600E02E65 /* Favicons.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Favicons.js; sourceTree = "<group>"; };
 		4163EDF91E4BBA1500E02E65 /* FaviconGetter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaviconGetter.swift; sourceTree = "<group>"; };
+		4163EDFB1E4CA40E00E02E65 /* AddBookmarkTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookmarkTableViewController.swift; sourceTree = "<group>"; };
+		4163EDFD1E4CA48600E02E65 /* BookmarkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarkTableViewCell.swift; sourceTree = "<group>"; };
 		41A567EF1E40CB3B00470017 /* RadiumBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadiumBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41A567F21E40CB3B00470017 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41A567F91E40CB3B00470017 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 				02CC79A41E440DE6006FD9DE /* ScriptEditorViewController.swift */,
 				02DF6C5F1E495CFB0088BDEB /* HistoryTableViewController.swift */,
 				02DF6C611E4BE83C0088BDEB /* BookmarkCollectionViewController.swift */,
+				4163EDFB1E4CA40E00E02E65 /* AddBookmarkTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 				41DBC5F41E41204300913FAA /* SharedTextField.swift */,
 				023BB5871E42D3E0001498FA /* SharedDropdownMenu.swift */,
 				02DF6C631E4BEA820088BDEB /* BookmarkCollectionViewCell.swift */,
+				4163EDFD1E4CA48600E02E65 /* BookmarkTableViewCell.swift */,
 			);
 			name = "Shared UI";
 			sourceTree = "<group>";
@@ -612,9 +618,11 @@
 				41DBC5F51E41204300913FAA /* SharedTextField.swift in Sources */,
 				02A5CBE61E417F6400269FE6 /* StringExtensions.swift in Sources */,
 				02DF6C5E1E495C4E0088BDEB /* Bookmark.swift in Sources */,
+				4163EDFC1E4CA40E00E02E65 /* AddBookmarkTableViewController.swift in Sources */,
 				41F8F7531E43CAEC00029B56 /* ExtensionsTableViewController.swift in Sources */,
 				41DBC5FE1E412F0A00913FAA /* UIViewExtensions.swift in Sources */,
 				02DF6C601E495CFB0088BDEB /* HistoryTableViewController.swift in Sources */,
+				4163EDFE1E4CA48600E02E65 /* BookmarkTableViewCell.swift in Sources */,
 				02A5CBE41E41652000269FE6 /* WebContainer.swift in Sources */,
 				02DF6C5C1E47CAC80088BDEB /* HistoryEntry.swift in Sources */,
 				02DF6C621E4BE83C0088BDEB /* BookmarkCollectionViewController.swift in Sources */,

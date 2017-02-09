@@ -28,6 +28,11 @@ class TabContainerView: UIView, TabViewDelegate {
 			setTabColors()
 		}
 	}
+    
+    var currentTab: TabView? {
+        guard tabList.count > 0 else { return nil }
+        return tabList[selectedTabIndex]
+    }
 	
 	weak var addressBar: AddressBar?
 	
@@ -156,6 +161,10 @@ class TabContainerView: UIView, TabViewDelegate {
 	func loadQuery(string: String?) {
 		guard let string = string else { return }
 		
+        if addressBar?.addressField?.text != string {
+            addressBar?.setAddressText(string)
+        }
+        
 		let tab = tabList[selectedTabIndex]
 		tab.webContainer?.loadQuery(string: string)
 	}
