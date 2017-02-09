@@ -15,8 +15,6 @@ class BookmarkCollectionViewCell: UICollectionViewCell {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		
-//		self.backgroundColor = .blue
-		
 		imageView = UIImageView().then {
 			$0.contentMode = .scaleAspectFit
 			
