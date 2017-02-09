@@ -1,5 +1,6 @@
 PODS:
   - BSColorUtils (1.0.2)
+  - Highlightr (1.1.0)
   - Realm (2.4.2):
     - Realm/Headers (= 2.4.2)
   - Realm/Headers (2.4.2)
@@ -13,6 +14,7 @@ PODS:
 
 DEPENDENCIES:
   - BSColorUtils (from `https://github.com/SlayterDev/BSColorUtils`)
+  - Highlightr (from `https://github.com/raspu/Highlightr.git`)
   - RealmSwift
   - SDWebImage (~> 3.8)
   - SnapKit
@@ -21,20 +23,26 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   BSColorUtils:
     :git: https://github.com/SlayterDev/BSColorUtils
+  Highlightr:
+    :git: https://github.com/raspu/Highlightr.git
 
 CHECKOUT OPTIONS:
   BSColorUtils:
     :commit: 953ec48826fb938045771af49c57087218d8ee9f
     :git: https://github.com/SlayterDev/BSColorUtils
+  Highlightr:
+    :commit: c95539e8417448b6ba22d06dd66667cd2046f393
+    :git: https://github.com/raspu/Highlightr.git
 
 SPEC CHECKSUMS:
   BSColorUtils: af322f5fae883bf102fcdf04afc26e56496e2829
+  Highlightr: 70c4df19e4aa55aa1b4387fb98182abce1dec9da
   Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
   RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
   SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
   Then: 8496793c8fcac95482b943909b440724c7d8d82c
 
-PODFILE CHECKSUM: 3cc3c57486d6f50c8caab15c527d7e37f95e319f
+PODFILE CHECKSUM: 3a687f24d09a6bc732f4baa96ed31621dae2003e
 
 COCOAPODS: 1.2.0

@@ -22,6 +22,8 @@ def all_pods
     pod 'SDWebImage', '~> 3.8'
     # Color utilities
     pod 'BSColorUtils', :git => 'https://github.com/SlayterDev/BSColorUtils'
+    # UITextView Syntax Highlighting
+    pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git'
 
     project 'RadiumBrowser.xcodeproj'
 

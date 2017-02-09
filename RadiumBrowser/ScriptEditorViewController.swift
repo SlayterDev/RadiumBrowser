@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Highlightr
 
 protocol ScriptEditorDelegate: class {
 	func addScript(named name: String?, source: String?, injectionTime: Int)
@@ -30,11 +31,21 @@ class ScriptEditorViewController: UIViewController {
 		
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(self.done(sender:)))
 		
-		textView = UITextView().then { [unowned self] in
+        let textStorage = CodeAttributedString()
+        textStorage.language = "JavaScript"
+        textStorage.highlightr.setTheme(to: "monokai-sublime")
+        let layoutManager = NSLayoutManager()
+        textStorage.addLayoutManager(layoutManager)
+        
+        let textContainer = NSTextContainer(size: view.bounds.size)
+        layoutManager.addTextContainer(textContainer)
+        
+        textView = UITextView(frame: .zero, textContainer: textContainer).then { [unowned self] in
 			$0.autocorrectionType = .no
 			$0.autocapitalizationType = .none
 			$0.font = UIFont(name: "Menlo-Regular", size: UIFont.systemFontSize + 3)
             $0.inputAccessoryView = DoneAccessoryView(targetView: $0, width: self.view.frame.width)
+            $0.backgroundColor = textStorage.highlightr.theme.themeBackgroundColor
 			
 			if let prevModel = self.prevModel {
 				$0.text = prevModel.source
