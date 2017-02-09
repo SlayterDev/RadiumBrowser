@@ -72,5 +72,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         tabContainer?.saveBrowsingSession()
     }
-
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        do {
+            let source = try String(contentsOf: url, encoding: .utf8)
+            print(source)
+        } catch {
+            print("Could not open file")
+        }
+        
+        return true
+    }
 }
