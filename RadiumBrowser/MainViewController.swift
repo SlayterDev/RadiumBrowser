@@ -100,8 +100,11 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		let historyAction = MenuItem.item(named: "History", action: { [unowned self] in
 			self.showHistory()
 		})
+		let bookmarkAction = MenuItem.item(named: "Bookmarks", action: { [unowned self] in
+			self.showBookmarks()
+		})
 		
-		let menu = SharedDropdownMenu(menuItems: [shareAction, extensionAction, historyAction])
+		let menu = SharedDropdownMenu(menuItems: [shareAction, extensionAction, historyAction, bookmarkAction])
 		let convertedPoint = sender.convert(sender.center, to: self.view)
 		menu.show(in: self.view, from: convertedPoint)
 	}
@@ -131,6 +134,20 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 	func showHistory() {
 		let vc = HistoryTableViewController()
         vc.delegate = self
+		let nav = UINavigationController(rootViewController: vc)
+		nav.navigationBar.barTintColor = Colors.radiumGray
+		
+		if isiPadUI {
+			nav.modalPresentationStyle = .formSheet
+		}
+		
+		self.present(nav, animated: true, completion: nil)
+	}
+	
+	func showBookmarks() {
+		let flowLayout = UICollectionViewFlowLayout()
+		flowLayout.itemSize = CGSize(width: 80, height: 97.5)
+		let vc = BookmarkCollectionViewController(collectionViewLayout: flowLayout)
 		let nav = UINavigationController(rootViewController: vc)
 		nav.navigationBar.barTintColor = Colors.radiumGray
 		

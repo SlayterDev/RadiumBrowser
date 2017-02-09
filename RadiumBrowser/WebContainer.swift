@@ -17,7 +17,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
     var isObserving = false
 	
 	weak var tabView: TabView?
-    var pageIconUrl: String?
+	var pageIconUrl: String?
     var builtinExtensions: [BuiltinExtension]?
 	
 	var progressView: UIProgressView?

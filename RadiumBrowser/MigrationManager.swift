@@ -14,7 +14,7 @@ class MigrationManager: NSObject {
 	
 	func attemptMigration() {
 		let realmConfig = Realm.Configuration(
-			schemaVersion: 4,
+			schemaVersion: 5,
 			migrationBlock: { migration, oldSchemaVersion in
 				if oldSchemaVersion < 1 {
 					migration.enumerateObjects(ofType: ExtensionModel.className()) { oldObject, newObject in
@@ -39,6 +39,12 @@ class MigrationManager: NSObject {
                         newObject?["selectedTabIndex"] = 0
                     }
                 }
+				
+				if oldSchemaVersion < 5 {
+					migration.enumerateObjects(ofType: Bookmark.className()) { oldObject, newObject in
+						newObject?["iconURL"] = ""
+					}
+				}
 			}
 		)
 		
