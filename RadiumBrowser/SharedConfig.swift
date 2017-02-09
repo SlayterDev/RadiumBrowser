@@ -22,3 +22,14 @@ let isiPadUI = UI_USER_INTERFACE_IDIOM() == .pad
 func logRealmError(error: Error) {
 	print("## Realm Error: \(error.localizedDescription)")
 }
+
+func * (lhs: String, rhs: Int) -> String {
+    guard rhs > 0 else { return "" }
+    
+    var result = ""
+    for _ in 0..<rhs {
+        result += lhs
+    }
+    
+    return result
+}

@@ -14,7 +14,7 @@ protocol ScriptEditorDelegate: class {
 	func addScript(named name: String?, source: String?, injectionTime: Int)
 }
 
-class ScriptEditorViewController: UIViewController {
+class ScriptEditorViewController: UIViewController, UITextViewDelegate {
 	
 	var textView: UITextView?
 	var injectionTimeSelector: UISegmentedControl?
@@ -46,6 +46,7 @@ class ScriptEditorViewController: UIViewController {
 			$0.font = UIFont(name: "Menlo-Regular", size: UIFont.systemFontSize + 3)
             $0.inputAccessoryView = DoneAccessoryView(targetView: $0, width: self.view.frame.width)
             $0.backgroundColor = textStorage.highlightr.theme.themeBackgroundColor
+            $0.delegate = self
 			
 			if let prevModel = self.prevModel {
 				$0.text = prevModel.source
@@ -159,5 +160,37 @@ class ScriptEditorViewController: UIViewController {
 			self.view.layoutIfNeeded()
 		}
 	}
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard text == "\n" else { return true }
+        
+        let end = textView.text.index(textView.text.startIndex, offsetBy: range.location)
+        guard let prevLine = textView.text.substring(with: textView.text.startIndex..<end).lines.last else { return true }
+        
+        var nextLevel = 0
+        if prevLine.characters.last == "{" {
+            nextLevel = 1
+        }
+        
+        let indentationLevel = prevLine.getIndentationLevel() + nextLevel
+        let paddingString = "    " * indentationLevel
+        
+        if range.location == textView.text.characters.count {
+            let updatedText = "\n" + paddingString
+            textView.text = textView.text + updatedText
+        } else {
+            let beginning = textView.beginningOfDocument
+            let start = textView.position(from: beginning, offset: range.location)
+            let rangeEnd = textView.position(from: start!, offset: range.length)
+            let textRange = textView.textRange(from: start!, to: rangeEnd!)
+            
+            textView.replace(textRange!, withText: "\n" + paddingString)
+            
+            let cursor = NSRange(location: range.location + "\n\(paddingString)".characters.count, length: 0)
+            textView.selectedRange = cursor
+        }
+        
+        return false
+    }
 	
 }
