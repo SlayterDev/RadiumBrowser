@@ -19,6 +19,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
 	var textView: UITextView?
 	var injectionTimeSelector: UISegmentedControl?
 	var scriptName: String?
+    var importedSource: String?
 	
 	var prevModel: ExtensionModel?
 	
@@ -48,7 +49,9 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
             $0.backgroundColor = textStorage.highlightr.theme.themeBackgroundColor
             $0.delegate = self
 			
-			if let prevModel = self.prevModel {
+            if let importedSource = self.importedSource {
+                $0.attributedText = textStorage.highlightr.highlight(importedSource)
+            } else if let prevModel = self.prevModel {
 				$0.text = prevModel.source
 			}
 			
@@ -69,11 +72,20 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
 			self.navigationItem.titleView = $0
 		}
 		
-		let notificationCenter = NotificationCenter.default
-		notificationCenter.addObserver(self, selector: #selector(keyboardWillShow(notification:)),
-		                               name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-		notificationCenter.addObserver(self, selector: #selector(keyboardWillHide(notification:)),
-		                               name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        if let _ = importedSource {
+            // If we are importing a file, allow the user to select a new name
+            promptForNewName()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(keyboardWillShow(notification:)),
+                                       name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyboardWillHide(notification:)),
+                                       name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -87,6 +99,25 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Helpers
+    
+    func promptForNewName() {
+        let av = UIAlertController(title: "New Extension", message: "Please provide a name for your extension.", preferredStyle: .alert)
+        av.addTextField(configurationHandler: { (textField) in
+            textField.autocapitalizationType = .words
+            textField.text = self.scriptName
+        })
+        av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+            if let nameText = av.textFields?.first?.text, nameText != "" {
+                self.scriptName = nameText
+                self.navigationItem.prompt = nameText
+            }
+        }))
+        av.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(av, animated: true, completion: nil)
     }
     
     // MARK: - Saving
@@ -172,11 +203,12 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
             nextLevel = 1
         }
         
-        let indentationLevel = prevLine.getIndentationLevel() + nextLevel
-        let paddingString = "    " * indentationLevel
+        let tabSize = 4
+        let indentationLevel = prevLine.getIndentationLevel(tabSize: tabSize) + nextLevel
+        let paddingString = "\n" + ((" " * tabSize) * indentationLevel)
         
         if range.location == textView.text.characters.count {
-            let updatedText = "\n" + paddingString
+            let updatedText = paddingString
             textView.text = textView.text + updatedText
         } else {
             let beginning = textView.beginningOfDocument
@@ -184,9 +216,9 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
             let rangeEnd = textView.position(from: start!, offset: range.length)
             let textRange = textView.textRange(from: start!, to: rangeEnd!)
             
-            textView.replace(textRange!, withText: "\n" + paddingString)
+            textView.replace(textRange!, withText: paddingString)
             
-            let cursor = NSRange(location: range.location + "\n\(paddingString)".characters.count, length: 0)
+            let cursor = NSRange(location: range.location + paddingString.characters.count, length: 0)
             textView.selectedRange = cursor
         }
         

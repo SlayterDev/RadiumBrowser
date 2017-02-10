@@ -8,6 +8,23 @@
 
 import Foundation
 
+/// Duplicate a string n number of times.
+///
+/// - Parameters:
+///   - lhs: The string to duplicate
+///   - rhs: The number of times to duplicate the string
+/// - Returns: The resulting string
+func * (lhs: String, rhs: Int) -> String {
+    guard rhs > 0 else { return "" }
+    
+    var result = ""
+    for _ in 0..<rhs {
+        result += lhs
+    }
+    
+    return result
+}
+
 extension String {
 	func isURL() -> Bool {
         if self.hasPrefix("https://") || self.hasPrefix("http://") {
@@ -41,7 +58,11 @@ extension String {
         return count
     }
     
-    func getIndentationLevel() -> Int {
-        return countLeadingSpaces() / 4
+    func getIndentationLevel(tabSize: Int) -> Int {
+        guard tabSize > 0 else { return 0 }
+        
+        let formattedString = self.replacingOccurrences(of: "\t", with: " " * tabSize)
+        
+        return formattedString.countLeadingSpaces() / tabSize
     }
 }

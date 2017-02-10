@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 	
-	var tabContainer: TabContainerView?
+	var mainController: MainViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -28,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         MigrationManager.shared.attemptMigration()
 		
-        self.window?.rootViewController = MainViewController()
+        mainController = MainViewController()
+        self.window?.rootViewController = mainController
         self.window?.makeKeyAndVisible()
         
         return true
@@ -59,13 +60,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        tabContainer?.saveBrowsingSession()
+        mainController?.tabContainer?.saveBrowsingSession()
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         do {
             let source = try String(contentsOf: url, encoding: .utf8)
-            print(source)
+            mainController?.openEditor(withSource: source, andName: url.deletingPathExtension().lastPathComponent)
         } catch {
             print("Could not open file")
         }

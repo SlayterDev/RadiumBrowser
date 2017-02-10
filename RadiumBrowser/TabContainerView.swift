@@ -39,10 +39,6 @@ class TabContainerView: UIView, TabViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
 		
-		if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-			appDelegate.tabContainer = self
-		}
-		
         self.backgroundColor = Colors.radiumDarkGray
 		
 		addTabButton = UIButton().then { [unowned self] in

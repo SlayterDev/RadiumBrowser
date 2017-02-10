@@ -138,7 +138,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
         })
 		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
 			if let nameText = av.textFields?.first?.text, nameText != "" {
-				self.presentEditor(name: nameText)
+				self.presentEditor(name: nameText, source: nil)
 			}
 		}))
 		av.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -146,11 +146,12 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 		self.present(av, animated: true, completion: nil)
 	}
 	
-	func presentEditor(name: String) {
+    func presentEditor(name: String, source: String?) {
 		let editor = ScriptEditorViewController()
 		editor.delegate = self
 		editor.scriptName = name
-		self.navigationController?.pushViewController(editor, animated: true)
+        editor.importedSource = source
+        self.navigationController?.pushViewController(editor, animated: (source == nil)) // Animate if no imported source
 	}
 	
 	func addScript(named name: String?, source: String?, injectionTime: Int) {

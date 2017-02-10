@@ -103,7 +103,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 			self.shareLink()
 		})
         let extensionAction = MenuItem.item(named: "Extensions", action: { [unowned self] in
-            self.showExtensions()
+            let _ = self.showExtensions(animated: true)
         })
 		let historyAction = MenuItem.item(named: "History", action: { [unowned self] in
 			self.showHistory()
@@ -123,7 +123,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		self.present(activityVC, animated: true, completion: nil)
 	}
     
-    func showExtensions() {
+    func showExtensions(animated: Bool) -> ExtensionsTableViewController {
         let vc = ExtensionsTableViewController(style: .grouped)
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.barTintColor = Colors.radiumGray
@@ -132,7 +132,9 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
             nav.modalPresentationStyle = .formSheet
         }
         
-        self.present(nav, animated: true, completion: nil)
+        self.present(nav, animated: animated, completion: nil)
+        
+        return vc
     }
 	
 	func showHistory() {
@@ -183,5 +185,18 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
     func didSelectEntry(with url: URL?) {
         guard let url = url else { return }
         tabContainer?.loadQuery(string: url.absoluteString)
+    }
+    
+    // MARK: - Import methods
+    
+    func openEditor(withSource source: String, andName name: String) {
+        if let presentedController = self.presentedViewController {
+            presentedController.dismiss(animated: false, completion: nil)
+        }
+        
+        let vc = self.showExtensions(animated: false)
+        delay(0.15) {
+            vc.presentEditor(name: name, source: source)
+        }
     }
 }
