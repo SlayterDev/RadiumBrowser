@@ -91,8 +91,12 @@ class HistoryTableViewController: UITableViewController {
 		}
 
         let entry = history?[indexPath.row]
-		cell?.textLabel?.text = entry?.pageTitle
-		cell?.detailTextLabel?.text = entry?.pageURL
+        if let pageTitle = entry?.pageTitle, pageTitle != "" {
+            cell?.textLabel?.text = pageTitle
+            cell?.detailTextLabel?.text = entry?.pageURL
+        } else {
+            cell?.textLabel?.text = entry?.pageURL
+        }
 
         return cell!
     }

@@ -29,11 +29,11 @@ class FaviconGetter: BuiltinExtension, WKScriptMessageHandler {
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if let icons = message.body as? [String: Int] {
-            for icon in icons {
-                if icon.1 != 0 {
-                    webContainer?.pageIconUrl = icon.0
-                }
+        guard let icons = message.body as? [String: Int] else { return }
+        
+        for icon in icons {
+            if icon.1 != 0 {
+                webContainer?.pageIconUrl = icon.0
             }
         }
     }

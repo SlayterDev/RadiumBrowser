@@ -31,7 +31,6 @@ class BookmarkCollectionViewCell: UICollectionViewCell {
 		textLabel = UILabel().then {
 			$0.textAlignment = .center
 			$0.adjustsFontSizeToFitWidth = true
-//			$0.numberOfLines = 2
 			$0.lineBreakMode = .byTruncatingTail
 			$0.minimumScaleFactor = 0.8
 			$0.font = .systemFont(ofSize: 14)
