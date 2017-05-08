@@ -167,7 +167,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
     
     func addBookmark(btn: UIView) {
         let vc = AddBookmarkTableViewController(style: .grouped)
-        vc.pageIconURL = tabContainer?.currentTab?.webContainer?.pageIconUrl
+        vc.pageIconURL = tabContainer?.currentTab?.webContainer?.favicon?.getPreferredURL()
         vc.pageTitle = tabContainer?.currentTab?.webContainer?.webView?.title
         vc.pageURL = tabContainer?.currentTab?.webContainer?.webView?.url?.absoluteString
         let nav = UINavigationController(rootViewController: vc)

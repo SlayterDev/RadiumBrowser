@@ -17,7 +17,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
     var isObserving = false
 	
 	weak var tabView: TabView?
-	var pageIconUrl: String?
+    var favicon: Favicon?
     var builtinExtensions: [BuiltinExtension]?
 	
 	var progressView: UIProgressView?
@@ -194,7 +194,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	}
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        pageIconUrl = nil
+        favicon = nil
     }
     
 	func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -276,6 +276,11 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
     // MARK: - Helper methods
     
     func tryToGetFavicon(for url: URL?) {
+        if let faviconURL = favicon?.iconURL {
+            tabView?.tabImageView?.sd_setImage(with: URL(string: faviconURL), placeholderImage: UIImage(named: "globe"))
+            return
+        }
+        
         guard let url = url else { return }
         guard let scheme = url.scheme else { return }
         guard let host = url.host else { return }

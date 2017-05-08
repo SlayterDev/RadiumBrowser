@@ -9,6 +9,34 @@
 import UIKit
 import WebKit
 
+enum FaviconType: Int {
+    case icon = 0
+    case apple = 1
+    case applePrecomposed = 2
+    case guess = 3
+}
+
+struct Favicon {
+    var iconURL: String?
+    var appleURL: String?
+    var applePrecomposed: String?
+    var guess: String?
+    
+    func getPreferredURL() -> String? {
+        if let applePrecomposed = applePrecomposed {
+            return applePrecomposed
+        } else if let appleURL = appleURL {
+            return appleURL
+        } else if let iconURL = iconURL {
+            return iconURL
+        } else if let guess = guess {
+            return guess
+        }
+        
+        return nil
+    }
+}
+
 class FaviconGetter: BuiltinExtension, WKScriptMessageHandler {
     override var extensionName: String {
         return "Favicon Getter"
@@ -31,10 +59,21 @@ class FaviconGetter: BuiltinExtension, WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let icons = message.body as? [String: Int] else { return }
         
+        var favicon = Favicon()
         for icon in icons {
-            if icon.1 != 0 {
-                webContainer?.pageIconUrl = icon.0
+            guard let type = FaviconType(rawValue: icon.1) else { continue }
+            switch type {
+            case .icon:
+                favicon.iconURL = icon.0
+            case .apple:
+                favicon.appleURL = icon.0
+            case .applePrecomposed:
+                favicon.applePrecomposed = icon.0
+            case .guess:
+                favicon.guess = icon.0
             }
         }
+        
+        webContainer?.favicon = favicon
     }
 }
