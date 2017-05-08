@@ -17,31 +17,31 @@ class MigrationManager: NSObject {
 			schemaVersion: 5,
 			migrationBlock: { migration, oldSchemaVersion in
 				if oldSchemaVersion < 1 {
-					migration.enumerateObjects(ofType: ExtensionModel.className()) { oldObject, newObject in
+					migration.enumerateObjects(ofType: ExtensionModel.className()) { _, newObject in
 						newObject?["active"] = true
 					}
 				}
 				
 				if oldSchemaVersion < 2 {
-					migration.enumerateObjects(ofType: BrowsingSession.className()) { oldObject, newObject in
+					migration.enumerateObjects(ofType: BrowsingSession.className()) { _, newObject in
 						newObject?["selectedTabIndex"] = 0
 					}
 				}
 				
 				if oldSchemaVersion < 3 {
-					migration.enumerateObjects(ofType: ExtensionModel.className()) { oldObject, newObject in
+					migration.enumerateObjects(ofType: ExtensionModel.className()) { _, newObject in
 						newObject?["injectionTime"] = 1
 					}
 				}
                 
                 if oldSchemaVersion < 4 {
-                    migration.enumerateObjects(ofType: BrowsingSession.className()) { oldObject, newObject in
+                    migration.enumerateObjects(ofType: BrowsingSession.className()) { _, newObject in
                         newObject?["selectedTabIndex"] = 0
                     }
                 }
 				
 				if oldSchemaVersion < 5 {
-					migration.enumerateObjects(ofType: Bookmark.className()) { oldObject, newObject in
+					migration.enumerateObjects(ofType: Bookmark.className()) { _, newObject in
 						newObject?["iconURL"] = ""
 					}
 				}

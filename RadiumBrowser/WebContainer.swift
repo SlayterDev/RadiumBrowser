@@ -61,7 +61,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         
         do {
             let realm = try Realm()
-            self.notificationToken = realm.addNotificationBlock { notification, realm in
+            self.notificationToken = realm.addNotificationBlock { _, _ in
                 self.reloadExtensions()
             }
         } catch let error as NSError {
@@ -239,7 +239,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String,
 	             initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
 		let av = UIAlertController(title: webView.title, message: message, preferredStyle: .alert)
-		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(action) in
+		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
 			completionHandler()
 		}))
 		self.parentViewController?.present(av, animated: true, completion: nil)
@@ -248,10 +248,10 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String,
 	             initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
 		let av = UIAlertController(title: webView.title, message: message, preferredStyle: .alert)
-		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(action) in
+		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
 			completionHandler(true)
 		}))
-		av.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in
+		av.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
 			completionHandler(false)
 		}))
 		self.parentViewController?.present(av, animated: true, completion: nil)
@@ -264,10 +264,10 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 			textField.placeholder = prompt
 			textField.text = defaultText
 		})
-		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: {(action) in
+		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
 			completionHandler(av.textFields?.first?.text)
 		}))
-		av.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) in
+		av.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
 			completionHandler(nil)
 		}))
 		self.parentViewController?.present(av, animated: true, completion: nil)

@@ -109,7 +109,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
             textField.autocapitalizationType = .words
             textField.text = self.scriptName
         })
-        av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+        av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
             if let nameText = av.textFields?.first?.text, nameText != "" {
                 self.scriptName = nameText
                 self.navigationItem.prompt = nameText
@@ -206,21 +206,25 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
         let tabSize = 4
         let indentationLevel = prevLine.getIndentationLevel(tabSize: tabSize) + nextLevel
         let paddingString = "\n" + ((" " * tabSize) * indentationLevel)
+        var postString = ""
+        if nextLevel > 0 {
+            postString = "\n" + ((" " * tabSize) * (indentationLevel - nextLevel)) + "}"
+        }
         
         if range.location == textView.text.characters.count {
             let updatedText = paddingString
-            textView.text = textView.text + updatedText
+            textView.text = textView.text + updatedText + postString
         } else {
             let beginning = textView.beginningOfDocument
             let start = textView.position(from: beginning, offset: range.location)
             let rangeEnd = textView.position(from: start!, offset: range.length)
             let textRange = textView.textRange(from: start!, to: rangeEnd!)
             
-            textView.replace(textRange!, withText: paddingString)
-            
-            let cursor = NSRange(location: range.location + paddingString.characters.count, length: 0)
-            textView.selectedRange = cursor
+            textView.replace(textRange!, withText: paddingString + postString)
         }
+        
+        let cursor = NSRange(location: range.location + paddingString.characters.count, length: 0)
+        textView.selectedRange = cursor
         
         return false
     }

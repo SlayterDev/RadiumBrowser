@@ -30,7 +30,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
         
         do {
             self.realm = try Realm()
-			self.notificationToken = realm.addNotificationBlock { notification, realm in
+			self.notificationToken = realm.addNotificationBlock { _, _ in
 				DispatchQueue.main.async {
 					self.tableView.reloadSections([1], with: .automatic)
 				}
@@ -136,7 +136,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
         av.addTextField(configurationHandler: { (textField) in
             textField.autocapitalizationType = .words
         })
-		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
+		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
 			if let nameText = av.textFields?.first?.text, nameText != "" {
 				self.presentEditor(name: nameText, source: nil)
 			}
