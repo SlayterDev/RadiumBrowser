@@ -27,6 +27,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	deinit {
         if isObserving {
             webView?.removeObserver(self, forKeyPath: "estimatedProgress")
+            webView?.removeObserver(self, forKeyPath: "title")
         }
         notificationToken.stop()
 	}
@@ -148,6 +149,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		
 		if !isObserving {
 			webView?.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+            webView?.addObserver(self, forKeyPath: "title", options: .new, context: nil)
 			isObserving = true
 		}
 	}
@@ -158,6 +160,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		// Remove ourself as the observer
         if isObserving {
             webView?.removeObserver(self, forKeyPath: "estimatedProgress")
+            webView?.removeObserver(self, forKeyPath: "title")
             isObserving = false
             progressView?.setProgress(0, animated: false)
             progressView?.isHidden = true
@@ -190,7 +193,9 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
             if webView?.estimatedProgress == 1 {
                 progressView?.setProgress(0, animated: false)
             }
-		}
+        } else if keyPath == "title" {
+            tabView?.tabTitle = webView?.title
+        }
 	}
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {

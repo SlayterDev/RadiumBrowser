@@ -13,7 +13,7 @@ protocol TabViewDelegate: class {
 	func close(tab: TabView)
 }
 
-class TabView: UIView {
+class TabView: UIView, UIGestureRecognizerDelegate {
     
     var shapeLayer: CAShapeLayer?
     
@@ -74,7 +74,7 @@ class TabView: UIView {
 		}
 		
 		let gesture = UITapGestureRecognizer()
-		gesture.numberOfTapsRequired = 1
+        gesture.delegate = self
 		gesture.addTarget(self, action: #selector(tappedTab))
 		self.addGestureRecognizer(gesture)
 		self.isUserInteractionEnabled = true
@@ -85,6 +85,14 @@ class TabView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view is UIControl {
+            return false
+        }
+        
+        return true
     }
     
     override func layoutSubviews() {
