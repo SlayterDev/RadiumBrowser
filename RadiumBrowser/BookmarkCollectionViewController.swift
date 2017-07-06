@@ -43,7 +43,7 @@ class BookmarkCollectionViewController: UICollectionViewController {
 				switch changes {
 				case .initial:
 					collectionView.reloadData()
-				case .update(_, _, _, _):
+				case .update:
 					collectionView.reloadSections([0])
 				case .error(let error):
 					logRealmError(error: error)

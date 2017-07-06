@@ -71,6 +71,10 @@ class TabContainerView: UIView, TabViewDelegate {
         didTap(tab: newTab)
         setUpTabConstraints()
         
+        if tabList.count > 1 {
+            addressBar?.addressField?.becomeFirstResponder()
+        }
+        
         return newTab
     }
     

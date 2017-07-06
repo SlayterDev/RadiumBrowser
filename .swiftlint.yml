@@ -4,6 +4,8 @@ disabled_rules:
   - valid_docs
   - shorthand_operator
   - void_return
+  - redundant_discardable_let
+  - unused_optional_binding
 
 excluded:
   - Pods

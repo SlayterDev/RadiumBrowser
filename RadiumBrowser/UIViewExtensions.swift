@@ -72,19 +72,15 @@ extension UIView {
         
         let path = CGMutablePath()
         path.move(to: points.first!)
-        for point in points {
-            if point != points.first {
-                path.addLine(to: point)
-            }
+        for point in points where point != points.first {
+            path.addLine(to: point)
         }
         path.addLine(to: points.first!)
         
         let outlinePath = UIBezierPath()
         outlinePath.move(to: outlinePoints.first!)
-        for point in outlinePoints {
-            if point != outlinePoints.first {
-                outlinePath.addLine(to: point)
-            }
+        for point in outlinePoints where point != outlinePoints.first {
+            outlinePath.addLine(to: point)
         }
         
         return (path, outlinePath)

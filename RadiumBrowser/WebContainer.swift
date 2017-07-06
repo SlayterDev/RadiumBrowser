@@ -92,7 +92,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		let config = WKWebViewConfiguration()
 		
 		let contentController = WKUserContentController()
-		let _ = loadExtensions().map {
+		loadExtensions().forEach {
 			contentController.addUserScript($0)
 		}
 		
@@ -126,7 +126,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
     func reloadExtensions() {
         // Called when a new extension is added to Realm
         webView?.configuration.userContentController.removeAllUserScripts()
-        let _ = loadExtensions().map {
+        loadExtensions().forEach {
             webView?.configuration.userContentController.addUserScript($0)
         }
         builtinExtensions?.forEach {
