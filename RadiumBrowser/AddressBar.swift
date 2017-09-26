@@ -10,15 +10,15 @@ import UIKit
 
 class AddressBar: UIView, UITextFieldDelegate {
     
-    static let standardHeight: CGFloat = 44
+    @objc static let standardHeight: CGFloat = 44
 	
-	var backButton: UIButton?
-	var forwardButton: UIButton?
-	var refreshButton: UIButton?
-    var addressField: UITextField?
-	var menuButton: UIButton?
+	@objc var backButton: UIButton?
+	@objc var forwardButton: UIButton?
+	@objc var refreshButton: UIButton?
+    @objc var addressField: UITextField?
+	@objc var menuButton: UIButton?
 	
-	weak var tabContainer: TabContainerView?
+	@objc weak var tabContainer: TabContainerView?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -109,10 +109,18 @@ class AddressBar: UIView, UITextFieldDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Setup
+    
+    @objc func setupNaviagtionActions(forTabConatiner tabContainer: TabContainerView) {
+        backButton?.addTarget(tabContainer, action: #selector(tabContainer.goBack(sender:)), for: .touchUpInside)
+        forwardButton?.addTarget(tabContainer, action: #selector(tabContainer.goForward(sender:)), for: .touchUpInside)
+        refreshButton?.addTarget(tabContainer, action: #selector(tabContainer.refresh(sender:)), for: .touchUpInside)
+    }
 	
 	// MARK: - Actions
 	
-	func setAddressText(_ text: String?) {
+	@objc func setAddressText(_ text: String?) {
 		guard let _ = addressField else { return }
 		
 		if !addressField!.isFirstResponder {
@@ -120,7 +128,7 @@ class AddressBar: UIView, UITextFieldDelegate {
 		}
 	}
 	
-	func setAttributedAddressText(_ text: NSAttributedString) {
+	@objc func setAttributedAddressText(_ text: NSAttributedString) {
 		guard let _ = addressField else { return }
 		
 		if !addressField!.isFirstResponder {

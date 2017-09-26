@@ -14,16 +14,16 @@ protocol UserScriptHandler {
 }
 
 class BuiltinExtension: NSObject {
-    var extensionName: String {
+    @objc var extensionName: String {
         return "UNNAMED"
     }
     
-    var scriptHandlerName: String?
+    @objc var scriptHandlerName: String?
     
-    var webContainer: WebContainer?
-    var webScript: WKUserScript?
+    @objc var webContainer: WebContainer?
+    @objc var webScript: WKUserScript?
     
-    init(container: WebContainer) {
+    @objc init(container: WebContainer) {
         super.init()
         
         webContainer = container

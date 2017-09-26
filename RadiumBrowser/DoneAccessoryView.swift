@@ -10,10 +10,10 @@ import UIKit
 
 class DoneAccessoryView: UIView {
     
-    var doneButton: UIButton?
-    var targetView: UIView?
+    @objc var doneButton: UIButton?
+    @objc var targetView: UIView?
     
-    init(targetView: UIView?, width: CGFloat) {
+    @objc init(targetView: UIView?, width: CGFloat) {
         super.init(frame: CGRect(x: 0, y: 0, width: width, height: 35))
         
         self.targetView = targetView
@@ -28,7 +28,7 @@ class DoneAccessoryView: UIView {
         super.init(coder: aDecoder)
     }
 
-    func doneButtonSetup() {
+    @objc func doneButtonSetup() {
         self.backgroundColor = Colors.radiumGray
         doneButton = UIButton(type: .custom).then {
             $0.setTitle("Done", for: .normal)
@@ -45,7 +45,7 @@ class DoneAccessoryView: UIView {
         }
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         targetView?.endEditing(true)
     }
 

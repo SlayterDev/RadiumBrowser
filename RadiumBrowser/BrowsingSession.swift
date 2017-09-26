@@ -10,11 +10,11 @@ import Foundation
 import RealmSwift
 
 class URLModel: Object {
-	dynamic var urlString = ""
-	dynamic var pageTitle = ""
+	@objc dynamic var urlString = ""
+	@objc dynamic var pageTitle = ""
 }
 
 class BrowsingSession: Object {
 	let tabs = List<URLModel>()
-	dynamic var selectedTabIndex = 0
+	@objc dynamic var selectedTabIndex = 0
 }

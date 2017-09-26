@@ -10,10 +10,10 @@ import Foundation
 import RealmSwift
 
 class Bookmark: Object {
-	dynamic var id = ""
-    dynamic var name = ""
-	dynamic var pageURL = ""
-	dynamic var iconURL = ""
+	@objc dynamic var id = ""
+    @objc dynamic var name = ""
+	@objc dynamic var pageURL = ""
+	@objc dynamic var iconURL = ""
 	
 	override static func indexedProperties() -> [String] {
 		return ["name"]

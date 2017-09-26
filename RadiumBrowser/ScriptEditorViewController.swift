@@ -16,12 +16,12 @@ protocol ScriptEditorDelegate: class {
 
 class ScriptEditorViewController: UIViewController, UITextViewDelegate {
 	
-	var textView: UITextView?
-	var injectionTimeSelector: UISegmentedControl?
-	var scriptName: String?
-    var importedSource: String?
+	@objc var textView: UITextView?
+	@objc var injectionTimeSelector: UISegmentedControl?
+	@objc var scriptName: String?
+    @objc var importedSource: String?
 	
-	var prevModel: ExtensionModel?
+	@objc var prevModel: ExtensionModel?
 	
 	weak var delegate: ScriptEditorDelegate?
 	
@@ -103,7 +103,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - Helpers
     
-    func promptForNewName() {
+    @objc func promptForNewName() {
         let av = UIAlertController(title: "New Extension", message: "Please provide a name for your extension.", preferredStyle: .alert)
         av.addTextField(configurationHandler: { (textField) in
             textField.autocapitalizationType = .words
@@ -122,12 +122,12 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - Saving
 
-	func done(sender: UIBarButtonItem) {
+	@objc func done(sender: UIBarButtonItem) {
 		saveChanges()
 		let _ = self.navigationController?.popViewController(animated: true)
 	}
 	
-    func saveChanges() {
+    @objc func saveChanges() {
         if let model = prevModel {
             do {
                 let realm = try Realm()
@@ -145,7 +145,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - Keyboard Methods
     
-	func getTextViewInsets(keyboardHeight: CGFloat) -> CGFloat {
+	@objc func getTextViewInsets(keyboardHeight: CGFloat) -> CGFloat {
 		// Calculate the offset of our tableView in the
 		// coordinate space of of our window
 		guard let window = (UIApplication.shared.delegate as? AppDelegate)?.window else { return 0 }
@@ -161,7 +161,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
 			   0)
 	}
     
-	func keyboardWillShow(notification: NSNotification) {
+	@objc func keyboardWillShow(notification: NSNotification) {
 		let userInfo = notification.userInfo!
 		guard let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
         
@@ -182,7 +182,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
 		}
 	}
 	
-	func keyboardWillHide(notification: NSNotification) {
+	@objc func keyboardWillHide(notification: NSNotification) {
 		textView?.snp.remakeConstraints { (make) in
 			make.edges.equalTo(self.view)
 		}
@@ -196,7 +196,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
         guard text == "\n" else { return true }
         
         let end = textView.text.index(textView.text.startIndex, offsetBy: range.location)
-        guard let prevLine = textView.text.substring(with: textView.text.startIndex..<end).lines.last else { return true }
+        guard let prevLine = String(textView.text[..<end]).lines.last else { return true }
         
         var nextLevel = 0
         if prevLine.characters.last == "{" {

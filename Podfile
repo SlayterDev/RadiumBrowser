@@ -13,11 +13,11 @@ def all_pods
     # See "Shared" folder for more shared libraries/resources
 
     # AutoLayout
-    pod 'SnapKit'
+    pod 'SnapKit', '<= 3.2.0'
     # Then API - initialization
     pod 'Then'
     # Realm database
-    pod 'RealmSwift'
+    pod 'RealmSwift', '<= 2.10.0'
     # async images
     pod 'SDWebImage', '~> 3.8'
     # Color utilities
@@ -39,12 +39,4 @@ end
 
 target 'RadiumBrowserUITests' do
     all_pods
-end
-
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            config.build_settings['SWIFT_VERSION'] = '3.0'
-        end
-    end
 end

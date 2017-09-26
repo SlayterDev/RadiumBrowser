@@ -22,12 +22,12 @@ struct MenuItem {
 
 class SharedDropdownMenu: UIView, UIGestureRecognizerDelegate {
 	
-	static let defaultMenuItemHeight: CGFloat = 44
-	static let defaultMenuWidth: CGFloat = 250
+	@objc static let defaultMenuItemHeight: CGFloat = 44
+	@objc static let defaultMenuWidth: CGFloat = 250
 	
 	var menuItems: [MenuItem]?
 	
-	var dismissGesture: UITapGestureRecognizer?
+	@objc var dismissGesture: UITapGestureRecognizer?
 	
 	init(menuItems: [MenuItem]) {
 		super.init(frame: .zero)
@@ -45,7 +45,7 @@ class SharedDropdownMenu: UIView, UIGestureRecognizerDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	func setupMenu() {
+	@objc func setupMenu() {
 		var itemViews = [UIView]()
 		for (i, menuItem) in menuItems!.enumerated() {
 			let _ = UIButton().then { [unowned self] in
@@ -77,7 +77,7 @@ class SharedDropdownMenu: UIView, UIGestureRecognizerDelegate {
 		}
 	}
 	
-	func show(in view: UIView, from point: CGPoint) {
+	@objc func show(in view: UIView, from point: CGPoint) {
 		let bounds = view.bounds
 		let height = SharedDropdownMenu.defaultMenuItemHeight * CGFloat(menuItems!.count)
 		let width = SharedDropdownMenu.defaultMenuWidth
@@ -99,14 +99,14 @@ class SharedDropdownMenu: UIView, UIGestureRecognizerDelegate {
 		view.window?.addGestureRecognizer(dismissGesture!)
 	}
 	
-	func dismiss() {
+	@objc func dismiss() {
 		if let _ = dismissGesture {
 			self.window?.removeGestureRecognizer(dismissGesture!)
 		}
 		self.removeFromSuperview()
 	}
 	
-	func tappedItem(sender: UIButton) {
+	@objc func tappedItem(sender: UIButton) {
 		dismiss()
 		guard let item = menuItems?[sender.tag] else { return }
 		item.action?()

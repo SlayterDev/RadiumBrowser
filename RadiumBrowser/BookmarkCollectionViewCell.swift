@@ -9,8 +9,8 @@
 import UIKit
 
 class BookmarkCollectionViewCell: UICollectionViewCell {
-	var textLabel: UILabel?
-	var imageView: UIImageView?
+	@objc var textLabel: UILabel?
+	@objc var imageView: UIImageView?
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)

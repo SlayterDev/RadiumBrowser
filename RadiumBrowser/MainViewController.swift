@@ -10,8 +10,8 @@ import UIKit
 
 class MainViewController: UIViewController, HistoryNavigationDelegate {
 
-	var container: UIView?
-	var tabContainer: TabContainerView?
+	@objc var container: UIView?
+	@objc var tabContainer: TabContainerView?
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
             self.view.addSubview($0)
             $0.snp.makeConstraints { (make) in
                 make.width.equalTo(self.view)
-                make.height.equalTo(22)
+                make.height.equalTo(UIApplication.shared.statusBarFrame.height)
                 make.top.equalTo(self.view)
             }
         }
@@ -45,9 +45,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 			$0.tabContainer = self.tabContainer
 			self.tabContainer?.addressBar = $0
 			
-			$0.backButton?.addTarget(self.tabContainer!, action: #selector(self.tabContainer?.goBack(sender:)), for: .touchUpInside)
-			$0.forwardButton?.addTarget(self.tabContainer!, action: #selector(self.tabContainer?.goForward(sender:)), for: .touchUpInside)
-			$0.refreshButton?.addTarget(self.tabContainer!, action: #selector(self.tabContainer?.refresh(sender:)), for: .touchUpInside)
+            $0.setupNaviagtionActions(forTabConatiner: self.tabContainer!)
 			$0.menuButton?.addTarget(self, action: #selector(self.showMenu(sender:)), for: .touchUpInside)
 			
             self.view.addSubview($0)
@@ -86,11 +84,15 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         tabContainer?.setUpTabConstraints()
     }
     
-	func addTab() {
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true
+    }
+    
+	@objc func addTab() {
 		let _ = tabContainer?.addNewTab(container: container!)
 	}
 	
-	func showMenu(sender: UIButton) {
+	@objc func showMenu(sender: UIButton) {
         let convertedPoint = sender.convert(sender.center, to: self.view)
         
         let addBookmarkAction = MenuItem.item(named: "Add Bookmark", action: { [unowned self] in
@@ -113,7 +115,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		menu.show(in: self.view, from: convertedPoint)
 	}
 	
-	func shareLink() {
+	@objc func shareLink() {
 		guard let tabContainer = self.tabContainer else { return }
 		let selectedTab = tabContainer.tabList[tabContainer.selectedTabIndex]
 		
@@ -123,7 +125,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		self.present(activityVC, animated: true, completion: nil)
 	}
     
-    func showExtensions(animated: Bool) -> ExtensionsTableViewController {
+    @objc func showExtensions(animated: Bool) -> ExtensionsTableViewController {
         let vc = ExtensionsTableViewController(style: .grouped)
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.barTintColor = Colors.radiumGray
@@ -137,7 +139,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         return vc
     }
 	
-	func showHistory() {
+	@objc func showHistory() {
 		let vc = HistoryTableViewController()
         vc.delegate = self
 		let nav = UINavigationController(rootViewController: vc)
@@ -150,7 +152,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		self.present(nav, animated: true, completion: nil)
 	}
 	
-	func showBookmarks() {
+	@objc func showBookmarks() {
 		let flowLayout = UICollectionViewFlowLayout()
 		flowLayout.itemSize = CGSize(width: 80, height: 97.5)
 		let vc = BookmarkCollectionViewController(collectionViewLayout: flowLayout)
@@ -165,7 +167,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		self.present(nav, animated: true, completion: nil)
 	}
     
-    func addBookmark(btn: UIView) {
+    @objc func addBookmark(btn: UIView) {
         let vc = AddBookmarkTableViewController(style: .grouped)
         vc.pageIconURL = tabContainer?.currentTab?.webContainer?.favicon?.getPreferredURL()
         vc.pageTitle = tabContainer?.currentTab?.webContainer?.webView?.title
@@ -182,14 +184,14 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         self.present(nav, animated: true, completion: nil)
     }
     
-    func didSelectEntry(with url: URL?) {
+    @objc func didSelectEntry(with url: URL?) {
         guard let url = url else { return }
         tabContainer?.loadQuery(string: url.absoluteString)
     }
     
     // MARK: - Import methods
     
-    func openEditor(withSource source: String, andName name: String) {
+    @objc func openEditor(withSource source: String, andName name: String) {
         if let presentedController = self.presentedViewController {
             presentedController.dismiss(animated: false, completion: nil)
         }

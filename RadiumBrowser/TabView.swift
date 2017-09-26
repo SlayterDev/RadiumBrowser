@@ -15,21 +15,21 @@ protocol TabViewDelegate: class {
 
 class TabView: UIView, UIGestureRecognizerDelegate {
     
-    var shapeLayer: CAShapeLayer?
+    @objc var shapeLayer: CAShapeLayer?
     
-    var tabTitle: String? {
+    @objc var tabTitle: String? {
         didSet {
             tabTitleLabel?.text = tabTitle
         }
     }
-    var tabTitleLabel: UILabel?
-    var tabImageView: UIImageView?
+    @objc var tabTitleLabel: UILabel?
+    @objc var tabImageView: UIImageView?
 	
 	weak var delegate: TabViewDelegate?
 	
-	var webContainer: WebContainer?
+	@objc var webContainer: WebContainer?
 
-	init(parentView: UIView) {
+	@objc init(parentView: UIView) {
         super.init(frame: .zero)
         
         self.backgroundColor = Colors.radiumGray
@@ -101,11 +101,11 @@ class TabView: UIView, UIGestureRecognizerDelegate {
         self.blendCorner(corner: .All, shapeLayer: &shapeLayer, length: 10)
     }
 	
-	func tappedTab(sender: UITapGestureRecognizer) {
+	@objc func tappedTab(sender: UITapGestureRecognizer) {
 		delegate?.didTap(tab: self)
 	}
 	
-	func close(sender: UIButton) {
+	@objc func close(sender: UIButton) {
 		delegate?.close(tab: self)
 	}
 }

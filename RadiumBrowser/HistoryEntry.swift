@@ -10,10 +10,10 @@ import Foundation
 import RealmSwift
 
 class HistoryEntry: Object {
-	dynamic var id = ""
-	dynamic var pageURL = ""
-	dynamic var pageTitle = ""
-	dynamic var visitDate = Date(timeIntervalSince1970: 1)
+	@objc dynamic var id = ""
+	@objc dynamic var pageURL = ""
+	@objc dynamic var pageTitle = ""
+	@objc dynamic var visitDate = Date(timeIntervalSince1970: 1)
 	
 	override class func primaryKey() -> String? {
 		return "id"

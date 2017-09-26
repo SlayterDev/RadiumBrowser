@@ -13,7 +13,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 
 	var extensions: Results<ExtensionModel>?
     
-    var notificationToken: NotificationToken!
+    @objc var notificationToken: NotificationToken!
     var realm: Realm!
 	
 	deinit {
@@ -46,7 +46,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
         // Dispose of any resources that can be recreated.
     }
     
-    func done(sender: UIBarButtonItem) {
+    @objc func done(sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -131,7 +131,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
     
     // MARK: - Actions
 	
-	func promptForScriptName() {
+	@objc func promptForScriptName() {
 		let av = UIAlertController(title: "New Extension", message: "Please provide a name for your extension.", preferredStyle: .alert)
         av.addTextField(configurationHandler: { (textField) in
             textField.autocapitalizationType = .words
@@ -146,7 +146,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 		self.present(av, animated: true, completion: nil)
 	}
 	
-    func presentEditor(name: String, source: String?) {
+    @objc func presentEditor(name: String, source: String?) {
 		let editor = ScriptEditorViewController()
 		editor.delegate = self
 		editor.scriptName = name
@@ -154,7 +154,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
         self.navigationController?.pushViewController(editor, animated: (source == nil)) // Animate if no imported source
 	}
 	
-	func addScript(named name: String?, source: String?, injectionTime: Int) {
+	@objc func addScript(named name: String?, source: String?, injectionTime: Int) {
 		guard let name = name else { return }
 		guard let source = source else { return }
 		
@@ -170,7 +170,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 		}
 	}
     
-    func toggleScript(sender: UISwitch) {
+    @objc func toggleScript(sender: UISwitch) {
         guard let model = extensions?[sender.tag] else { return }
         
         do {

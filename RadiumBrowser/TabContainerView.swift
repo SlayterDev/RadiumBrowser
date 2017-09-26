@@ -12,29 +12,29 @@ import WebKit
 
 class TabContainerView: UIView, TabViewDelegate {
     
-    static let standardHeight: CGFloat = 35
+    @objc static let standardHeight: CGFloat = 35
     
-    static let defaultTabWidth: CGFloat = 150
-    static let defaultTabHeight: CGFloat = TabContainerView.standardHeight - 2
+    @objc static let defaultTabWidth: CGFloat = 150
+    @objc static let defaultTabHeight: CGFloat = TabContainerView.standardHeight - 2
     
-    weak var containerView: UIView?
+    @objc weak var containerView: UIView?
     
-    lazy var tabList: [TabView] = []
+    @objc lazy var tabList: [TabView] = []
 	
-	var addTabButton: UIButton?
+	@objc var addTabButton: UIButton?
     
-	var selectedTabIndex = 0 {
+	@objc var selectedTabIndex = 0 {
 		didSet {
 			setTabColors()
 		}
 	}
     
-    var currentTab: TabView? {
+    @objc var currentTab: TabView? {
         guard tabList.count > 0 else { return nil }
         return tabList[selectedTabIndex]
     }
 	
-	weak var addressBar: AddressBar?
+	@objc weak var addressBar: AddressBar?
 	
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,7 +60,7 @@ class TabContainerView: UIView, TabViewDelegate {
     
     // MARK: - Tab Management
 	
-	func addNewTab(container: UIView) -> TabView {
+	@objc func addNewTab(container: UIView) -> TabView {
 		let newTab = TabView(parentView: container).then { [unowned self] in
 			$0.delegate = self
 			
@@ -78,14 +78,14 @@ class TabContainerView: UIView, TabViewDelegate {
         return newTab
     }
     
-    func addNewTab(withRequest request: URLRequest) {
+    @objc func addNewTab(withRequest request: URLRequest) {
         guard let container = self.containerView else { return }
         
         let newTab = addNewTab(container: container)
         let _ = newTab.webContainer?.webView?.load(request)
     }
     
-    func setUpTabConstraints() {
+    @objc func setUpTabConstraints() {
         let tabWidth = min(TabContainerView.defaultTabWidth,
                            (self.frame.width - TabContainerView.standardHeight + CGFloat(tabList.count * 6) - 5) / CGFloat(tabList.count))
         
@@ -108,7 +108,7 @@ class TabContainerView: UIView, TabViewDelegate {
         })
     }
     
-    func setTabColors() {
+    @objc func setTabColors() {
         for (i, tab) in tabList.enumerated() {
             tab.backgroundColor = (i == selectedTabIndex) ? Colors.radiumGray : Colors.radiumUnselected
         }
@@ -116,7 +116,7 @@ class TabContainerView: UIView, TabViewDelegate {
 	
 	// MARK: - Tab Delegate
 	
-	func didTap(tab: TabView) {
+	@objc func didTap(tab: TabView) {
 		let prevIndex = selectedTabIndex
 		if let index = tabList.index(of: tab) {
 			selectedTabIndex = index
@@ -130,7 +130,7 @@ class TabContainerView: UIView, TabViewDelegate {
 		}
 	}
 	
-	func switchVisibleWebView(prevTab: TabView?, newTab: TabView) {
+	@objc func switchVisibleWebView(prevTab: TabView?, newTab: TabView) {
 		prevTab?.webContainer?.removeFromView()
 		newTab.webContainer?.addToView()
         
@@ -142,7 +142,7 @@ class TabContainerView: UIView, TabViewDelegate {
         }
 	}
 	
-	func close(tab: TabView) {
+	@objc func close(tab: TabView) {
         guard tabList.count > 1 else { return }
         guard let indexToRemove = tabList.index(of: tab) else { return }
         
@@ -158,7 +158,7 @@ class TabContainerView: UIView, TabViewDelegate {
 	
 	// MARK: - Web Navigation
 	
-	func loadQuery(string: String?) {
+	@objc func loadQuery(string: String?) {
 		guard let string = string else { return }
 		
         if addressBar?.addressField?.text != string {
@@ -169,24 +169,24 @@ class TabContainerView: UIView, TabViewDelegate {
 		tab.webContainer?.loadQuery(string: string)
 	}
 	
-	func goBack(sender: UIButton) {
+	@objc func goBack(sender: UIButton) {
 		let tab = tabList[selectedTabIndex]
 		let _ = tab.webContainer?.webView?.goBack()
         tab.webContainer?.finishedLoadUpdates()
     }
 	
-	func goForward(sender: UIButton) {
+	@objc func goForward(sender: UIButton) {
 		let tab = tabList[selectedTabIndex]
 		let _ = tab.webContainer?.webView?.goForward()
         tab.webContainer?.finishedLoadUpdates()
 	}
 	
-	func refresh(sender: UIButton) {
+	@objc func refresh(sender: UIButton) {
 		let tab = tabList[selectedTabIndex]
 		let _ = tab.webContainer?.webView?.reload()
 	}
 	
-	func updateNavButtons() {
+	@objc func updateNavButtons() {
 		let tab = tabList[selectedTabIndex]
 		
 		addressBar?.backButton?.isEnabled = tab.webContainer?.webView?.canGoBack ?? false
@@ -197,7 +197,7 @@ class TabContainerView: UIView, TabViewDelegate {
 	
 	// MARK: - Data Managment
 	
-	func saveBrowsingSession() {
+	@objc func saveBrowsingSession() {
 		let session = BrowsingSession()
 		let models = List<URLModel>()
 		for tab in tabList {
@@ -222,7 +222,7 @@ class TabContainerView: UIView, TabViewDelegate {
 		}
 	}
 	
-	func loadBrowsingSession() {
+	@objc func loadBrowsingSession() {
 		var tabModels: List<URLModel>?
 		var session: BrowsingSession?
 		var realm: Realm?

@@ -10,9 +10,9 @@ import UIKit
 import RealmSwift
 
 class MigrationManager: NSObject {
-	static let shared = MigrationManager()
+	@objc static let shared = MigrationManager()
 	
-	func attemptMigration() {
+	@objc func attemptMigration() {
 		let realmConfig = Realm.Configuration(
 			schemaVersion: 5,
 			migrationBlock: { migration, oldSchemaVersion in

@@ -13,7 +13,7 @@ private let reuseIdentifier = "Cell"
 
 class BookmarkCollectionViewController: UICollectionViewController {
 	
-	var notificationToken: NotificationToken!
+	@objc var notificationToken: NotificationToken!
 	var realm: Realm!
 	
 	var bookmarks: Results<Bookmark>?
@@ -59,7 +59,7 @@ class BookmarkCollectionViewController: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
 	
-	func done() {
+	@objc func done() {
 		self.dismiss(animated: true, completion: nil)
 	}
 	

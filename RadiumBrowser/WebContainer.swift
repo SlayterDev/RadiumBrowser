@@ -12,17 +12,17 @@ import RealmSwift
 
 class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	
-	weak var parentView: UIView?
-	var webView: WKWebView?
-    var isObserving = false
+	@objc weak var parentView: UIView?
+	@objc var webView: WKWebView?
+    @objc var isObserving = false
 	
-	weak var tabView: TabView?
+	@objc weak var tabView: TabView?
     var favicon: Favicon?
-    var builtinExtensions: [BuiltinExtension]?
+    @objc var builtinExtensions: [BuiltinExtension]?
 	
-	var progressView: UIProgressView?
+	@objc var progressView: UIProgressView?
     
-    var notificationToken: NotificationToken!
+    @objc var notificationToken: NotificationToken!
 	
 	deinit {
         if isObserving {
@@ -32,7 +32,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         notificationToken.stop()
 	}
 	
-	init(parent: UIView) {
+	@objc init(parent: UIView) {
 		super.init(frame: .zero)
 		
 		self.parentView = parent
@@ -80,7 +80,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	
     // MARK: - Configuration Setup
     
-    func loadBuiltins() {
+    @objc func loadBuiltins() {
         builtinExtensions = WebViewManager.shared.loadBuiltinExtensions(webContainer: self)
         builtinExtensions?.forEach {
             if let handler = $0 as? WKScriptMessageHandler, let handlerName = $0.scriptHandlerName {
@@ -89,7 +89,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         }
     }
     
-	func loadConfiguration() -> WKWebViewConfiguration {
+	@objc func loadConfiguration() -> WKWebViewConfiguration {
 		let config = WKWebViewConfiguration()
 		
 		let contentController = WKUserContentController()
@@ -103,7 +103,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		return config
 	}
 	
-	func loadExtensions() -> [WKUserScript] {
+	@objc func loadExtensions() -> [WKUserScript] {
 		var extensions = [WKUserScript]()
 		
 		var models: Results<ExtensionModel>?
@@ -124,7 +124,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		return extensions
 	}
     
-    func reloadExtensions() {
+    @objc func reloadExtensions() {
         // Called when a new extension is added to Realm
         webView?.configuration.userContentController.removeAllUserScripts()
         loadExtensions().forEach {
@@ -139,7 +139,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	
     // MARK: - View Managment
     
-	func addToView() {
+	@objc func addToView() {
 		guard let _ = parentView else { return }
 		
 		parentView?.addSubview(self)
@@ -154,7 +154,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		}
 	}
 	
-	func removeFromView() {
+	@objc func removeFromView() {
 		guard let _ = parentView else { return }
 		
 		// Remove ourself as the observer
@@ -169,7 +169,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		self.removeFromSuperview()
 	}
 	
-	func loadQuery(string: String) {
+	@objc func loadQuery(string: String) {
 		var urlString = string
 		if !urlString.isURL() {
 			let searchTerms = urlString.replacingOccurrences(of: " ", with: "+")
@@ -206,7 +206,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		finishedLoadUpdates()
 	}
     
-    func finishedLoadUpdates() {
+    @objc func finishedLoadUpdates() {
         guard let webView = webView else { return }
         
         WebViewManager.shared.logPageVisit(url: webView.url?.absoluteString, pageTitle: webView.title)
@@ -280,7 +280,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
     
     // MARK: - Helper methods
     
-    func tryToGetFavicon(for url: URL?) {
+    @objc func tryToGetFavicon(for url: URL?) {
         if let faviconURL = favicon?.iconURL {
             tabView?.tabImageView?.sd_setImage(with: URL(string: faviconURL), placeholderImage: UIImage(named: "globe"))
             return

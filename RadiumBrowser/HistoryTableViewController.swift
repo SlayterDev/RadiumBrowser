@@ -17,7 +17,7 @@ class HistoryTableViewController: UITableViewController {
     
     weak var delegate: HistoryNavigationDelegate?
     
-	var notificationToken: NotificationToken!
+	@objc var notificationToken: NotificationToken!
 	var realm: Realm!
 	
 	var history: Results<HistoryEntry>?
@@ -68,7 +68,7 @@ class HistoryTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 	
-	func done() {
+	@objc func done() {
 		self.dismiss(animated: true, completion: nil)
 	}
 

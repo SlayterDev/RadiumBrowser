@@ -10,8 +10,8 @@ import UIKit
 
 class BookmarkTableViewCell: UITableViewCell {
     
-    var titleTextField: UITextField?
-    var urlTextField: UITextField?
+    @objc var titleTextField: UITextField?
+    @objc var urlTextField: UITextField?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

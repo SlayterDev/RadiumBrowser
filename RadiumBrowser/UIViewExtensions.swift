@@ -86,7 +86,7 @@ extension UIView {
         return (path, outlinePath)
     }
 	
-	var parentViewController: UIViewController? {
+	@objc var parentViewController: UIViewController? {
 		var parentResponder: UIResponder? = self
 		while parentResponder != nil {
 			parentResponder = parentResponder!.next

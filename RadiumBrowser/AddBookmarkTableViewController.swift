@@ -13,12 +13,12 @@ fileprivate let reuseidentifier = "bookmarkCell"
 
 class AddBookmarkTableViewController: UITableViewController {
     
-    var pageIconURL: String?
-    var pageTitle: String?
-    var pageURL: String?
+    @objc var pageIconURL: String?
+    @objc var pageTitle: String?
+    @objc var pageURL: String?
     
-    var titleTextField: UITextField?
-    var urlTextField: UITextField?
+    @objc var titleTextField: UITextField?
+    @objc var urlTextField: UITextField?
     
     override var preferredContentSize: CGSize {
         get {
@@ -48,13 +48,13 @@ class AddBookmarkTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func displayValidationError(for field: String) {
+    @objc func displayValidationError(for field: String) {
         let av = UIAlertController(title: "Error", message: "Please enter a \(field) for your bookmark.", preferredStyle: .alert)
         av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         self.present(av, animated: true, completion: nil)
     }
     
-    func done() {
+    @objc func done() {
         guard let title = titleTextField?.text, title != "" else {
             displayValidationError(for: "title")
             return
@@ -78,7 +78,7 @@ class AddBookmarkTableViewController: UITableViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func cancel() {
+    @objc func cancel() {
         self.dismiss(animated: true, completion: nil)
     }
 
