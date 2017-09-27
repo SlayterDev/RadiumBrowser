@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '9.0'
+platform :ios, '10.0'
 inhibit_all_warnings!
 use_frameworks!
 
@@ -24,19 +24,13 @@ def all_pods
     pod 'BSColorUtils', :git => 'https://github.com/SlayterDev/BSColorUtils'
     # UITextView Syntax Highlighting
     pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git'
+    # Event based actions
+    pod 'WaitForIt'
 
     project 'RadiumBrowser.xcodeproj'
 
 end
 
 target 'RadiumBrowser' do
-    all_pods
-end
-
-target 'RadiumBrowserTests' do
-    all_pods
-end
-
-target 'RadiumBrowserUITests' do
     all_pods
 end

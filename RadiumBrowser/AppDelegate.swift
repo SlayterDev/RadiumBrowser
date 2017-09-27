@@ -10,6 +10,7 @@ import UIKit
 import Then
 import SnapKit
 import RealmSwift
+import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,6 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainController = MainViewController()
         self.window?.rootViewController = mainController
         self.window?.makeKeyAndVisible()
+        
+        AppReview.triggerEvent()
+        AppReview.tryToExecute { didExecute in
+            if didExecute {
+                if #available(iOS 10.3, *) {
+                    SKStoreReviewController.requestReview()
+                }
+            }
+        }
         
         return true
     }

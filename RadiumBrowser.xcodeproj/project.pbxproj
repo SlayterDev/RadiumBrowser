@@ -21,7 +21,6 @@
 		02DF6C601E495CFB0088BDEB /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF6C5F1E495CFB0088BDEB /* HistoryTableViewController.swift */; };
 		02DF6C621E4BE83C0088BDEB /* BookmarkCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF6C611E4BE83C0088BDEB /* BookmarkCollectionViewController.swift */; };
 		02DF6C641E4BEA820088BDEB /* BookmarkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DF6C631E4BEA820088BDEB /* BookmarkCollectionViewCell.swift */; };
-		155BC95B7462E7A51833A86D /* Pods_RadiumBrowserUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB664E8EC27919571578F55A /* Pods_RadiumBrowserUITests.framework */; };
 		4163EDCA1E48E3A600E02E65 /* DoneAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4163EDC91E48E3A600E02E65 /* DoneAccessoryView.swift */; };
 		4163EDF51E4BB8F600E02E65 /* BuiltinExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4163EDF41E4BB8F600E02E65 /* BuiltinExtension.swift */; };
 		4163EDF81E4BB9D600E02E65 /* Favicons.js in Resources */ = {isa = PBXBuildFile; fileRef = 4163EDF71E4BB9D600E02E65 /* Favicons.js */; };
@@ -42,8 +41,8 @@
 		41DBC5FE1E412F0A00913FAA /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DBC5FD1E412F0A00913FAA /* UIViewExtensions.swift */; };
 		41F8F7531E43CAEC00029B56 /* ExtensionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8F7521E43CAEC00029B56 /* ExtensionsTableViewController.swift */; };
 		41F8F7561E43CB4B00029B56 /* ExtensionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8F7551E43CB4B00029B56 /* ExtensionModel.swift */; };
-		75120760D1AAB280302E6573 /* Pods_RadiumBrowserTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65B6B0A501710052BE8EF87 /* Pods_RadiumBrowserTests.framework */; };
 		D348888C4000EEE5E21DA85C /* Pods_RadiumBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7223C7ED4906D838E566912 /* Pods_RadiumBrowser.framework */; };
+		E60641F31F7BDDFE00100DF1 /* AppReviewScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60641F21F7BDDFE00100DF1 /* AppReviewScenario.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,14 +104,11 @@
 		41F8F7521E43CAEC00029B56 /* ExtensionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionsTableViewController.swift; sourceTree = "<group>"; };
 		41F8F7551E43CB4B00029B56 /* ExtensionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionModel.swift; sourceTree = "<group>"; };
 		41F8F7571E48C3A400029B56 /* RadiumBrowser-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RadiumBrowser-Bridging-Header.h"; sourceTree = "<group>"; };
-		467E4E9DBE17724137B49EA1 /* Pods-RadiumBrowserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowserTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowserTests/Pods-RadiumBrowserTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5610D93397D8C1354C4F30E5 /* Pods-RadiumBrowserUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowserUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowserUITests/Pods-RadiumBrowserUITests.release.xcconfig"; sourceTree = "<group>"; };
 		76B7139BBDE14B5054A22890 /* Pods-RadiumBrowser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser.debug.xcconfig"; sourceTree = "<group>"; };
 		78F23366915C60BA1ECB7F15 /* Pods-RadiumBrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser.release.xcconfig"; sourceTree = "<group>"; };
-		A2015514F69E3B74D47675CB /* Pods-RadiumBrowserTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowserTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowserTests/Pods-RadiumBrowserTests.release.xcconfig"; sourceTree = "<group>"; };
 		A7223C7ED4906D838E566912 /* Pods_RadiumBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65B6B0A501710052BE8EF87 /* Pods_RadiumBrowserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8C23E14974DCD9A323F85DF /* Pods-RadiumBrowserUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowserUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowserUITests/Pods-RadiumBrowserUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E60641F21F7BDDFE00100DF1 /* AppReviewScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewScenario.swift; sourceTree = "<group>"; };
 		FB664E8EC27919571578F55A /* Pods_RadiumBrowserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -129,7 +125,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75120760D1AAB280302E6573 /* Pods_RadiumBrowserTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +132,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				155BC95B7462E7A51833A86D /* Pods_RadiumBrowserUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +279,7 @@
 				02DF6C521E478FE30088BDEB /* BrowsingSession.swift */,
 				02DF6C5B1E47CAC80088BDEB /* HistoryEntry.swift */,
 				02DF6C5D1E495C4E0088BDEB /* Bookmark.swift */,
+				E60641F21F7BDDFE00100DF1 /* AppReviewScenario.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -304,10 +299,6 @@
 			children = (
 				76B7139BBDE14B5054A22890 /* Pods-RadiumBrowser.debug.xcconfig */,
 				78F23366915C60BA1ECB7F15 /* Pods-RadiumBrowser.release.xcconfig */,
-				467E4E9DBE17724137B49EA1 /* Pods-RadiumBrowserTests.debug.xcconfig */,
-				A2015514F69E3B74D47675CB /* Pods-RadiumBrowserTests.release.xcconfig */,
-				F8C23E14974DCD9A323F85DF /* Pods-RadiumBrowserUITests.debug.xcconfig */,
-				5610D93397D8C1354C4F30E5 /* Pods-RadiumBrowserUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -340,12 +331,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41A5681A1E40CB3B00470017 /* Build configuration list for PBXNativeTarget "RadiumBrowserTests" */;
 			buildPhases = (
-				9F914091AE275D661EB5BA05 /* [CP] Check Pods Manifest.lock */,
 				41A567FF1E40CB3B00470017 /* Sources */,
 				41A568001E40CB3B00470017 /* Frameworks */,
 				41A568011E40CB3B00470017 /* Resources */,
-				B5280817728B83C25046E567 /* [CP] Embed Pods Frameworks */,
-				41814CDBA9B9C77F428B5B1F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -361,12 +349,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41A5681D1E40CB3B00470017 /* Build configuration list for PBXNativeTarget "RadiumBrowserUITests" */;
 			buildPhases = (
-				D08AB95AFD4502B0B35738EB /* [CP] Check Pods Manifest.lock */,
 				41A5680A1E40CB3B00470017 /* Sources */,
 				41A5680B1E40CB3B00470017 /* Frameworks */,
 				41A5680C1E40CB3B00470017 /* Resources */,
-				8833CA818D07C047F20DCC9C /* [CP] Embed Pods Frameworks */,
-				581FCF58D0D790E2BAAA9BA4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -469,21 +454,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --reporter xcode\nfi\n";
 		};
-		41814CDBA9B9C77F428B5B1F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowserTests/Pods-RadiumBrowserTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		465C825ED9071CBBCEF7B04D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -497,51 +467,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		581FCF58D0D790E2BAAA9BA4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowserUITests/Pods-RadiumBrowserUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8833CA818D07C047F20DCC9C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowserUITests/Pods-RadiumBrowserUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BSColorUtils/BSColorUtils.framework",
-				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSColorUtils.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowserUITests/Pods-RadiumBrowserUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		954060A6DB807D9D64C61E11 /* [CP] Check Pods Manifest.lock */ = {
@@ -576,6 +501,7 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
+				"${BUILT_PRODUCTS_DIR}/WaitForIt/WaitForIt.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -586,76 +512,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WaitForIt.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9F914091AE275D661EB5BA05 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RadiumBrowserTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B5280817728B83C25046E567 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowserTests/Pods-RadiumBrowserTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BSColorUtils/BSColorUtils.framework",
-				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSColorUtils.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowserTests/Pods-RadiumBrowserTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D08AB95AFD4502B0B35738EB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RadiumBrowserUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -674,6 +535,7 @@
 				02DF6C5E1E495C4E0088BDEB /* Bookmark.swift in Sources */,
 				4163EDFC1E4CA40E00E02E65 /* AddBookmarkTableViewController.swift in Sources */,
 				41F8F7531E43CAEC00029B56 /* ExtensionsTableViewController.swift in Sources */,
+				E60641F31F7BDDFE00100DF1 /* AppReviewScenario.swift in Sources */,
 				41DBC5FE1E412F0A00913FAA /* UIViewExtensions.swift in Sources */,
 				02DF6C601E495CFB0088BDEB /* HistoryTableViewController.swift in Sources */,
 				4163EDFE1E4CA48600E02E65 /* BookmarkTableViewCell.swift in Sources */,
@@ -840,9 +702,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = Z67LVNYQSE;
 				INFOPLIST_FILE = RadiumBrowser/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SlayterDevelopment.RadiumBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RadiumBrowser/RadiumBrowser-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -858,9 +720,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = Z67LVNYQSE;
 				INFOPLIST_FILE = RadiumBrowser/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SlayterDevelopment.RadiumBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RadiumBrowser/RadiumBrowser-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -869,7 +731,6 @@
 		};
 		41A5681B1E40CB3B00470017 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 467E4E9DBE17724137B49EA1 /* Pods-RadiumBrowserTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -886,7 +747,6 @@
 		};
 		41A5681C1E40CB3B00470017 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2015514F69E3B74D47675CB /* Pods-RadiumBrowserTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -903,7 +763,6 @@
 		};
 		41A5681E1E40CB3B00470017 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F8C23E14974DCD9A323F85DF /* Pods-RadiumBrowserUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = RadiumBrowserUITests/Info.plist;
@@ -918,7 +777,6 @@
 		};
 		41A5681F1E40CB3B00470017 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5610D93397D8C1354C4F30E5 /* Pods-RadiumBrowserUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = RadiumBrowserUITests/Info.plist;
