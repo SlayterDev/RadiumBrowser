@@ -37,6 +37,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		
 		self.parentView = parent
 		
+        backgroundColor = .white
+        
 		webView = WKWebView(frame: .zero, configuration: loadConfiguration()).then { [unowned self] in
 			$0.allowsLinkPreview = true
 			$0.allowsBackForwardNavigationGestures = true
@@ -45,7 +47,12 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 			
 			self.addSubview($0)
 			$0.snp.makeConstraints { (make) in
-				make.edges.equalTo(self)
+                if #available(iOS 11.0, *) {
+                    make.top.left.right.equalTo(self.safeAreaLayoutGuide)
+                    make.bottom.equalTo(self)
+                } else {
+                    make.edges.equalTo(self)
+                }
 			}
 		}
         

@@ -16,7 +16,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .gray
+        self.view.backgroundColor = Colors.radiumDarkGray
         
         let padding = UIView().then { [unowned self] in
             $0.backgroundColor = Colors.radiumDarkGray
@@ -24,7 +24,11 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
             self.view.addSubview($0)
             $0.snp.makeConstraints { (make) in
                 make.width.equalTo(self.view)
-                make.height.equalTo(UIApplication.shared.statusBarFrame.height)
+                if #available(iOS 11.0, *) {
+                    make.height.equalTo(self.view.safeAreaInsets.top)
+                } else {
+                    make.height.equalTo(UIApplication.shared.statusBarFrame.height)
+                }
                 make.top.equalTo(self.view)
             }
         }
@@ -34,7 +38,11 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 			
             self.view.addSubview($0)
             $0.snp.makeConstraints { (make) in
-                make.top.equalTo(padding.snp.bottom)
+                if #available(iOS 11.0, *) {
+                    make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+                } else {
+                    make.top.equalTo(padding.snp.bottom)
+                }
                 make.left.equalTo(self.view)
                 make.width.equalTo(self.view)
                 make.height.equalTo(TabContainerView.standardHeight)

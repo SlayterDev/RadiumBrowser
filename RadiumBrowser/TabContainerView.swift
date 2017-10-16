@@ -49,7 +49,11 @@ class TabContainerView: UIView, TabViewDelegate {
 				make.height.equalTo(TabContainerView.standardHeight - 5)
 				make.width.equalTo(TabContainerView.standardHeight - 5)
 				make.centerY.equalTo(self)
-				make.right.equalTo(self).offset(-8)
+                if #available(iOS 11.0, *) {
+                    make.right.equalTo(self.safeAreaLayoutGuide.snp.right).offset(-8)
+                } else {
+                    make.right.equalTo(self)
+                }
 			}
 		}
     }
@@ -97,7 +101,11 @@ class TabContainerView: UIView, TabViewDelegate {
                     let lastTab = self.tabList[i - 1]
                     make.left.equalTo(lastTab.snp.right).offset(-6)
                 } else {
-                    make.left.equalTo(self)
+                    if #available(iOS 11.0, *) {
+                        make.left.equalTo(self.safeAreaLayoutGuide.snp.left)
+                    } else {
+                        make.left.equalTo(self)
+                    }
                 }
                 make.width.equalTo(tabWidth)
             }
