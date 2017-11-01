@@ -45,6 +45,7 @@
 		E60641F31F7BDDFE00100DF1 /* AppReviewScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60641F21F7BDDFE00100DF1 /* AppReviewScenario.swift */; };
 		E60D52851FAA293B005AC5D1 /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D52841FAA293B005AC5D1 /* OrderedSet.swift */; };
 		E60D52871FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */; };
+		E60D528B1FAA4F0B005AC5D1 /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D528A1FAA4F0B005AC5D1 /* WebServer.swift */; };
 		E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */ = {isa = PBXBuildFile; fileRef = E635B6D31FAA026F004C27C0 /* topdomains.txt */; };
 		E635B6D61FAA02C0004C27C0 /* SuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */; };
 /* End PBXBuildFile section */
@@ -115,6 +116,7 @@
 		E60641F21F7BDDFE00100DF1 /* AppReviewScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewScenario.swift; sourceTree = "<group>"; };
 		E60D52841FAA293B005AC5D1 /* OrderedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
 		E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteTableViewCell.swift; sourceTree = "<group>"; };
+		E60D528A1FAA4F0B005AC5D1 /* WebServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServer.swift; sourceTree = "<group>"; };
 		E635B6D31FAA026F004C27C0 /* topdomains.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = topdomains.txt; sourceTree = "<group>"; };
 		E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionManager.swift; sourceTree = "<group>"; };
 		FB664E8EC27919571578F55A /* Pods_RadiumBrowserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 				02DF6C561E47AADA0088BDEB /* MigrationManager.swift */,
 				02DF6C591E47C15B0088BDEB /* WebViewManager.swift */,
 				E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */,
+				E60D528A1FAA4F0B005AC5D1 /* WebServer.swift */,
 			);
 			name = Singletons;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BSColorUtils/BSColorUtils.framework",
+				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
 				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
 				"${BUILT_PRODUCTS_DIR}/LUAutocompleteView/LUAutocompleteView.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
@@ -528,6 +532,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSColorUtils.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LUAutocompleteView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
@@ -581,6 +586,7 @@
 				41DBC5F31E411C7A00913FAA /* SharedConfig.swift in Sources */,
 				4163EDF51E4BB8F600E02E65 /* BuiltinExtension.swift in Sources */,
 				02DF6C531E478FE30088BDEB /* BrowsingSession.swift in Sources */,
+				E60D528B1FAA4F0B005AC5D1 /* WebServer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

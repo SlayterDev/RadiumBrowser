@@ -27,6 +27,7 @@ def all_pods
     # Event based actions
     pod 'WaitForIt'
     pod 'LUAutocompleteView'
+    pod 'GCDWebServer', '~> 3.0'
 
     project 'RadiumBrowser.xcodeproj'
 

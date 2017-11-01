@@ -78,7 +78,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         
         loadBuiltins()
 		
-		let _ = webView?.load(URLRequest(url: URL(string: "https://google.com")!))
+        let _ = webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
+//        loadNewTabPage()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -142,6 +143,16 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
                 webView?.configuration.userContentController.addUserScript(userScript)
             }
         }
+    }
+    
+    func loadNewTabPage() {
+        func goToGoogle() {
+            webView?.load(URLRequest(url: URL(string: "https://google.com")!))
+        }
+        guard let newTabContentPath = Bundle.main.path(forResource: "NewTab", ofType: "html") else { goToGoogle(); return }
+        guard let newTabContent = try? String(contentsOfFile: newTabContentPath, encoding: .utf8) else { goToGoogle(); return }
+        
+        webView?.loadHTMLString(newTabContent, baseURL: URL(string: "localhost"))
     }
 	
     // MARK: - View Managment
