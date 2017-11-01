@@ -43,6 +43,10 @@
 		41F8F7561E43CB4B00029B56 /* ExtensionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8F7551E43CB4B00029B56 /* ExtensionModel.swift */; };
 		D348888C4000EEE5E21DA85C /* Pods_RadiumBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7223C7ED4906D838E566912 /* Pods_RadiumBrowser.framework */; };
 		E60641F31F7BDDFE00100DF1 /* AppReviewScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60641F21F7BDDFE00100DF1 /* AppReviewScenario.swift */; };
+		E60D52851FAA293B005AC5D1 /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D52841FAA293B005AC5D1 /* OrderedSet.swift */; };
+		E60D52871FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */; };
+		E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */ = {isa = PBXBuildFile; fileRef = E635B6D31FAA026F004C27C0 /* topdomains.txt */; };
+		E635B6D61FAA02C0004C27C0 /* SuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +113,10 @@
 		A7223C7ED4906D838E566912 /* Pods_RadiumBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65B6B0A501710052BE8EF87 /* Pods_RadiumBrowserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E60641F21F7BDDFE00100DF1 /* AppReviewScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewScenario.swift; sourceTree = "<group>"; };
+		E60D52841FAA293B005AC5D1 /* OrderedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
+		E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteTableViewCell.swift; sourceTree = "<group>"; };
+		E635B6D31FAA026F004C27C0 /* topdomains.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = topdomains.txt; sourceTree = "<group>"; };
+		E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionManager.swift; sourceTree = "<group>"; };
 		FB664E8EC27919571578F55A /* Pods_RadiumBrowserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -143,6 +151,7 @@
 			children = (
 				02DF6C561E47AADA0088BDEB /* MigrationManager.swift */,
 				02DF6C591E47C15B0088BDEB /* WebViewManager.swift */,
+				E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */,
 			);
 			name = Singletons;
 			sourceTree = "<group>";
@@ -196,6 +205,7 @@
 				41F8F7571E48C3A400029B56 /* RadiumBrowser-Bridging-Header.h */,
 				41A567F21E40CB3B00470017 /* AppDelegate.swift */,
 				41DBC5F21E411C7A00913FAA /* SharedConfig.swift */,
+				E635B6D21FAA0245004C27C0 /* Assets */,
 				4163EDF61E4BB9AD00E02E65 /* Javascript Files */,
 				41F8F7541E43CB3500029B56 /* Models */,
 				4163EDF31E4BB89F00E02E65 /* Builtin Browser Extensions */,
@@ -258,6 +268,7 @@
 				023BB5871E42D3E0001498FA /* SharedDropdownMenu.swift */,
 				02DF6C631E4BEA820088BDEB /* BookmarkCollectionViewCell.swift */,
 				4163EDFD1E4CA48600E02E65 /* BookmarkTableViewCell.swift */,
+				E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */,
 			);
 			name = "Shared UI";
 			sourceTree = "<group>";
@@ -268,6 +279,7 @@
 				41DBC5FD1E412F0A00913FAA /* UIViewExtensions.swift */,
 				02A5CBE51E417F6400269FE6 /* StringExtensions.swift */,
 				02A5CBE71E41820000269FE6 /* UIImageExtensions.swift */,
+				E60D52841FAA293B005AC5D1 /* OrderedSet.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -301,6 +313,14 @@
 				78F23366915C60BA1ECB7F15 /* Pods-RadiumBrowser.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E635B6D21FAA0245004C27C0 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				E635B6D31FAA026F004C27C0 /* topdomains.txt */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,6 +437,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */,
 				02DF6C551E4795180088BDEB /* Main.storyboard in Resources */,
 				41A567FD1E40CB3B00470017 /* LaunchScreen.storyboard in Resources */,
 				41A567FA1E40CB3B00470017 /* Assets.xcassets in Resources */,
@@ -496,6 +517,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BSColorUtils/BSColorUtils.framework",
 				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
+				"${BUILT_PRODUCTS_DIR}/LUAutocompleteView/LUAutocompleteView.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -507,6 +529,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSColorUtils.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LUAutocompleteView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -529,8 +552,10 @@
 				023BB5881E42D3E0001498FA /* SharedDropdownMenu.swift in Sources */,
 				41DBC5FA1E412C8400913FAA /* TabContainerView.swift in Sources */,
 				02DF6C641E4BEA820088BDEB /* BookmarkCollectionViewCell.swift in Sources */,
+				E635B6D61FAA02C0004C27C0 /* SuggestionManager.swift in Sources */,
 				02A5CBE81E41820000269FE6 /* UIImageExtensions.swift in Sources */,
 				41DBC5F51E41204300913FAA /* SharedTextField.swift in Sources */,
+				E60D52851FAA293B005AC5D1 /* OrderedSet.swift in Sources */,
 				02A5CBE61E417F6400269FE6 /* StringExtensions.swift in Sources */,
 				02DF6C5E1E495C4E0088BDEB /* Bookmark.swift in Sources */,
 				4163EDFC1E4CA40E00E02E65 /* AddBookmarkTableViewController.swift in Sources */,
@@ -539,6 +564,7 @@
 				41DBC5FE1E412F0A00913FAA /* UIViewExtensions.swift in Sources */,
 				02DF6C601E495CFB0088BDEB /* HistoryTableViewController.swift in Sources */,
 				4163EDFE1E4CA48600E02E65 /* BookmarkTableViewCell.swift in Sources */,
+				E60D52871FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift in Sources */,
 				02A5CBE41E41652000269FE6 /* WebContainer.swift in Sources */,
 				02DF6C5C1E47CAC80088BDEB /* HistoryEntry.swift in Sources */,
 				02DF6C621E4BE83C0088BDEB /* BookmarkCollectionViewController.swift in Sources */,

@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import LUAutocompleteView
 
 class MainViewController: UIViewController, HistoryNavigationDelegate {
 
 	@objc var container: UIView?
 	@objc var tabContainer: TabContainerView?
+    var addressBar: AddressBar!
+    private let autocompleteView = LUAutocompleteView()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +52,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
             }
         }
         
-        let addressBar = AddressBar(frame: .zero).then { [unowned self] in
+        addressBar = AddressBar(frame: .zero).then { [unowned self] in
 			$0.tabContainer = self.tabContainer
 			self.tabContainer?.addressBar = $0
 			
@@ -59,7 +62,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
             self.view.addSubview($0)
             $0.snp.makeConstraints { (make) in
                 make.top.equalTo(self.tabContainer!.snp.bottom)
-                make.width.equalTo(self.view)
+                make.left.width.equalTo(self.view)
                 make.height.equalTo(AddressBar.standardHeight)
             }
         }
@@ -75,6 +78,14 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 				make.left.equalTo(self.view)
 			}
 		}
+        
+        self.view.addSubview(autocompleteView)
+        autocompleteView.textField = addressBar.addressField
+        autocompleteView.dataSource = self
+        autocompleteView.delegate = self
+        autocompleteView.rowHeight = 45
+        autocompleteView.autocompleteCell = AutocompleteTableViewCell.self
+        autocompleteView.throttleTime = 0.2
 
 		tabContainer?.loadBrowsingSession()
     }
@@ -208,5 +219,19 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         delay(0.15) {
             vc.presentEditor(name: name, source: source)
         }
+    }
+}
+
+extension MainViewController: LUAutocompleteViewDataSource {
+    func autocompleteView(_ autocompleteView: LUAutocompleteView, elementsFor text: String, completion: @escaping ([String]) -> Void) {
+        let results = SuggestionManager.shared.queryDomains(forText: text).map { $0.urlString }
+        completion(results)
+    }
+}
+
+extension MainViewController: LUAutocompleteViewDelegate {
+    func autocompleteView(_ autocompleteView: LUAutocompleteView, didSelect text: String) {
+        addressBar.addressField?.text = text
+        _ = addressBar.textFieldShouldReturn(addressBar.addressField!)
     }
 }
