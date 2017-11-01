@@ -24,7 +24,7 @@ struct URLEntry: Hashable {
 class SuggestionManager {
     static let shared = SuggestionManager()
     
-    lazy var domainSet = Set<URLEntry>()
+    lazy var domainSet = OrderedSet<URLEntry>()
     
     var topdomains: [URLEntry]?
     var historyResults: Results<HistoryEntry>?
@@ -51,11 +51,9 @@ class SuggestionManager {
             let domainConent = try String(contentsOfFile: path, encoding: .utf8)
             let domainList = domainConent.components(separatedBy: "\n")
             
-           topdomains = domainList.map { URLEntry(urlString: $0) }
+            topdomains = domainList.map { URLEntry(urlString: $0) }
             
-            topdomains?.forEach {
-                domainSet.insert($0)
-            }
+            domainSet.append(contentsOf: topdomains!)
         } catch {
             return
         }
@@ -63,10 +61,10 @@ class SuggestionManager {
     }
     
     func reupdateList() {
-        domainSet.removeAll()
+        domainSet.removeAllObjects()
         
-        topdomains?.forEach { domainSet.insert($0) }
-        historyResults?.forEach { domainSet.insert(URLEntry(urlString: $0.pageURL)) }
+        domainSet.append(contentsOf: topdomains!)
+        historyResults?.forEach { domainSet.append(URLEntry(urlString: $0.pageURL)) }
     }
     
     func queryDomains(forText text: String) -> [URLEntry] {
