@@ -19,6 +19,7 @@ struct URLEntry: Hashable {
     }
     
     var urlString: String
+    var titleString: String?
 }
 
 class SuggestionManager {
@@ -33,6 +34,10 @@ class SuggestionManager {
     var realm: Realm!
     
     init() {
+        defer {
+            reupdateList()
+        }
+        
         guard let path = Bundle.main.path(forResource: "topdomains", ofType: "txt") else {
             return
         }
@@ -51,9 +56,7 @@ class SuggestionManager {
             let domainConent = try String(contentsOfFile: path, encoding: .utf8)
             let domainList = domainConent.components(separatedBy: "\n")
             
-            topdomains = domainList.map { URLEntry(urlString: $0) }
-            
-            domainSet.append(contentsOf: topdomains!)
+            topdomains = domainList.map { URLEntry(urlString: $0, titleString: nil) }
         } catch {
             return
         }
@@ -64,7 +67,7 @@ class SuggestionManager {
         domainSet.removeAllObjects()
         
         domainSet.append(contentsOf: topdomains!)
-        historyResults?.forEach { domainSet.append(URLEntry(urlString: $0.pageURL)) }
+        historyResults?.forEach { domainSet.append(URLEntry(urlString: $0.pageURL, titleString: $0.pageTitle)) }
     }
     
     func queryDomains(forText text: String) -> [URLEntry] {
@@ -74,5 +77,13 @@ class SuggestionManager {
         let results: [URLEntry] = domainSet.filter { $0.urlString.contains(queryText) }
         
         return results
+    }
+    
+    func pageTitle(forURLSring urlString: String) -> String? {
+        for entry in domainSet where entry.urlString == urlString {
+            return entry.titleString
+        }
+        
+        return nil
     }
 }

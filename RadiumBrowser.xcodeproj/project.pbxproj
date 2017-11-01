@@ -44,6 +44,7 @@
 		D348888C4000EEE5E21DA85C /* Pods_RadiumBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7223C7ED4906D838E566912 /* Pods_RadiumBrowser.framework */; };
 		E60641F31F7BDDFE00100DF1 /* AppReviewScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60641F21F7BDDFE00100DF1 /* AppReviewScenario.swift */; };
 		E60D52851FAA293B005AC5D1 /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D52841FAA293B005AC5D1 /* OrderedSet.swift */; };
+		E60D52871FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */; };
 		E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */ = {isa = PBXBuildFile; fileRef = E635B6D31FAA026F004C27C0 /* topdomains.txt */; };
 		E635B6D61FAA02C0004C27C0 /* SuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */; };
 /* End PBXBuildFile section */
@@ -113,6 +114,7 @@
 		D65B6B0A501710052BE8EF87 /* Pods_RadiumBrowserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E60641F21F7BDDFE00100DF1 /* AppReviewScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewScenario.swift; sourceTree = "<group>"; };
 		E60D52841FAA293B005AC5D1 /* OrderedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
+		E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteTableViewCell.swift; sourceTree = "<group>"; };
 		E635B6D31FAA026F004C27C0 /* topdomains.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = topdomains.txt; sourceTree = "<group>"; };
 		E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionManager.swift; sourceTree = "<group>"; };
 		FB664E8EC27919571578F55A /* Pods_RadiumBrowserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -266,6 +268,7 @@
 				023BB5871E42D3E0001498FA /* SharedDropdownMenu.swift */,
 				02DF6C631E4BEA820088BDEB /* BookmarkCollectionViewCell.swift */,
 				4163EDFD1E4CA48600E02E65 /* BookmarkTableViewCell.swift */,
+				E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */,
 			);
 			name = "Shared UI";
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				41DBC5FE1E412F0A00913FAA /* UIViewExtensions.swift in Sources */,
 				02DF6C601E495CFB0088BDEB /* HistoryTableViewController.swift in Sources */,
 				4163EDFE1E4CA48600E02E65 /* BookmarkTableViewCell.swift in Sources */,
+				E60D52871FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift in Sources */,
 				02A5CBE41E41652000269FE6 /* WebContainer.swift in Sources */,
 				02DF6C5C1E47CAC80088BDEB /* HistoryEntry.swift in Sources */,
 				02DF6C621E4BE83C0088BDEB /* BookmarkCollectionViewController.swift in Sources */,

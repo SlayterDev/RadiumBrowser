@@ -84,6 +84,8 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         autocompleteView.dataSource = self
         autocompleteView.delegate = self
         autocompleteView.rowHeight = 45
+        autocompleteView.autocompleteCell = AutocompleteTableViewCell.self
+        autocompleteView.throttleTime = 0.2
 
 		tabContainer?.loadBrowsingSession()
     }
