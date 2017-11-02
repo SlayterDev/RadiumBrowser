@@ -129,8 +129,11 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		let historyAction = MenuItem.item(named: "History", action: { [unowned self] in
 			self.showHistory()
 		})
+        let settingsAction = MenuItem.item(named: "Settings", action: { [unowned self] in
+            self.showSettings()
+        })
 		
-		let menu = SharedDropdownMenu(menuItems: [addBookmarkAction, bookmarkAction, shareAction, extensionAction, historyAction])
+		let menu = SharedDropdownMenu(menuItems: [addBookmarkAction, bookmarkAction, shareAction, extensionAction, historyAction, settingsAction])
 		menu.show(in: self.view, from: convertedPoint)
 	}
 	
@@ -206,6 +209,17 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
     @objc func didSelectEntry(with url: URL?) {
         guard let url = url else { return }
         tabContainer?.loadQuery(string: url.absoluteString)
+    }
+    
+    func showSettings() {
+        let vc = SettingsTableViewController(style: .grouped)
+        let nav = UINavigationController(rootViewController: vc)
+        
+        if isiPadUI {
+            nav.modalPresentationStyle = .formSheet
+        }
+        
+        self.present(nav, animated: true, completion: nil)
     }
     
     // MARK: - Import methods
