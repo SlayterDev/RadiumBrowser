@@ -85,6 +85,13 @@ class AddressBar: UIView, UITextFieldDelegate {
 			$0.delegate = self
 			$0.clearButtonMode = .whileEditing
             
+            $0.inputAccessoryView = DoneAccessoryView(targetView: $0, width: UIScreen.main.bounds.width).then { obj in
+                obj.doneButton?.setTitle("Cancel", for: .normal)
+                obj.doneButton?.snp.updateConstraints { make in
+                    make.width.equalTo(60)
+                }
+            }
+            
             self.addSubview($0)
             $0.snp.makeConstraints { (make) in
 				if isiPadUI {
