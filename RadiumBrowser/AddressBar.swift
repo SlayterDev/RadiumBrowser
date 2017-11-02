@@ -125,6 +125,7 @@ class AddressBar: UIView, UITextFieldDelegate {
 		
 		if !addressField!.isFirstResponder {
 			addressField?.text = text
+            checkForLocalhost()
 		}
 	}
 	
@@ -133,8 +134,15 @@ class AddressBar: UIView, UITextFieldDelegate {
 		
 		if !addressField!.isFirstResponder {
 			addressField?.attributedText = text
+            checkForLocalhost()
 		}
 	}
+    
+    func checkForLocalhost() {
+        if let address = addressField?.text, address.contains("localhost") {
+            addressField?.text = ""
+        }
+    }
     
     // MARK: - Textfield Delegate
 	

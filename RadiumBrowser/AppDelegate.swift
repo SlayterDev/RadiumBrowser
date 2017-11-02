@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			NSLog("Document Path: %@", documentsPath)
 		#endif
         
+        WebServer.shared.startServer()
+        
         MigrationManager.shared.attemptMigration()
 		
         mainController = MainViewController()
