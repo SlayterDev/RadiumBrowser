@@ -47,12 +47,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 			
 			self.addSubview($0)
 			$0.snp.makeConstraints { (make) in
-                if #available(iOS 11.0, *) {
-                    make.top.left.right.equalTo(self.safeAreaLayoutGuide)
-                    make.bottom.equalTo(self)
-                } else {
-                    make.edges.equalTo(self)
-                }
+                make.edges.equalTo(self)
 			}
 		}
         
@@ -79,7 +74,6 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         loadBuiltins()
 		
         let _ = webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
-//        loadNewTabPage()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -143,16 +137,6 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
                 webView?.configuration.userContentController.addUserScript(userScript)
             }
         }
-    }
-    
-    func loadNewTabPage() {
-        func goToGoogle() {
-            webView?.load(URLRequest(url: URL(string: "https://google.com")!))
-        }
-        guard let newTabContentPath = Bundle.main.path(forResource: "NewTab", ofType: "html") else { goToGoogle(); return }
-        guard let newTabContent = try? String(contentsOfFile: newTabContentPath, encoding: .utf8) else { goToGoogle(); return }
-        
-        webView?.loadHTMLString(newTabContent, baseURL: URL(string: "localhost"))
     }
 	
     // MARK: - View Managment

@@ -12,6 +12,8 @@ import WebKit
 
 class TabContainerView: UIView, TabViewDelegate {
     
+    static var currentInstance: TabContainerView?
+    
     @objc static let standardHeight: CGFloat = 35
     
     @objc static let defaultTabWidth: CGFloat = 150
@@ -56,6 +58,8 @@ class TabContainerView: UIView, TabViewDelegate {
                 }
 			}
 		}
+        
+        TabContainerView.currentInstance = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,7 +68,7 @@ class TabContainerView: UIView, TabViewDelegate {
     
     // MARK: - Tab Management
 	
-	@objc func addNewTab(container: UIView) -> TabView {
+    @objc func addNewTab(container: UIView, focusAddressBar: Bool = true) -> TabView {
 		let newTab = TabView(parentView: container).then { [unowned self] in
 			$0.delegate = self
 			
@@ -75,7 +79,7 @@ class TabContainerView: UIView, TabViewDelegate {
         didTap(tab: newTab)
         setUpTabConstraints()
         
-        if tabList.count > 1 {
+        if focusAddressBar && tabList.count > 1 {
             addressBar?.addressField?.becomeFirstResponder()
         }
         
@@ -85,7 +89,7 @@ class TabContainerView: UIView, TabViewDelegate {
     @objc func addNewTab(withRequest request: URLRequest) {
         guard let container = self.containerView else { return }
         
-        let newTab = addNewTab(container: container)
+        let newTab = addNewTab(container: container, focusAddressBar: false)
         let _ = newTab.webContainer?.webView?.load(request)
     }
     
