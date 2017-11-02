@@ -17,6 +17,11 @@ struct Colors {
     static let urlGreen = UIColor.with(hex: "#046D23")
 }
 
+struct SettingsKeys {
+    static let firstRun = "firstRun"
+    static let trackHistory = "trackHistory"
+}
+
 let isiPadUI = UI_USER_INTERFACE_IDIOM() == .pad
 
 func logRealmError(error: Error) {

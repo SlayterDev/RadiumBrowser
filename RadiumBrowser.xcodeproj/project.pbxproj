@@ -46,6 +46,7 @@
 		E60D52851FAA293B005AC5D1 /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D52841FAA293B005AC5D1 /* OrderedSet.swift */; };
 		E60D52871FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */; };
 		E60D528B1FAA4F0B005AC5D1 /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D528A1FAA4F0B005AC5D1 /* WebServer.swift */; };
+		E60D528F1FAB4984005AC5D1 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D528E1FAB4984005AC5D1 /* SettingsTableViewController.swift */; };
 		E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */ = {isa = PBXBuildFile; fileRef = E635B6D31FAA026F004C27C0 /* topdomains.txt */; };
 		E635B6D61FAA02C0004C27C0 /* SuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */; };
 /* End PBXBuildFile section */
@@ -117,6 +118,7 @@
 		E60D52841FAA293B005AC5D1 /* OrderedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
 		E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteTableViewCell.swift; sourceTree = "<group>"; };
 		E60D528A1FAA4F0B005AC5D1 /* WebServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServer.swift; sourceTree = "<group>"; };
+		E60D528E1FAB4984005AC5D1 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E635B6D31FAA026F004C27C0 /* topdomains.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = topdomains.txt; sourceTree = "<group>"; };
 		E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionManager.swift; sourceTree = "<group>"; };
 		FB664E8EC27919571578F55A /* Pods_RadiumBrowserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,6 +250,7 @@
 				02DF6C5F1E495CFB0088BDEB /* HistoryTableViewController.swift */,
 				02DF6C611E4BE83C0088BDEB /* BookmarkCollectionViewController.swift */,
 				4163EDFB1E4CA40E00E02E65 /* AddBookmarkTableViewController.swift */,
+				E60D528E1FAB4984005AC5D1 /* SettingsTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				E635B6D61FAA02C0004C27C0 /* SuggestionManager.swift in Sources */,
 				02A5CBE81E41820000269FE6 /* UIImageExtensions.swift in Sources */,
 				41DBC5F51E41204300913FAA /* SharedTextField.swift in Sources */,
+				E60D528F1FAB4984005AC5D1 /* SettingsTableViewController.swift in Sources */,
 				E60D52851FAA293B005AC5D1 /* OrderedSet.swift in Sources */,
 				02A5CBE61E417F6400269FE6 /* StringExtensions.swift in Sources */,
 				02DF6C5E1E495C4E0088BDEB /* Bookmark.swift in Sources */,

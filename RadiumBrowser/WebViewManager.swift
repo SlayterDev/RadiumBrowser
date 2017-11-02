@@ -17,6 +17,16 @@ class WebViewManager: NSObject {
 	@objc static let sharedProcessPool = WKProcessPool()
 	
 	@objc func logPageVisit(url: String?, pageTitle: String?) {
+        if let urlString = url, let urlObj = URL(string: urlString), urlObj.host == "localhost" {
+            // We don't want to log any pages we serve ourselves
+            return
+        }
+        
+        // Check if we should be logging page visits
+        if !UserDefaults.standard.bool(forKey: SettingsKeys.trackHistory) {
+            return
+        }
+        
 		let entry = HistoryEntry()
 		entry.id = UUID().uuidString
 		entry.pageURL = url ?? ""
