@@ -3,3 +3,5 @@
 //
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <GCDWebServer/GCDWebServer.h>
+#import <GCDWebServer/GCDWebServerDataResponse.h>

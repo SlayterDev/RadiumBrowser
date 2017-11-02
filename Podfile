@@ -26,6 +26,8 @@ def all_pods
     pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git'
     # Event based actions
     pod 'WaitForIt'
+    pod 'LUAutocompleteView'
+    pod 'GCDWebServer', '~> 3.0'
 
     project 'RadiumBrowser.xcodeproj'
 

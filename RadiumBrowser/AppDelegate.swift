@@ -29,6 +29,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         MigrationManager.shared.attemptMigration()
 		
+        WebServer.shared.startServer()
+        
+        let defaults = UserDefaults.standard
+        if !defaults.bool(forKey: SettingsKeys.firstRun) {
+            defaults.set(true, forKey: SettingsKeys.firstRun)
+            performFirstRunTasks()
+        }
+        
         mainController = MainViewController()
         self.window?.rootViewController = mainController
         self.window?.makeKeyAndVisible()
@@ -45,6 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func performFirstRunTasks() {
+        UserDefaults.standard.set(true, forKey: SettingsKeys.trackHistory)
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions 
         // (such as an incoming phone call or SMS message) or when the user quits the application and it begins the 

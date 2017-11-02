@@ -93,9 +93,13 @@ class HistoryTableViewController: UITableViewController {
         let entry = history?[indexPath.row]
         if let pageTitle = entry?.pageTitle, pageTitle != "" {
             cell?.textLabel?.text = pageTitle
-            cell?.detailTextLabel?.text = entry?.pageURL
+            
+            let attrString = getGrayDate(entry!.visitDate)
+            attrString.append(NSAttributedString(string: entry!.pageURL))
+            cell?.detailTextLabel?.attributedText = attrString
         } else {
             cell?.textLabel?.text = entry?.pageURL
+            cell?.detailTextLabel?.attributedText = getGrayDate(entry!.visitDate, attachDash: false)
         }
 
         return cell!
@@ -129,5 +133,13 @@ class HistoryTableViewController: UITableViewController {
 			print("Could not delete object: \(error.localizedDescription)")
 		}
     }
-
+    
+    func getGrayDate(_ date: Date, attachDash: Bool = true) -> NSMutableAttributedString {
+        let df = DateFormatter()
+        df.dateFormat = "MM/dd/yy hh:mma"
+        let dateString = df.string(from: date)
+        
+        return NSMutableAttributedString(string: "\(dateString)\((attachDash) ? " - " : "")", attributes: [.foregroundColor: UIColor.gray])
+    }
+    
 }

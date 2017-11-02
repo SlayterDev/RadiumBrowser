@@ -47,12 +47,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 			
 			self.addSubview($0)
 			$0.snp.makeConstraints { (make) in
-                if #available(iOS 11.0, *) {
-                    make.top.left.right.equalTo(self.safeAreaLayoutGuide)
-                    make.bottom.equalTo(self)
-                } else {
-                    make.edges.equalTo(self)
-                }
+                make.edges.equalTo(self)
 			}
 		}
         
@@ -78,7 +73,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         
         loadBuiltins()
 		
-		let _ = webView?.load(URLRequest(url: URL(string: "https://google.com")!))
+        let _ = webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
