@@ -22,6 +22,13 @@ enum DeleteSectionTitles: String {
     static let allValues: [DeleteSectionTitles] = [.clearHistory, .clearCookies]
 }
 
+enum LinksTitles: String {
+    case supportPage = "Support Page"
+    case codeRepository = "Code Repository"
+    
+    static let allValues: [LinksTitles] = [.supportPage, .codeRepository]
+}
+
 class SettingsTableViewController: UITableViewController {
     
     static let identifier = "SettingsIdentifier"
@@ -47,7 +54,7 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,6 +63,8 @@ class SettingsTableViewController: UITableViewController {
             return OptionsTitles.allValues.count
         case 1:
             return DeleteSectionTitles.allValues.count
+        case 2:
+            return LinksTitles.allValues.count
         default:
             return 0
         }
@@ -81,6 +90,10 @@ class SettingsTableViewController: UITableViewController {
             cell.textLabel?.textColor = .red
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = DeleteSectionTitles.allValues[indexPath.row].rawValue
+        case 2:
+            cell.selectionStyle = .none
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.text = LinksTitles.allValues[indexPath.row].rawValue
         default:
             break
         }
@@ -94,10 +107,14 @@ class SettingsTableViewController: UITableViewController {
         switch indexPath.section {
         case 1:
             didSelectClearSection(withRowIndex: indexPath.row)
+        case 2:
+            didSelectLinkSection(withRowIndex: indexPath.row)
         default:
             break
         }
     }
+    
+    // MARK: - Clear Section
     
     func didSelectClearSection(withRowIndex rowIndex: Int) {
         switch DeleteSectionTitles.allValues[rowIndex] {
@@ -147,8 +164,24 @@ class SettingsTableViewController: UITableViewController {
         self.present(av, animated: true, completion: nil)
     }
     
+    // MARK: - Settings Functions
+    
     @objc func trackHistoryChanged(sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: SettingsKeys.trackHistory)
+    }
+    
+    // MARK: - Links Section
+    
+    func didSelectLinkSection(withRowIndex rowIndex: Int) {
+        var urlString = "https://github.com/SlayterDev/RadiumBrowser"
+        
+        if LinksTitles.allValues[rowIndex] == .supportPage {
+            urlString += "/issues"
+        }
+        
+        let request = URLRequest(url: URL(string: urlString)!)
+        TabContainerView.currentInstance?.addNewTab(withRequest: request)
+        self.dismiss(animated: true, completion: nil)
     }
 
 }
