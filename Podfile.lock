@@ -4,7 +4,7 @@ PODS:
     - GCDWebServer/Core (= 3.4.1)
   - GCDWebServer/Core (3.4.1)
   - Highlightr (1.1.0)
-  - LUAutocompleteView (1.0.1)
+  - LUAutocompleteView (2.0.0)
   - Realm (2.10.0):
     - Realm/Headers (= 2.10.0)
   - Realm/Headers (2.10.0)
@@ -46,7 +46,7 @@ SPEC CHECKSUMS:
   BSColorUtils: af322f5fae883bf102fcdf04afc26e56496e2829
   GCDWebServer: 1db60034fe0e78a4a8524bd6c7cd97cd3c589870
   Highlightr: 70c4df19e4aa55aa1b4387fb98182abce1dec9da
-  LUAutocompleteView: 1f2de4cac956348c30ad85c63f7b79bf3fa29915
+  LUAutocompleteView: 38bdad1c826a45f7980ce285ba7d566adf0edf1d
   Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
   RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
