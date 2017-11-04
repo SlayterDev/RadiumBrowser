@@ -37,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             performFirstRunTasks()
         }
         
+        defaults.set(false, forKey: SettingsKeys.adBlockLoaded)
+        defaults.set(false, forKey: SettingsKeys.stringLiteralAdBlock)
+        
         mainController = MainViewController()
         self.window?.rootViewController = mainController
         self.window?.makeKeyAndVisible()

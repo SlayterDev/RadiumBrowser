@@ -72,8 +72,22 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         }
         
         loadBuiltins()
-		
-        let _ = webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
+        if #available(iOS 11.0, *) {
+            let group = DispatchGroup()
+            group.enter()
+            AdBlockManager.shared.setupAdBlock(forWebView: self.webView) {
+                group.leave()
+            }
+            group.enter()
+            AdBlockManager.shared.setupAdBlockFromStringLiteral(forWebView: self.webView) {
+                group.leave()
+            }
+            group.notify(queue: .main, execute: { [weak self] in
+                let _ = self?.webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
+            })
+        } else {
+            let _ = webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
+        }
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
