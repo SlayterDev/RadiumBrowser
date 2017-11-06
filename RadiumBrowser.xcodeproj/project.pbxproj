@@ -52,6 +52,7 @@
 		E612CFC21FAE429200007ACD /* AdBlockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E612CFC11FAE429200007ACD /* AdBlockManager.swift */; };
 		E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */ = {isa = PBXBuildFile; fileRef = E635B6D31FAA026F004C27C0 /* topdomains.txt */; };
 		E635B6D61FAA02C0004C27C0 /* SuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */; };
+		E69EF2F61FB0F2FB002A7CED /* blackHosts.json in Resources */ = {isa = PBXBuildFile; fileRef = E69EF2F51FB0F2FB002A7CED /* blackHosts.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,7 @@
 		E612CFC11FAE429200007ACD /* AdBlockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockManager.swift; sourceTree = "<group>"; };
 		E635B6D31FAA026F004C27C0 /* topdomains.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = topdomains.txt; sourceTree = "<group>"; };
 		E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionManager.swift; sourceTree = "<group>"; };
+		E69EF2F51FB0F2FB002A7CED /* blackHosts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blackHosts.json; sourceTree = "<group>"; };
 		FB664E8EC27919571578F55A /* Pods_RadiumBrowserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -332,6 +334,7 @@
 		E635B6D21FAA0245004C27C0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				E69EF2F51FB0F2FB002A7CED /* blackHosts.json */,
 				E612CFBF1FAE407300007ACD /* adaway.json */,
 				E635B6D31FAA026F004C27C0 /* topdomains.txt */,
 			);
@@ -455,6 +458,7 @@
 				E612CFC01FAE407300007ACD /* adaway.json in Resources */,
 				E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */,
 				02DF6C551E4795180088BDEB /* Main.storyboard in Resources */,
+				E69EF2F61FB0F2FB002A7CED /* blackHosts.json in Resources */,
 				41A567FD1E40CB3B00470017 /* LaunchScreen.storyboard in Resources */,
 				41A567FA1E40CB3B00470017 /* Assets.xcassets in Resources */,
 				4163EDF81E4BB9D600E02E65 /* Favicons.js in Resources */,

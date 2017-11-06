@@ -148,7 +148,11 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         if #available(iOS 11.0, *), AdBlockManager.shared.shouldBlockAds() {
             let group = DispatchGroup()
             group.enter()
-            AdBlockManager.shared.setupAdBlock(forWebView: self.webView) {
+            AdBlockManager.shared.setupAdBlock(forKey: SettingsKeys.adBlockLoaded, filename: "adaway", webView: webView) {
+                group.leave()
+            }
+            group.enter()
+            AdBlockManager.shared.setupAdBlock(forKey: SettingsKeys.blackHostsLoaded, filename: "blackHosts", webView: webView) {
                 group.leave()
             }
             group.enter()

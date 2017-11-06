@@ -13,13 +13,13 @@ class AdBlockManager {
     static let shared = AdBlockManager()
     
     @available(iOS 11.0, *)
-    func setupAdBlock(forWebView webView: WKWebView?, completion: (() -> Void)?) {
-        if UserDefaults.standard.bool(forKey: SettingsKeys.adBlockLoaded) {
-            WKContentRuleListStore.default().lookUpContentRuleList(forIdentifier: SettingsKeys.adBlockLoaded) { [weak self] ruleList, error in
+    func setupAdBlock(forKey key: String, filename: String, webView: WKWebView?, completion: (() -> Void)?) {
+        if UserDefaults.standard.bool(forKey: key) {
+            WKContentRuleListStore.default().lookUpContentRuleList(forIdentifier: key) { [weak self] ruleList, error in
                 if let error = error {
                     print(error.localizedDescription)
-                    UserDefaults.standard.set(false, forKey: SettingsKeys.adBlockLoaded)
-                    self?.setupAdBlock(forWebView: webView, completion: completion)
+                    UserDefaults.standard.set(false, forKey: key)
+                    self?.setupAdBlock(forKey: key, filename: filename, webView: webView, completion: completion)
                     return
                 }
                 if let list = ruleList {
@@ -28,15 +28,15 @@ class AdBlockManager {
                 }
             }
         } else {
-            if let jsonPath = Bundle.main.path(forResource: "adaway", ofType: "json"), let jsonContent = try? String(contentsOfFile: jsonPath, encoding: .utf8) {
-                WKContentRuleListStore.default().compileContentRuleList(forIdentifier: SettingsKeys.adBlockLoaded, encodedContentRuleList: jsonContent) { ruleList, error in
+            if let jsonPath = Bundle.main.path(forResource: filename, ofType: "json"), let jsonContent = try? String(contentsOfFile: jsonPath, encoding: .utf8) {
+                WKContentRuleListStore.default().compileContentRuleList(forIdentifier: key, encodedContentRuleList: jsonContent) { ruleList, error in
                     if let error = error {
                         print(error.localizedDescription)
                         return
                     }
                     if let list = ruleList {
                         webView?.configuration.userContentController.add(list)
-                        UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockLoaded)
+                        UserDefaults.standard.set(true, forKey: key)
                         completion?()
                     }
                 }

@@ -22,6 +22,7 @@ struct SettingsKeys {
     static let trackHistory = "trackHistory"
     static let adBlockEnabled = "adBlockEnabled"
     static let adBlockLoaded = "adBlockLoaded"
+    static let blackHostsLoaded = "blackHostsLoaded"
     static let stringLiteralAdBlock = "stringLiteralAdBlock"
     static let adBlockPurchased = "purchasedAdBlock"
 }

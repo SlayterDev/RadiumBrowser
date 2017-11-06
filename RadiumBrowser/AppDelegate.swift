@@ -50,11 +50,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             performFirstRunTasks()
         }
         
-        #if DEBUG // MAKE SURE IAP LOGIC IS TESTED PROPERLY
-            defaults.set(false, forKey: SettingsKeys.adBlockPurchased)
+        #if DEBUG
+            defaults.set(true, forKey: SettingsKeys.adBlockPurchased)
         #endif
         defaults.set(false, forKey: SettingsKeys.adBlockLoaded)
         defaults.set(false, forKey: SettingsKeys.stringLiteralAdBlock)
+        defaults.set(false, forKey: SettingsKeys.blackHostsLoaded)
         
         mainController = MainViewController()
         self.window?.rootViewController = mainController
