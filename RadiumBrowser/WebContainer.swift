@@ -240,6 +240,24 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
             tabContainer.close(tab: tabView!)
         }
     }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        handleError(error as NSError)
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        handleError(error as NSError)
+    }
+    
+    func handleError(_ error: NSError) {
+        if let failUrl = error.userInfo["NSErrorFailingURLStringKey"] as? String, let url = URL(string: failUrl), !failUrl.contains("localhost") {
+            UIApplication.shared.open(url, options: [:], completionHandler: { success in
+                if success {
+                    print("openURL succeeded")
+                }
+            })
+        }
+    }
 	
 	// MARK: - Alert Methods
 	
