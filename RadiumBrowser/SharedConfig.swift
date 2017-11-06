@@ -20,8 +20,10 @@ struct Colors {
 struct SettingsKeys {
     static let firstRun = "firstRun"
     static let trackHistory = "trackHistory"
+    static let adBlockEnabled = "adBlockEnabled"
     static let adBlockLoaded = "adBlockLoaded"
     static let stringLiteralAdBlock = "stringLiteralAdBlock"
+    static let adBlockPurchased = "purchasedAdBlock"
 }
 
 let isiPadUI = UI_USER_INTERFACE_IDIOM() == .pad

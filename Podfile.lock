@@ -14,6 +14,7 @@ PODS:
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - SnapKit (3.2.0)
+  - SwiftyStoreKit (0.11.0)
   - Then (2.2.0)
   - WaitForIt (1.1.0)
 
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - RealmSwift (<= 2.10.0)
   - SDWebImage (~> 3.8)
   - SnapKit (<= 3.2.0)
+  - SwiftyStoreKit
   - Then
   - WaitForIt
 
@@ -51,9 +53,10 @@ SPEC CHECKSUMS:
   RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  SwiftyStoreKit: c5cb38110cb01b55b9c5f25d7f69d0083650b2a4
   Then: 823f9813e1d4d0a814a5ba15e9c9d33ec7aca631
   WaitForIt: 5f85af0fece69b5f5a12df4de550cf7eb22664f1
 
-PODFILE CHECKSUM: 3f3aef660ca5ed64d47473ffa018ad76189545ba
+PODFILE CHECKSUM: 147a0074541036dfda3392cc645ade91cbcdd0c1
 
 COCOAPODS: 1.4.0.beta.1

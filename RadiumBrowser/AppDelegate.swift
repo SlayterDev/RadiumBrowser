@@ -11,6 +11,7 @@ import Then
 import SnapKit
 import RealmSwift
 import StoreKit
+import SwiftyStoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 			NSLog("Document Path: %@", documentsPath)
 		#endif
+        
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                if purchase.transaction.transactionState == .purchased || purchase.transaction.transactionState == .restored {
+                    if purchase.needsFinishTransaction {
+                        UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                    print("purchased: \(purchase)")
+                }
+            }
+        }
         
         MigrationManager.shared.attemptMigration()
 		

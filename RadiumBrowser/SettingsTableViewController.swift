@@ -8,11 +8,22 @@
 
 import UIKit
 import RealmSwift
+import SwiftyStoreKit
 
 enum OptionsTitles: String {
     case trackHistory = "Track History"
     
     static let allValues: [OptionsTitles] = [.trackHistory]
+}
+
+enum AdBlockingTitles: String {
+    case purchaseAdBlock = "Purchase Ad Blocking"
+    case restorePurchases = "Restore Purchases"
+    
+    case enableAdBlock = "Enable Ad Block"
+    
+    static let unpurchasedValues: [AdBlockingTitles] = [.purchaseAdBlock, .restorePurchases]
+    static let purchasedValues: [AdBlockingTitles] = [.enableAdBlock]
 }
 
 enum DeleteSectionTitles: String {
@@ -50,11 +61,15 @@ class SettingsTableViewController: UITableViewController {
     @objc func done() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    func adBlockPurchased() -> Bool {
+        return UserDefaults.standard.bool(forKey: SettingsKeys.adBlockPurchased)
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,8 +77,10 @@ class SettingsTableViewController: UITableViewController {
         case 0:
             return OptionsTitles.allValues.count
         case 1:
-            return DeleteSectionTitles.allValues.count
+            return (adBlockPurchased()) ? AdBlockingTitles.purchasedValues.count : AdBlockingTitles.unpurchasedValues.count
         case 2:
+            return DeleteSectionTitles.allValues.count
+        case 3:
             return LinksTitles.allValues.count
         default:
             return 0
@@ -86,11 +103,28 @@ class SettingsTableViewController: UITableViewController {
                 }
             }
         case 1:
+            if adBlockPurchased() {
+                let option = AdBlockingTitles.purchasedValues[indexPath.row]
+                cell.textLabel?.text = option.rawValue
+                cell.selectionStyle = .none
+                
+                if option == .enableAdBlock {
+                    cell.accessoryView = UISwitch().then {
+                        $0.isOn = UserDefaults.standard.bool(forKey: SettingsKeys.adBlockEnabled)
+                        $0.addTarget(self, action: #selector(adBlockEnabledChanged(sender:)), for: .valueChanged)
+                    }
+                }
+            } else {
+                cell.textLabel?.text = AdBlockingTitles.unpurchasedValues[indexPath.row].rawValue
+                cell.selectionStyle = .default
+                cell.textLabel?.textAlignment = .center
+            }
+        case 2:
             cell.selectionStyle = .default
             cell.textLabel?.textColor = .red
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = DeleteSectionTitles.allValues[indexPath.row].rawValue
-        case 2:
+        case 3:
             cell.selectionStyle = .none
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = LinksTitles.allValues[indexPath.row].rawValue
@@ -106,8 +140,10 @@ class SettingsTableViewController: UITableViewController {
         
         switch indexPath.section {
         case 1:
-            didSelectClearSection(withRowIndex: indexPath.row)
+            didSelectAdBlock(withRowIndex: indexPath.row)
         case 2:
+            didSelectClearSection(withRowIndex: indexPath.row)
+        case 3:
             didSelectLinkSection(withRowIndex: indexPath.row)
         default:
             break
@@ -170,6 +206,10 @@ class SettingsTableViewController: UITableViewController {
         UserDefaults.standard.set(sender.isOn, forKey: SettingsKeys.trackHistory)
     }
     
+    @objc func adBlockEnabledChanged(sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: SettingsKeys.adBlockEnabled)
+    }
+    
     // MARK: - Links Section
     
     func didSelectLinkSection(withRowIndex rowIndex: Int) {
@@ -182,6 +222,68 @@ class SettingsTableViewController: UITableViewController {
         let request = URLRequest(url: URL(string: urlString)!)
         TabContainerView.currentInstance?.addNewTab(withRequest: request)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - In App Purchase Section
+    
+    func didSelectAdBlock(withRowIndex rowIndex: Int) {
+        if AdBlockingTitles.unpurchasedValues[rowIndex] == .purchaseAdBlock {
+            purchaseAdBlock()
+        } else {
+            restorePurchases()
+        }
+    }
+    
+    func purchaseAdBlock() {
+        func makePurchase() {
+            SwiftyStoreKit.purchaseProduct("com.slayterdevelopment.radium.adblocking") { result in
+                switch result {
+                case .success(let purchase):
+                    print("Successfully purchased: \(purchase.productId)")
+                    UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
+                    
+                    let av = UIAlertController(title: "Ad Block Purchased!", message: nil, preferredStyle: .alert)
+                    av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    
+                    DispatchQueue.main.async {
+                        self.present(av, animated: true, completion: nil)
+                        self.tableView.reloadData()
+                    }
+                case .error(let error):
+                    print("Error purchasing: \(error.localizedDescription)")
+                }
+            }
+        }
+        
+        let av = UIAlertController(title: "Purchase Ad Block", message: "Purchasing ad block will use our list of sources to filter out ads being served to you by websites you visit. In addition to blocking unwanted content this will speed up your browsing experience as well as make it safer. PLEASE NOTE: Because ad sources are constantly changing we can't guaruntee every single ad will be blocked. We will continue to add known sources to the app to block more ads as we become aware of them.\n\nWould you like to purchase Ad Blocking?", preferredStyle: .alert)
+        av.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+            makePurchase()
+        }))
+        av.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        
+        self.present(av, animated: true, completion: nil)
+    }
+    
+    func restorePurchases() {
+        SwiftyStoreKit.restorePurchases() { results in
+            if results.restoreFailedPurchases.count > 0 {
+                let av = UIAlertController(title: "Restore Failed", message: "Something went wrong restroing purchases. Please try again later.", preferredStyle: .alert)
+                av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                self.present(av, animated: true, completion: nil)
+            } else if results.restoredPurchases.count > 0 {
+                let av = UIAlertController(title: "Purchases Restored!", message: nil, preferredStyle: .alert)
+                av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                self.present(av, animated: true, completion: nil)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            } else {
+                let av = UIAlertController(title: "Nothing to Restore", message: nil, preferredStyle: .alert)
+                av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                self.present(av, animated: true, completion: nil)
+            }
+        }
     }
 
 }

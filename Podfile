@@ -28,6 +28,7 @@ def all_pods
     pod 'WaitForIt'
     pod 'LUAutocompleteView'
     pod 'GCDWebServer', '~> 3.0'
+    pod 'SwiftyStoreKit'
 
     project 'RadiumBrowser.xcodeproj'
 
