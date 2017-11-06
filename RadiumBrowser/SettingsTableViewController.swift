@@ -111,6 +111,16 @@ class SettingsTableViewController: UITableViewController {
         
         return counts[section]
     }
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if #available(iOS 11.0, *) {
+            return nil
+        } else if section == 2 {
+            return "Upgrade to iOS 11 to have the option to block ads on pages you visit!"
+        }
+        
+        return nil
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewController.identifier, for: indexPath)
