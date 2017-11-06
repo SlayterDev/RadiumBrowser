@@ -28,6 +28,7 @@ struct SettingsKeys {
 }
 
 let isiPadUI = UI_USER_INTERFACE_IDIOM() == .pad
+let isiPhone5 = UIScreen.main.bounds.height == 568
 
 func logRealmError(error: Error) {
 	print("## Realm Error: \(error.localizedDescription)")

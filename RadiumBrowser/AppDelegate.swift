@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         #if DEBUG
-            KeychainWrapper.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
+            KeychainWrapper.standard.set(false, forKey: SettingsKeys.adBlockPurchased)
         #endif
         defaults.set(false, forKey: SettingsKeys.adBlockLoaded)
         defaults.set(false, forKey: SettingsKeys.stringLiteralAdBlock)

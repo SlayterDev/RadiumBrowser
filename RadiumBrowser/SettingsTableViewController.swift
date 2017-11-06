@@ -49,7 +49,9 @@ class SettingsTableViewController: UITableViewController {
     
     lazy var bulletinManager: BulletinManager = {
         let rootItem = PageBulletinItem(title: "Ad Blocking")
-        rootItem.image = #imageLiteral(resourceName: "NoAds")
+        if !isiPhone5 {
+            rootItem.image = #imageLiteral(resourceName: "NoAds")
+        }
         
         rootItem.shouldCompactDescriptionText = true
         rootItem.descriptionText = """
@@ -94,22 +96,20 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        if #available(iOS 11.0, *) {
+            return 4
+        } else {
+            return 3
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return OptionsTitles.allValues.count
-        case 1:
-            return (adBlockPurchased()) ? AdBlockingTitles.purchasedValues.count : AdBlockingTitles.unpurchasedValues.count
-        case 2:
-            return DeleteSectionTitles.allValues.count
-        case 3:
-            return LinksTitles.allValues.count
-        default:
-            return 0
+        var counts = [OptionsTitles.allValues.count, DeleteSectionTitles.allValues.count, LinksTitles.allValues.count]
+        if #available(iOS 11.0, *) {
+            counts.insert((adBlockPurchased()) ? AdBlockingTitles.purchasedValues.count : AdBlockingTitles.unpurchasedValues.count, at: 1)
         }
+        
+        return counts[section]
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,7 +117,14 @@ class SettingsTableViewController: UITableViewController {
         
         cell.textLabel?.textColor = .black
         
-        switch indexPath.section {
+        var section = indexPath.section
+        if #available(iOS 11.0, *) {
+            // do nothing
+        } else if section > 0 {
+            section += 1
+        }
+        
+        switch section {
         case 0:
             let option = OptionsTitles.allValues[indexPath.row]
             cell.textLabel?.text = option.rawValue
@@ -166,7 +173,14 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        switch indexPath.section {
+        var section = indexPath.section
+        if #available(iOS 11.0, *) {
+            // do nothing
+        } else if section > 0 {
+            section += 1
+        }
+        
+        switch section {
         case 1:
             didSelectAdBlock(withRowIndex: indexPath.row)
         case 2:
