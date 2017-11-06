@@ -113,6 +113,8 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewController.identifier, for: indexPath)
         
+        cell.textLabel?.textColor = .black
+        
         switch indexPath.section {
         case 0:
             let option = OptionsTitles.allValues[indexPath.row]
@@ -130,6 +132,7 @@ class SettingsTableViewController: UITableViewController {
                 let option = AdBlockingTitles.purchasedValues[indexPath.row]
                 cell.textLabel?.text = option.rawValue
                 cell.selectionStyle = .none
+                cell.textLabel?.textAlignment = .left
                 
                 if option == .enableAdBlock {
                     cell.accessoryView = UISwitch().then {
@@ -260,8 +263,8 @@ class SettingsTableViewController: UITableViewController {
     
     func makePurchase() {
         bulletinManager.displayActivityIndicator()
-        SwiftyStoreKit.purchaseProduct("com.slayterdevelopment.radium.adblocking") { result in
-            self.bulletinManager.dismissBulletin()
+        SwiftyStoreKit.purchaseProduct("com.slayterdevelopment.radium.adblocking") { [weak self] result in
+            self?.bulletinManager.dismissBulletin()
             switch result {
             case .success(let purchase):
                 print("Successfully purchased: \(purchase.productId)")
@@ -273,8 +276,8 @@ class SettingsTableViewController: UITableViewController {
                 av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                 
                 DispatchQueue.main.async {
-                    self.present(av, animated: true, completion: nil)
-                    self.tableView.reloadData()
+                    self?.present(av, animated: true, completion: nil)
+                    self?.tableView.reloadData()
                 }
             case .error(let error):
                 print("Error purchasing: \(error.localizedDescription)")
@@ -295,26 +298,30 @@ class SettingsTableViewController: UITableViewController {
         self.tableView.addSubview(spinner)
         spinner.startAnimating()
         
-        SwiftyStoreKit.restorePurchases() { results in
+        SwiftyStoreKit.restorePurchases() { [weak self] results in
             spinner.stopAnimating()
             spinner.removeFromSuperview()
             
             if results.restoreFailedPurchases.count > 0 {
                 let av = UIAlertController(title: "Restore Failed", message: "Something went wrong restroing purchases. Please try again later.", preferredStyle: .alert)
                 av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                self.present(av, animated: true, completion: nil)
+                self?.present(av, animated: true, completion: nil)
             } else if results.restoredPurchases.count > 0 {
+                UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
+                UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockEnabled)
+                NotificationCenter.default.post(name: NSNotification.Name.adBlockSettingsChanged, object: nil)
+                
                 let av = UIAlertController(title: "Purchases Restored!", message: nil, preferredStyle: .alert)
                 av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                self.present(av, animated: true, completion: nil)
+                self?.present(av, animated: true, completion: nil)
                 
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
                 }
             } else {
                 let av = UIAlertController(title: "Nothing to Restore", message: nil, preferredStyle: .alert)
                 av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                self.present(av, animated: true, completion: nil)
+                self?.present(av, animated: true, completion: nil)
             }
         }
     }
