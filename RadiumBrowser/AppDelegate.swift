@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         #if DEBUG // MAKE SURE IAP LOGIC IS TESTED PROPERLY
-            defaults.set(true, forKey: SettingsKeys.adBlockPurchased)
+            defaults.set(false, forKey: SettingsKeys.adBlockPurchased)
         #endif
         defaults.set(false, forKey: SettingsKeys.adBlockLoaded)
         defaults.set(false, forKey: SettingsKeys.stringLiteralAdBlock)

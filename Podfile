@@ -29,6 +29,7 @@ def all_pods
     pod 'LUAutocompleteView'
     pod 'GCDWebServer', '~> 3.0'
     pod 'SwiftyStoreKit'
+    pod 'BulletinBoard'
 
     project 'RadiumBrowser.xcodeproj'
 

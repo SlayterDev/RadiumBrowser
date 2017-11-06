@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import SwiftyStoreKit
+import BulletinBoard
 
 enum OptionsTitles: String {
     case trackHistory = "Track History"
@@ -43,6 +44,28 @@ enum LinksTitles: String {
 class SettingsTableViewController: UITableViewController {
     
     static let identifier = "SettingsIdentifier"
+    
+    lazy var bulletinManager: BulletinManager = {
+        let rootItem = PageBulletinItem(title: "Ad Blocking")
+        rootItem.image = #imageLiteral(resourceName: "NoAds")
+        
+        rootItem.shouldCompactDescriptionText = true
+        rootItem.descriptionText = """
+        Purchasing ad block will use our list of sources to filter out ads being served to you by websites you visit. In addition to blocking unwanted content this will speed up your browsing experience as well as make it safer.
+        PLEASE NOTE: Because ad sources are constantly changing we can't guaruntee every single ad will be blocked. We will continue to add known sources to the app to block more ads as we become aware of them.
+        
+        Would you like to purchase Ad Blocking?
+        """
+        rootItem.actionButtonTitle = "Purchase ($1.99)"
+        rootItem.actionHandler = { _ in
+            self.makePurchase()
+        }
+        rootItem.alternativeHandler = { item in
+            item.manager?.dismissBulletin()
+        }
+        rootItem.alternativeButtonTitle = "Not now"
+        return BulletinManager(rootItem: rootItem)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -235,40 +258,47 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    func purchaseAdBlock() {
-        func makePurchase() {
-            SwiftyStoreKit.purchaseProduct("com.slayterdevelopment.radium.adblocking") { result in
-                switch result {
-                case .success(let purchase):
-                    print("Successfully purchased: \(purchase.productId)")
-                    UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
-                    UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockEnabled)
-                    NotificationCenter.default.post(name: NSNotification.Name.adBlockSettingsChanged, object: nil)
-                    
-                    let av = UIAlertController(title: "Ad Block Purchased!", message: nil, preferredStyle: .alert)
-                    av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-                    
-                    DispatchQueue.main.async {
-                        self.present(av, animated: true, completion: nil)
-                        self.tableView.reloadData()
-                    }
-                case .error(let error):
-                    print("Error purchasing: \(error.localizedDescription)")
+    func makePurchase() {
+        bulletinManager.displayActivityIndicator()
+        SwiftyStoreKit.purchaseProduct("com.slayterdevelopment.radium.adblocking") { result in
+            self.bulletinManager.dismissBulletin()
+            switch result {
+            case .success(let purchase):
+                print("Successfully purchased: \(purchase.productId)")
+                UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
+                UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockEnabled)
+                NotificationCenter.default.post(name: NSNotification.Name.adBlockSettingsChanged, object: nil)
+                
+                let av = UIAlertController(title: "Ad Block Purchased!", message: nil, preferredStyle: .alert)
+                av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                
+                DispatchQueue.main.async {
+                    self.present(av, animated: true, completion: nil)
+                    self.tableView.reloadData()
                 }
+            case .error(let error):
+                print("Error purchasing: \(error.localizedDescription)")
             }
         }
-        
-        let av = UIAlertController(title: "Purchase Ad Block", message: "Purchasing ad block will use our list of sources to filter out ads being served to you by websites you visit. In addition to blocking unwanted content this will speed up your browsing experience as well as make it safer. PLEASE NOTE: Because ad sources are constantly changing we can't guaruntee every single ad will be blocked. We will continue to add known sources to the app to block more ads as we become aware of them.\n\nWould you like to purchase Ad Blocking?", preferredStyle: .alert)
-        av.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-            makePurchase()
-        }))
-        av.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        
-        self.present(av, animated: true, completion: nil)
+    }
+    
+    func purchaseAdBlock() {
+        bulletinManager.prepare()
+        bulletinManager.presentBulletin(above: self)
     }
     
     func restorePurchases() {
+        let spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        spinner.center = self.view.center
+        spinner.hidesWhenStopped = true
+        spinner.color = .gray
+        self.tableView.addSubview(spinner)
+        spinner.startAnimating()
+        
         SwiftyStoreKit.restorePurchases() { results in
+            spinner.stopAnimating()
+            spinner.removeFromSuperview()
+            
             if results.restoreFailedPurchases.count > 0 {
                 let av = UIAlertController(title: "Restore Failed", message: "Something went wrong restroing purchases. Please try again later.", preferredStyle: .alert)
                 av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
