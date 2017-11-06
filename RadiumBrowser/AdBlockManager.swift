@@ -85,4 +85,14 @@ class AdBlockManager {
             }
         }
     }
+    
+    func shouldBlockAds() -> Bool {
+        let defaults = UserDefaults.standard
+        return defaults.bool(forKey: SettingsKeys.adBlockPurchased) && defaults.bool(forKey: SettingsKeys.adBlockEnabled)
+    }
+    
+    @available(iOS 11.0, *)
+    func disableAdBlock(forWebView webView: WKWebView?) {
+        webView?.configuration.userContentController.removeAllContentRuleLists()
+    }
 }

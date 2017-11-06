@@ -208,6 +208,7 @@ class SettingsTableViewController: UITableViewController {
     
     @objc func adBlockEnabledChanged(sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: SettingsKeys.adBlockEnabled)
+        NotificationCenter.default.post(name: NSNotification.Name.adBlockSettingsChanged, object: nil)
     }
     
     // MARK: - Links Section
@@ -241,6 +242,8 @@ class SettingsTableViewController: UITableViewController {
                 case .success(let purchase):
                     print("Successfully purchased: \(purchase.productId)")
                     UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
+                    UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockEnabled)
+                    NotificationCenter.default.post(name: NSNotification.Name.adBlockSettingsChanged, object: nil)
                     
                     let av = UIAlertController(title: "Ad Block Purchased!", message: nil, preferredStyle: .alert)
                     av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))

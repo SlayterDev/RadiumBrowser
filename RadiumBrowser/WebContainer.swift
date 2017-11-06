@@ -30,11 +30,14 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
             webView?.removeObserver(self, forKeyPath: "title")
         }
         notificationToken.stop()
+        NotificationCenter.default.removeObserver(self)
 	}
 	
 	@objc init(parent: UIView) {
 		super.init(frame: .zero)
 		
+        NotificationCenter.default.addObserver(self, selector: #selector(adBlockChanged), name: NSNotification.Name.adBlockSettingsChanged, object: nil)
+        
 		self.parentView = parent
 		
         backgroundColor = .white
@@ -72,21 +75,9 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         }
         
         loadBuiltins()
-        if #available(iOS 11.0, *) {
-            let group = DispatchGroup()
-            group.enter()
-            AdBlockManager.shared.setupAdBlock(forWebView: self.webView) {
-                group.leave()
-            }
-            group.enter()
-            AdBlockManager.shared.setupAdBlockFromStringLiteral(forWebView: self.webView) {
-                group.leave()
-            }
-            group.notify(queue: .main, execute: { [weak self] in
-                let _ = self?.webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
-            })
-        } else {
-            let _ = webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
+        
+        loadAdBlocking { [weak self] in
+            let _ = self?.webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
         }
 	}
 	
@@ -150,6 +141,39 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
             if let userScript = $0.webScript {
                 webView?.configuration.userContentController.addUserScript(userScript)
             }
+        }
+    }
+    
+    func loadAdBlocking(completion: @escaping (() -> ())) {
+        if #available(iOS 11.0, *), AdBlockManager.shared.shouldBlockAds() {
+            let group = DispatchGroup()
+            group.enter()
+            AdBlockManager.shared.setupAdBlock(forWebView: self.webView) {
+                group.leave()
+            }
+            group.enter()
+            AdBlockManager.shared.setupAdBlockFromStringLiteral(forWebView: self.webView) {
+                group.leave()
+            }
+            group.notify(queue: .main, execute: {
+                completion()
+            })
+        } else {
+            completion()
+        }
+    }
+    
+    @objc func adBlockChanged() {
+        guard #available(iOS 11.0, *) else { return }
+        
+        let currentRequest = URLRequest(url: webView!.url!)
+        if AdBlockManager.shared.shouldBlockAds() {
+            loadAdBlocking {
+                self.webView?.load(currentRequest)
+            }
+        } else {
+            AdBlockManager.shared.disableAdBlock(forWebView: webView)
+            webView?.load(currentRequest)
         }
     }
 	
