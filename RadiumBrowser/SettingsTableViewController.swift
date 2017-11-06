@@ -11,6 +11,7 @@ import RealmSwift
 import SwiftyStoreKit
 import BulletinBoard
 import SwiftKeychainWrapper
+import WebKit
 
 enum OptionsTitles: String {
     case trackHistory = "Track History"
@@ -30,7 +31,7 @@ enum AdBlockingTitles: String {
 
 enum DeleteSectionTitles: String {
     case clearHistory = "Clear History"
-    case clearCookies = "Clear Cookies"
+    case clearCookies = "Clear Local Storage"
     
     static let allValues: [DeleteSectionTitles] = [.clearHistory, .clearCookies]
 }
@@ -213,12 +214,13 @@ class SettingsTableViewController: UITableViewController {
     
     func clearCookies() {
         func doTheClear() {
-            if let cookies = HTTPCookieStorage.shared.cookies {
-                cookies.forEach { HTTPCookieStorage.shared.deleteCookie($0) }
-            }
+            let webDataTypes = Set(arrayLiteral: WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeOfflineWebApplicationCache, WKWebsiteDataTypeMemoryCache,
+                                                  WKWebsiteDataTypeLocalStorage, WKWebsiteDataTypeCookies, WKWebsiteDataTypeSessionStorage,
+                                                  WKWebsiteDataTypeIndexedDBDatabases, WKWebsiteDataTypeWebSQLDatabases)
+            WKWebsiteDataStore.default().removeData(ofTypes: webDataTypes, modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
         }
         
-        let av = UIAlertController(title: "Clear Cookies", message: "Are you sure you want to clear your cookies?", preferredStyle: .alert)
+        let av = UIAlertController(title: "Clear Local Data", message: "Are you sure you want to clear your cookies?", preferredStyle: .alert)
         av.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
             doTheClear()
         }))
