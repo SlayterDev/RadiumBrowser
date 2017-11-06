@@ -42,13 +42,17 @@
 		41F8F7531E43CAEC00029B56 /* ExtensionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8F7521E43CAEC00029B56 /* ExtensionsTableViewController.swift */; };
 		41F8F7561E43CB4B00029B56 /* ExtensionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8F7551E43CB4B00029B56 /* ExtensionModel.swift */; };
 		D348888C4000EEE5E21DA85C /* Pods_RadiumBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7223C7ED4906D838E566912 /* Pods_RadiumBrowser.framework */; };
+		E605653C1FB0D21600CAEE7D /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E605653B1FB0D21600CAEE7D /* NotificationExtensions.swift */; };
 		E60641F31F7BDDFE00100DF1 /* AppReviewScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60641F21F7BDDFE00100DF1 /* AppReviewScenario.swift */; };
 		E60D52851FAA293B005AC5D1 /* OrderedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D52841FAA293B005AC5D1 /* OrderedSet.swift */; };
 		E60D52871FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */; };
 		E60D528B1FAA4F0B005AC5D1 /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D528A1FAA4F0B005AC5D1 /* WebServer.swift */; };
 		E60D528F1FAB4984005AC5D1 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60D528E1FAB4984005AC5D1 /* SettingsTableViewController.swift */; };
+		E612CFC01FAE407300007ACD /* adaway.json in Resources */ = {isa = PBXBuildFile; fileRef = E612CFBF1FAE407300007ACD /* adaway.json */; };
+		E612CFC21FAE429200007ACD /* AdBlockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E612CFC11FAE429200007ACD /* AdBlockManager.swift */; };
 		E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */ = {isa = PBXBuildFile; fileRef = E635B6D31FAA026F004C27C0 /* topdomains.txt */; };
 		E635B6D61FAA02C0004C27C0 /* SuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */; };
+		E69EF2F61FB0F2FB002A7CED /* blackHosts.json in Resources */ = {isa = PBXBuildFile; fileRef = E69EF2F51FB0F2FB002A7CED /* blackHosts.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,13 +118,17 @@
 		78F23366915C60BA1ECB7F15 /* Pods-RadiumBrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RadiumBrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser.release.xcconfig"; sourceTree = "<group>"; };
 		A7223C7ED4906D838E566912 /* Pods_RadiumBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65B6B0A501710052BE8EF87 /* Pods_RadiumBrowserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E605653B1FB0D21600CAEE7D /* NotificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
 		E60641F21F7BDDFE00100DF1 /* AppReviewScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReviewScenario.swift; sourceTree = "<group>"; };
 		E60D52841FAA293B005AC5D1 /* OrderedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedSet.swift; sourceTree = "<group>"; };
 		E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteTableViewCell.swift; sourceTree = "<group>"; };
 		E60D528A1FAA4F0B005AC5D1 /* WebServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServer.swift; sourceTree = "<group>"; };
 		E60D528E1FAB4984005AC5D1 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		E612CFBF1FAE407300007ACD /* adaway.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = adaway.json; sourceTree = "<group>"; };
+		E612CFC11FAE429200007ACD /* AdBlockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockManager.swift; sourceTree = "<group>"; };
 		E635B6D31FAA026F004C27C0 /* topdomains.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = topdomains.txt; sourceTree = "<group>"; };
 		E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionManager.swift; sourceTree = "<group>"; };
+		E69EF2F51FB0F2FB002A7CED /* blackHosts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blackHosts.json; sourceTree = "<group>"; };
 		FB664E8EC27919571578F55A /* Pods_RadiumBrowserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -157,6 +165,7 @@
 				02DF6C591E47C15B0088BDEB /* WebViewManager.swift */,
 				E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */,
 				E60D528A1FAA4F0B005AC5D1 /* WebServer.swift */,
+				E612CFC11FAE429200007ACD /* AdBlockManager.swift */,
 			);
 			name = Singletons;
 			sourceTree = "<group>";
@@ -286,6 +295,7 @@
 				02A5CBE51E417F6400269FE6 /* StringExtensions.swift */,
 				02A5CBE71E41820000269FE6 /* UIImageExtensions.swift */,
 				E60D52841FAA293B005AC5D1 /* OrderedSet.swift */,
+				E605653B1FB0D21600CAEE7D /* NotificationExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -324,6 +334,8 @@
 		E635B6D21FAA0245004C27C0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				E69EF2F51FB0F2FB002A7CED /* blackHosts.json */,
+				E612CFBF1FAE407300007ACD /* adaway.json */,
 				E635B6D31FAA026F004C27C0 /* topdomains.txt */,
 			);
 			name = Assets;
@@ -443,8 +455,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E612CFC01FAE407300007ACD /* adaway.json in Resources */,
 				E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */,
 				02DF6C551E4795180088BDEB /* Main.storyboard in Resources */,
+				E69EF2F61FB0F2FB002A7CED /* blackHosts.json in Resources */,
 				41A567FD1E40CB3B00470017 /* LaunchScreen.storyboard in Resources */,
 				41A567FA1E40CB3B00470017 /* Assets.xcassets in Resources */,
 				4163EDF81E4BB9D600E02E65 /* Favicons.js in Resources */,
@@ -522,6 +536,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BSColorUtils/BSColorUtils.framework",
+				"${BUILT_PRODUCTS_DIR}/BulletinBoard/BulletinBoard.framework",
 				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
 				"${BUILT_PRODUCTS_DIR}/Highlightr/Highlightr.framework",
 				"${BUILT_PRODUCTS_DIR}/LUAutocompleteView/LUAutocompleteView.framework",
@@ -529,12 +544,15 @@
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
 				"${BUILT_PRODUCTS_DIR}/WaitForIt/WaitForIt.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSColorUtils.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BulletinBoard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Highlightr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LUAutocompleteView.framework",
@@ -542,6 +560,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WaitForIt.framework",
 			);
@@ -581,10 +601,12 @@
 				41DBC5EF1E411AE900913FAA /* MainViewController.swift in Sources */,
 				41DBC5F11E411B8B00913FAA /* AddressBar.swift in Sources */,
 				41DBC5FC1E412CA500913FAA /* TabView.swift in Sources */,
+				E605653C1FB0D21600CAEE7D /* NotificationExtensions.swift in Sources */,
 				4163EDFA1E4BBA1500E02E65 /* FaviconGetter.swift in Sources */,
 				02DF6C571E47AADA0088BDEB /* MigrationManager.swift in Sources */,
 				02DF6C5A1E47C15B0088BDEB /* WebViewManager.swift in Sources */,
 				4163EDCA1E48E3A600E02E65 /* DoneAccessoryView.swift in Sources */,
+				E612CFC21FAE429200007ACD /* AdBlockManager.swift in Sources */,
 				41F8F7561E43CB4B00029B56 /* ExtensionModel.swift in Sources */,
 				41A567F31E40CB3B00470017 /* AppDelegate.swift in Sources */,
 				41DBC5F31E411C7A00913FAA /* SharedConfig.swift in Sources */,
