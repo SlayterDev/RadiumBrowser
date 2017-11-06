@@ -12,6 +12,7 @@ import SnapKit
 import RealmSwift
 import StoreKit
 import SwiftyStoreKit
+import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -32,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             for purchase in purchases {
                 if purchase.transaction.transactionState == .purchased || purchase.transaction.transactionState == .restored {
                     if purchase.needsFinishTransaction {
-                        UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
+                        KeychainWrapper.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
                         SwiftyStoreKit.finishTransaction(purchase.transaction)
                     }
                     print("purchased: \(purchase)")
@@ -51,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         #if DEBUG
-            defaults.set(true, forKey: SettingsKeys.adBlockPurchased)
+            KeychainWrapper.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
         #endif
         defaults.set(false, forKey: SettingsKeys.adBlockLoaded)
         defaults.set(false, forKey: SettingsKeys.stringLiteralAdBlock)

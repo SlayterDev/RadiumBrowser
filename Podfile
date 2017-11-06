@@ -30,6 +30,7 @@ def all_pods
     pod 'GCDWebServer', '~> 3.0'
     pod 'SwiftyStoreKit'
     pod 'BulletinBoard'
+    pod 'SwiftKeychainWrapper'
 
     project 'RadiumBrowser.xcodeproj'
 

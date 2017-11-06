@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import SwiftKeychainWrapper
 
 class AdBlockManager {
     static let shared = AdBlockManager()
@@ -87,8 +88,8 @@ class AdBlockManager {
     }
     
     func shouldBlockAds() -> Bool {
-        let defaults = UserDefaults.standard
-        return defaults.bool(forKey: SettingsKeys.adBlockPurchased) && defaults.bool(forKey: SettingsKeys.adBlockEnabled)
+        let adBlockPurchased = KeychainWrapper.standard.bool(forKey: SettingsKeys.adBlockPurchased) ?? false
+        return adBlockPurchased && UserDefaults.standard.bool(forKey: SettingsKeys.adBlockEnabled)
     }
     
     @available(iOS 11.0, *)

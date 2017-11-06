@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import SwiftyStoreKit
 import BulletinBoard
+import SwiftKeychainWrapper
 
 enum OptionsTitles: String {
     case trackHistory = "Track History"
@@ -86,7 +87,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func adBlockPurchased() -> Bool {
-        return UserDefaults.standard.bool(forKey: SettingsKeys.adBlockPurchased)
+        return KeychainWrapper.standard.bool(forKey: SettingsKeys.adBlockPurchased) ?? false
     }
 
     // MARK: - Table view data source
@@ -268,7 +269,7 @@ class SettingsTableViewController: UITableViewController {
             switch result {
             case .success(let purchase):
                 print("Successfully purchased: \(purchase.productId)")
-                UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
+                KeychainWrapper.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
                 UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockEnabled)
                 NotificationCenter.default.post(name: NSNotification.Name.adBlockSettingsChanged, object: nil)
                 
@@ -307,7 +308,7 @@ class SettingsTableViewController: UITableViewController {
                 av.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                 self?.present(av, animated: true, completion: nil)
             } else if results.restoredPurchases.count > 0 {
-                UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
+                KeychainWrapper.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
                 UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockEnabled)
                 NotificationCenter.default.post(name: NSNotification.Name.adBlockSettingsChanged, object: nil)
                 
