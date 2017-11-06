@@ -199,7 +199,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
         guard let prevLine = String(textView.text[..<end]).lines.last else { return true }
         
         var nextLevel = 0
-        if prevLine.characters.last == "{" {
+        if prevLine.last == "{" {
             nextLevel = 1
         }
         
@@ -211,7 +211,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
             postString = "\n" + ((" " * tabSize) * (indentationLevel - nextLevel)) + "}"
         }
         
-        if range.location == textView.text.characters.count {
+        if range.location == textView.text.count {
             let updatedText = paddingString
             textView.text = textView.text + updatedText + postString
         } else {
@@ -223,7 +223,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
             textView.replace(textRange!, withText: paddingString + postString)
         }
         
-        let cursor = NSRange(location: range.location + paddingString.characters.count, length: 0)
+        let cursor = NSRange(location: range.location + paddingString.count, length: 0)
         textView.selectedRange = cursor
         
         return false
