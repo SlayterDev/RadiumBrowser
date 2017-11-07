@@ -76,6 +76,7 @@ class TabView: UIView, UIGestureRecognizerDelegate {
 		let gesture = UITapGestureRecognizer()
         gesture.delegate = self
 		gesture.addTarget(self, action: #selector(tappedTab))
+        gesture.cancelsTouchesInView = false
 		self.addGestureRecognizer(gesture)
 		self.isUserInteractionEnabled = true
 		

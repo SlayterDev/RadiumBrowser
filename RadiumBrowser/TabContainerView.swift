@@ -21,6 +21,7 @@ class TabContainerView: UIView, TabViewDelegate {
     
     @objc weak var containerView: UIView?
     
+    var tabScrollView: UIScrollView!
     @objc lazy var tabList: [TabView] = []
 	
 	@objc var addTabButton: UIButton?
@@ -59,6 +60,25 @@ class TabContainerView: UIView, TabViewDelegate {
 			}
 		}
         
+        tabScrollView = UIScrollView().then {
+            $0.isScrollEnabled = true
+            $0.showsVerticalScrollIndicator = false
+            $0.showsHorizontalScrollIndicator = false
+            
+            self.addSubview($0)
+            $0.snp.makeConstraints { make in
+                make.bottom.equalToSuperview()
+                make.height.equalTo(TabContainerView.defaultTabHeight)
+                make.right.equalTo(addTabButton!.snp.left).offset(-5)
+                
+                if #available(iOS 11.0, *) {
+                    make.left.equalTo(self.safeAreaLayoutGuide.snp.left)
+                } else {
+                    make.left.equalTo(self)
+                }
+            }
+        }
+        
         TabContainerView.currentInstance = self
     }
     
@@ -72,8 +92,8 @@ class TabContainerView: UIView, TabViewDelegate {
 		let newTab = TabView(parentView: container).then { [unowned self] in
 			$0.delegate = self
 			
-			self.addSubview($0)
-            self.sendSubview(toBack: $0)
+			self.tabScrollView.addSubview($0)
+            self.tabScrollView.sendSubview(toBack: $0)
         }
         tabList.append(newTab)
         didTap(tab: newTab)
@@ -82,6 +102,8 @@ class TabContainerView: UIView, TabViewDelegate {
         if focusAddressBar && tabList.count > 1 {
             addressBar?.addressField?.becomeFirstResponder()
         }
+        
+        tabScrollView.setContentOffset(CGPoint(x: newTab.frame.origin.x - TabContainerView.defaultTabWidth, y: 0), animated: true)
         
         return newTab
     }
@@ -94,22 +116,17 @@ class TabContainerView: UIView, TabViewDelegate {
     }
     
     @objc func setUpTabConstraints() {
-        let tabWidth = min(TabContainerView.defaultTabWidth,
-                           (self.frame.width - TabContainerView.standardHeight + CGFloat(tabList.count * 6) - 5) / CGFloat(tabList.count))
+        let tabWidth = TabContainerView.defaultTabWidth
         
         for (i, tab) in tabList.enumerated() {
             tab.snp.remakeConstraints { (make) in
-                make.bottom.equalTo(self)
+                make.top.bottom.equalTo(self.tabScrollView)
                 make.height.equalTo(TabContainerView.defaultTabHeight)
                 if i > 0 {
                     let lastTab = self.tabList[i - 1]
                     make.left.equalTo(lastTab.snp.right).offset(-6)
                 } else {
-                    if #available(iOS 11.0, *) {
-                        make.left.equalTo(self.safeAreaLayoutGuide.snp.left)
-                    } else {
-                        make.left.equalTo(self)
-                    }
+                    make.left.equalTo(self.tabScrollView)
                 }
                 make.width.equalTo(tabWidth)
             }
@@ -117,7 +134,11 @@ class TabContainerView: UIView, TabViewDelegate {
         
         UIView.animate(withDuration: 0.25, animations: {
             self.layoutIfNeeded()
-        })
+        }) { _ in
+            self.tabScrollView.contentSize = CGSize(width: TabContainerView.defaultTabWidth * CGFloat(self.tabList.count) -
+                                               CGFloat((self.tabList.count - 1) * 6),
+                                               height: TabContainerView.defaultTabHeight)
+        }
     }
     
     @objc func setTabColors() {
