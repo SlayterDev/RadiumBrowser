@@ -18,6 +18,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	
 	@objc weak var tabView: TabView?
     var favicon: Favicon?
+    var currentScreenshot: UIImage?
     @objc var builtinExtensions: [BuiltinExtension]?
 	
 	@objc var progressView: UIProgressView?
@@ -201,6 +202,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	@objc func removeFromView() {
 		guard let _ = parentView else { return }
 		
+        takeScreenshot()
+        
 		// Remove ourself as the observer
         if isObserving {
             webView?.removeObserver(self, forKeyPath: "estimatedProgress")
@@ -226,6 +229,10 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 			let _ = webView?.load(URLRequest(url: url))
 		}
 	}
+    
+    func takeScreenshot() {
+        currentScreenshot = webView?.screenshot()
+    }
 	
     // MARK: - Webview Delegate
     
