@@ -106,14 +106,14 @@ class TabContainerView: UIView, TabViewDelegate {
             self.tabScrollView.sendSubview(toBack: $0)
         }
         tabList.append(newTab)
-        didTap(tab: newTab)
-        setUpTabConstraints()
         
+        setUpTabConstraints()
+        didTap(tab: newTab)
         if focusAddressBar && tabList.count > 1 {
             addressBar?.addressField?.becomeFirstResponder()
         }
         
-        tabScrollView.setContentOffset(CGPoint(x: newTab.frame.origin.x - TabContainerView.defaultTabWidth, y: 0), animated: true)
+        scroll(toTab: newTab, addingTab: true)
         
         tabCountButton.updateCount(tabList.count)
         
@@ -158,6 +158,11 @@ class TabContainerView: UIView, TabViewDelegate {
             tab.backgroundColor = (i == selectedTabIndex) ? Colors.radiumGray : Colors.radiumUnselected
         }
     }
+    
+    func scroll(toTab tab: TabView, addingTab: Bool = false) {
+        let maxOffset = tabScrollView.contentSize.width - tabScrollView.frame.width + ((addingTab) ? TabContainerView.defaultTabWidth : 0)
+        tabScrollView.setContentOffset(CGPoint(x: min(maxOffset, tab.frame.origin.x), y: 0), animated: true)
+    }
 	
 	// MARK: - Tab Delegate
 	
@@ -172,6 +177,8 @@ class TabContainerView: UIView, TabViewDelegate {
 			}
 			
 			switchVisibleWebView(prevTab: prevTab, newTab: tab)
+            
+            scroll(toTab: tab)
 		}
 	}
 	
