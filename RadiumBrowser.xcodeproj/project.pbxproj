@@ -52,6 +52,7 @@
 		E612CFC21FAE429200007ACD /* AdBlockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E612CFC11FAE429200007ACD /* AdBlockManager.swift */; };
 		E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */ = {isa = PBXBuildFile; fileRef = E635B6D31FAA026F004C27C0 /* topdomains.txt */; };
 		E635B6D61FAA02C0004C27C0 /* SuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */; };
+		E677E0AA1FB2069D00256072 /* TabCountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E677E0A91FB2069D00256072 /* TabCountButton.swift */; };
 		E69EF2F61FB0F2FB002A7CED /* blackHosts.json in Resources */ = {isa = PBXBuildFile; fileRef = E69EF2F51FB0F2FB002A7CED /* blackHosts.json */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +129,7 @@
 		E612CFC11FAE429200007ACD /* AdBlockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockManager.swift; sourceTree = "<group>"; };
 		E635B6D31FAA026F004C27C0 /* topdomains.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = topdomains.txt; sourceTree = "<group>"; };
 		E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionManager.swift; sourceTree = "<group>"; };
+		E677E0A91FB2069D00256072 /* TabCountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCountButton.swift; sourceTree = "<group>"; };
 		E69EF2F51FB0F2FB002A7CED /* blackHosts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blackHosts.json; sourceTree = "<group>"; };
 		FB664E8EC27919571578F55A /* Pods_RadiumBrowserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -284,6 +286,7 @@
 				02DF6C631E4BEA820088BDEB /* BookmarkCollectionViewCell.swift */,
 				4163EDFD1E4CA48600E02E65 /* BookmarkTableViewCell.swift */,
 				E60D52861FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift */,
+				E677E0A91FB2069D00256072 /* TabCountButton.swift */,
 			);
 			name = "Shared UI";
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				E60641F31F7BDDFE00100DF1 /* AppReviewScenario.swift in Sources */,
 				41DBC5FE1E412F0A00913FAA /* UIViewExtensions.swift in Sources */,
 				02DF6C601E495CFB0088BDEB /* HistoryTableViewController.swift in Sources */,
+				E677E0AA1FB2069D00256072 /* TabCountButton.swift in Sources */,
 				4163EDFE1E4CA48600E02E65 /* BookmarkTableViewCell.swift in Sources */,
 				E60D52871FAA2CB8005AC5D1 /* AutocompleteTableViewCell.swift in Sources */,
 				02A5CBE41E41652000269FE6 /* WebContainer.swift in Sources */,

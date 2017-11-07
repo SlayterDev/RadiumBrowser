@@ -21,6 +21,7 @@ class TabContainerView: UIView, TabViewDelegate {
     
     @objc weak var containerView: UIView?
     
+    var tabCountButton: TabCountButton!
     var tabScrollView: UIScrollView!
     @objc lazy var tabList: [TabView] = []
 	
@@ -60,6 +61,20 @@ class TabContainerView: UIView, TabViewDelegate {
 			}
 		}
         
+        tabCountButton = TabCountButton().then {
+            self.addSubview($0)
+            $0.snp.makeConstraints { make in
+                make.height.equalTo(TabContainerView.standardHeight - 5)
+                make.width.equalTo(TabContainerView.standardHeight - 5)
+                make.centerY.equalTo(self)
+                if #available(iOS 11.0, *) {
+                    make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(8)
+                } else {
+                    make.left.equalTo(self).offset(4)
+                }
+            }
+        }
+        
         tabScrollView = UIScrollView().then {
             $0.isScrollEnabled = true
             $0.showsVerticalScrollIndicator = false
@@ -69,13 +84,8 @@ class TabContainerView: UIView, TabViewDelegate {
             $0.snp.makeConstraints { make in
                 make.bottom.equalToSuperview()
                 make.height.equalTo(TabContainerView.defaultTabHeight)
+                make.left.equalTo(tabCountButton.snp.right).offset(5)
                 make.right.equalTo(addTabButton!.snp.left).offset(-5)
-                
-                if #available(iOS 11.0, *) {
-                    make.left.equalTo(self.safeAreaLayoutGuide.snp.left)
-                } else {
-                    make.left.equalTo(self)
-                }
             }
         }
         
@@ -104,6 +114,8 @@ class TabContainerView: UIView, TabViewDelegate {
         }
         
         tabScrollView.setContentOffset(CGPoint(x: newTab.frame.origin.x - TabContainerView.defaultTabWidth, y: 0), animated: true)
+        
+        tabCountButton.updateCount(tabList.count)
         
         return newTab
     }
@@ -187,6 +199,8 @@ class TabContainerView: UIView, TabViewDelegate {
         }
         
         setUpTabConstraints()
+        
+        tabCountButton.updateCount(tabList.count)
 	}
 	
 	// MARK: - Web Navigation
