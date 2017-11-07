@@ -33,6 +33,10 @@ class SuggestionManager {
     @objc var notificationToken: NotificationToken!
     var realm: Realm!
     
+    deinit {
+        notificationToken.stop()
+    }
+    
     init() {
         defer {
             reupdateList()
