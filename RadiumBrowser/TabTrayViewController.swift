@@ -74,6 +74,13 @@ extension TabTrayViewController: UICollectionViewDataSource, UICollectionViewDel
         cell?.closeTabButton.tag = indexPath.item
         cell?.delegate = self
         
+        if tab == TabContainerView.currentInstance?.currentTab {
+            cell?.layer.borderWidth = 2
+            cell?.layer.borderColor = UIColor.black.cgColor
+        } else {
+            cell?.layer.borderColor = UIColor.clear.cgColor
+        }
+        
         return cell!
     }
     
@@ -94,7 +101,11 @@ extension TabTrayViewController: TabTrayCellDelegate {
         guard let tab = TabContainerView.currentInstance?.tabList[tag] else { return }
         
         if TabContainerView.currentInstance?.close(tab: tab) ?? false {
-            collectionView.deleteItems(at: [IndexPath(item: tag, section: 0)])
+            collectionView.performBatchUpdates({
+                self.collectionView.deleteItems(at: [IndexPath(item: tag, section: 0)])
+            }, completion: { _ in
+                self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            })
         }
     }
 }
