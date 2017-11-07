@@ -10,7 +10,7 @@ import UIKit
 
 protocol TabViewDelegate: class {
 	func didTap(tab: TabView)
-	func close(tab: TabView)
+	func close(tab: TabView) -> Bool
 }
 
 class TabView: UIView, UIGestureRecognizerDelegate {
@@ -76,6 +76,7 @@ class TabView: UIView, UIGestureRecognizerDelegate {
 		let gesture = UITapGestureRecognizer()
         gesture.delegate = self
 		gesture.addTarget(self, action: #selector(tappedTab))
+        gesture.cancelsTouchesInView = false
 		self.addGestureRecognizer(gesture)
 		self.isUserInteractionEnabled = true
 		
@@ -106,6 +107,6 @@ class TabView: UIView, UIGestureRecognizerDelegate {
 	}
 	
 	@objc func close(sender: UIButton) {
-		delegate?.close(tab: self)
+		_ = delegate?.close(tab: self)
 	}
 }

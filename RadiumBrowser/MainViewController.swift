@@ -38,7 +38,8 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         
         tabContainer = TabContainerView(frame: .zero).then { [unowned self] in
 			$0.addTabButton?.addTarget(self, action: #selector(self.addTab), for: .touchUpInside)
-			
+            $0.tabCountButton.addTarget(self, action: #selector(showTabTray), for: .touchUpInside)
+            
             self.view.addSubview($0)
             $0.snp.makeConstraints { (make) in
                 if #available(iOS 11.0, *) {
@@ -93,6 +94,12 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        tabContainer?.currentTab?.webContainer?.takeScreenshot()
     }
     
     override func viewDidLayoutSubviews() {
@@ -220,6 +227,12 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         }
         
         self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func showTabTray() {
+        let vc = TabTrayViewController()
+        
+        self.present(vc, animated: true, completion: nil)
     }
     
     // MARK: - Import methods
