@@ -47,6 +47,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
 			$0.font = UIFont(name: "Menlo-Regular", size: UIFont.systemFontSize + 3)
             $0.inputAccessoryView = DoneAccessoryView(targetView: $0, width: self.view.frame.width)
             $0.backgroundColor = textStorage.highlightr.theme.themeBackgroundColor
+            $0.keyboardType = .asciiCapable
             $0.delegate = self
 			
             if let importedSource = self.importedSource {
