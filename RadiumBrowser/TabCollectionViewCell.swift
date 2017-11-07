@@ -56,15 +56,16 @@ class TabCollectionViewCell: UICollectionViewCell {
             }
         }
         
-        closeTabButton = UIButton().then {
-            $0.setImage(UIImage.imageFrom(systemItem: .stop), for: .normal)
+        closeTabButton = UIButton(type: .custom).then {
+            $0.setTitle("Close", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
             $0.backgroundColor = UIColor.gray.withAlphaComponent(0.8)
             $0.layer.cornerRadius = 5
             $0.addTarget(self, action: #selector(tappedClose(sender:)), for: .touchUpInside)
             
             self.contentView.addSubview($0)
             $0.snp.makeConstraints { make in
-                make.width.height.equalTo(25)
+                make.height.equalTo(25)
                 make.top.right.equalTo(self.contentView).inset(8)
             }
         }
