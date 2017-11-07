@@ -265,7 +265,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         tabView?.tabTitle = webView.title
         tryToGetFavicon(for: webView.url)
         
-        if let tabContainer = tabView?.superview as? TabContainerView, isObserving {
+        if let tabContainer = TabContainerView.currentInstance, isObserving {
             let attrUrl = WebViewManager.shared.getColoredURL(url: webView.url)
             if attrUrl.string == "" {
                 tabContainer.addressBar?.setAddressText(webView.url?.absoluteString)
@@ -278,15 +278,15 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
                  for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if let tabContainer = tabView?.superview as? TabContainerView, navigationAction.targetFrame == nil {
+        if let tabContainer = TabContainerView.currentInstance, navigationAction.targetFrame == nil {
             tabContainer.addNewTab(withRequest: navigationAction.request)
         }
         return nil
     }
     
     func webViewDidClose(_ webView: WKWebView) {
-        if let tabContainer = tabView?.superview as? TabContainerView {
-            tabContainer.close(tab: tabView!)
+        if let tabContainer = TabContainerView.currentInstance {
+            _ = tabContainer.close(tab: tabView!)
         }
     }
     
