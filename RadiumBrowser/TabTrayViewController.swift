@@ -71,6 +71,9 @@ extension TabTrayViewController: UICollectionViewDataSource, UICollectionViewDel
         }
         cell?.pageTitle.text = tab?.webContainer?.webView?.title
         
+        cell?.closeTabButton.tag = indexPath.item
+        cell?.delegate = self
+        
         return cell!
     }
     
@@ -83,5 +86,15 @@ extension TabTrayViewController: UICollectionViewDataSource, UICollectionViewDel
         
         TabContainerView.currentInstance?.didTap(tab: tab)
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension TabTrayViewController: TabTrayCellDelegate {
+    func didTapCloseBtn(tabCell: TabCollectionViewCell, tag: Int) {
+        guard let tab = TabContainerView.currentInstance?.tabList[tag] else { return }
+        
+        if TabContainerView.currentInstance?.close(tab: tab) ?? false {
+            collectionView.deleteItems(at: [IndexPath(item: tag, section: 0)])
+        }
     }
 }

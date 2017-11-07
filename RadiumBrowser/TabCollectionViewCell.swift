@@ -8,10 +8,18 @@
 
 import UIKit
 
+protocol TabTrayCellDelegate: class {
+    func didTapCloseBtn(tabCell: TabCollectionViewCell, tag: Int)
+}
+
 class TabCollectionViewCell: UICollectionViewCell {
     var screenshotView: UIImageView!
     var faviconView: UIImageView!
     var pageTitle: UILabel!
+    
+    var closeTabButton: UIButton!
+    
+    weak var delegate: TabTrayCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,9 +55,26 @@ class TabCollectionViewCell: UICollectionViewCell {
                 make.right.equalTo(self.contentView).offset(-8)
             }
         }
+        
+        closeTabButton = UIButton().then {
+            $0.setImage(UIImage.imageFrom(systemItem: .stop), for: .normal)
+            $0.backgroundColor = UIColor.gray.withAlphaComponent(0.8)
+            $0.layer.cornerRadius = 5
+            $0.addTarget(self, action: #selector(tappedClose(sender:)), for: .touchUpInside)
+            
+            self.contentView.addSubview($0)
+            $0.snp.makeConstraints { make in
+                make.width.height.equalTo(25)
+                make.top.right.equalTo(self.contentView).inset(8)
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func tappedClose(sender: UIButton) {
+        delegate?.didTapCloseBtn(tabCell: self, tag: sender.tag)
     }
 }

@@ -160,6 +160,8 @@ class TabContainerView: UIView, TabViewDelegate {
     }
     
     func scroll(toTab tab: TabView, addingTab: Bool = false) {
+        guard tabScrollView.contentSize.width > tabScrollView.frame.width else { return }
+        
         let maxOffset = tabScrollView.contentSize.width - tabScrollView.frame.width + ((addingTab) ? TabContainerView.defaultTabWidth : 0)
         tabScrollView.setContentOffset(CGPoint(x: min(maxOffset, tab.frame.origin.x), y: 0), animated: true)
     }
@@ -194,9 +196,9 @@ class TabContainerView: UIView, TabViewDelegate {
         }
 	}
 	
-	@objc func close(tab: TabView) {
-        guard tabList.count > 1 else { return }
-        guard let indexToRemove = tabList.index(of: tab) else { return }
+	@objc func close(tab: TabView) -> Bool {
+        guard tabList.count > 1 else { return false }
+        guard let indexToRemove = tabList.index(of: tab) else { return false }
         
         tabList.remove(at: indexToRemove)
         tab.removeFromSuperview()
@@ -208,6 +210,8 @@ class TabContainerView: UIView, TabViewDelegate {
         setUpTabConstraints()
         
         tabCountButton.updateCount(tabList.count)
+        
+        return true
 	}
 	
 	// MARK: - Web Navigation
