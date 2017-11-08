@@ -5,7 +5,7 @@ Get it on the [App Store](https://itunes.apple.com/us/app/radium-web-browser/id1
 ### What is this repository for? ###
 
 * iOS tabbed web browser with extensions
-* Version 1.1.1 (Pending Review)
+* Version 1.2 (Pending Review)
 
 ### How do I get set up? ###
 
