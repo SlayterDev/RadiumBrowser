@@ -11,6 +11,8 @@ import Then
 import SnapKit
 import RealmSwift
 import StoreKit
+import SwiftyStoreKit
+import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +29,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			NSLog("Document Path: %@", documentsPath)
 		#endif
         
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                if purchase.transaction.transactionState == .purchased || purchase.transaction.transactionState == .restored {
+                    if purchase.needsFinishTransaction {
+                        KeychainWrapper.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                    print("purchased: \(purchase)")
+                }
+            }
+        }
+        
         MigrationManager.shared.attemptMigration()
 		
         WebServer.shared.startServer()
@@ -35,6 +49,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !defaults.bool(forKey: SettingsKeys.firstRun) {
             defaults.set(true, forKey: SettingsKeys.firstRun)
             performFirstRunTasks()
+        }
+        
+        #if DEBUG
+//            KeychainWrapper.standard.set(false, forKey: SettingsKeys.adBlockPurchased)
+        #endif
+        defaults.set(false, forKey: SettingsKeys.stringLiteralAdBlock)
+        for hostFile in HostFileNames.allValues {
+            defaults.set(false, forKey: hostFile.rawValue)
         }
         
         mainController = MainViewController()

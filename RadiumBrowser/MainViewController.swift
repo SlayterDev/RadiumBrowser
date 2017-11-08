@@ -38,7 +38,8 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         
         tabContainer = TabContainerView(frame: .zero).then { [unowned self] in
 			$0.addTabButton?.addTarget(self, action: #selector(self.addTab), for: .touchUpInside)
-			
+            $0.tabCountButton.addTarget(self, action: #selector(showTabTray), for: .touchUpInside)
+            
             self.view.addSubview($0)
             $0.snp.makeConstraints { (make) in
                 if #available(iOS 11.0, *) {
@@ -88,11 +89,21 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         autocompleteView.throttleTime = 0.2
 
 		tabContainer?.loadBrowsingSession()
+        
+        if UserDefaults.standard.bool(forKey: SettingsKeys.needToShowAdBlockAlert) {
+            showAdBlockEnabled()
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        tabContainer?.currentTab?.webContainer?.takeScreenshot()
     }
     
     override func viewDidLayoutSubviews() {
@@ -105,6 +116,20 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
     
     override func prefersHomeIndicatorAutoHidden() -> Bool {
         return true
+    }
+    
+    func showAdBlockEnabled() {
+        UserDefaults.standard.set(false, forKey: SettingsKeys.needToShowAdBlockAlert)
+        
+        let av = UIAlertController(title: "Ad Block Enabled!", message: "Thank you for being an early adopter of Radium! As a token of my grattitude you have received the new Ad Block add on free of charge! This will block ads from known sources on web pages you visit. Happy browsing!", preferredStyle: .alert)
+        av.addAction(UIAlertAction(title: "Settings", style: .default, handler: { _ in
+            self.showSettings()
+        }))
+        av.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        delay(0.5) {
+            self.present(av, animated: true, completion: nil)
+        }
     }
     
 	@objc func addTab() {
@@ -220,6 +245,12 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         }
         
         self.present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func showTabTray() {
+        let vc = TabTrayViewController()
+        
+        self.present(vc, animated: true, completion: nil)
     }
     
     // MARK: - Import methods

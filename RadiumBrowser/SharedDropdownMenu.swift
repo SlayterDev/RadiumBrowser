@@ -28,6 +28,8 @@ class SharedDropdownMenu: UIView, UIGestureRecognizerDelegate {
 	var menuItems: [MenuItem]?
 	
 	@objc var dismissGesture: UITapGestureRecognizer?
+    
+    var displayOrigin: CGPoint?
 	
 	init(menuItems: [MenuItem]) {
 		super.init(frame: .zero)
@@ -81,6 +83,7 @@ class SharedDropdownMenu: UIView, UIGestureRecognizerDelegate {
 		let bounds = view.bounds
 		let height = SharedDropdownMenu.defaultMenuItemHeight * CGFloat(menuItems!.count)
 		let width = SharedDropdownMenu.defaultMenuWidth
+        displayOrigin = point
 		
 		var x = point.x - (width / 2)
 		if x + width > bounds.width - 8 {
@@ -90,20 +93,35 @@ class SharedDropdownMenu: UIView, UIGestureRecognizerDelegate {
 			x = 8
 		}
 		
-		self.frame = CGRect(x: x, y: point.y, width: width, height: height)
+        let finalFrame = CGRect(x: x, y: point.y, width: width, height: height)
+		self.frame = CGRect(origin: point, size: .zero)
 		view.addSubview(self)
 		
 		dismissGesture = UITapGestureRecognizer()
         dismissGesture?.delegate = self
 		dismissGesture?.numberOfTapsRequired = 1
 		view.window?.addGestureRecognizer(dismissGesture!)
+        
+        UIView.animate(withDuration: 0.25) {
+            self.frame = finalFrame
+        }
 	}
 	
 	@objc func dismiss() {
 		if let _ = dismissGesture {
 			self.window?.removeGestureRecognizer(dismissGesture!)
 		}
-		self.removeFromSuperview()
+        
+        guard let displayOrigin = displayOrigin else {
+            self.removeFromSuperview()
+            return
+        }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.frame = CGRect(origin: displayOrigin, size: .zero)
+        }) { _ in
+            self.removeFromSuperview()
+        }
 	}
 	
 	@objc func tappedItem(sender: UIButton) {

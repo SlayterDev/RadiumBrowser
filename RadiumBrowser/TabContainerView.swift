@@ -21,6 +21,8 @@ class TabContainerView: UIView, TabViewDelegate {
     
     @objc weak var containerView: UIView?
     
+    var tabCountButton: TabCountButton!
+    var tabScrollView: UIScrollView!
     @objc lazy var tabList: [TabView] = []
 	
 	@objc var addTabButton: UIButton?
@@ -59,6 +61,34 @@ class TabContainerView: UIView, TabViewDelegate {
 			}
 		}
         
+        tabCountButton = TabCountButton().then {
+            self.addSubview($0)
+            $0.snp.makeConstraints { make in
+                make.height.equalTo(TabContainerView.standardHeight - 5)
+                make.width.equalTo(TabContainerView.standardHeight - 5)
+                make.centerY.equalTo(self)
+                if #available(iOS 11.0, *) {
+                    make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(8)
+                } else {
+                    make.left.equalTo(self).offset(4)
+                }
+            }
+        }
+        
+        tabScrollView = UIScrollView().then {
+            $0.isScrollEnabled = true
+            $0.showsVerticalScrollIndicator = false
+            $0.showsHorizontalScrollIndicator = false
+            
+            self.addSubview($0)
+            $0.snp.makeConstraints { make in
+                make.bottom.equalToSuperview()
+                make.height.equalTo(TabContainerView.defaultTabHeight)
+                make.left.equalTo(tabCountButton.snp.right).offset(5)
+                make.right.equalTo(addTabButton!.snp.left).offset(-5)
+            }
+        }
+        
         TabContainerView.currentInstance = self
     }
     
@@ -72,16 +102,20 @@ class TabContainerView: UIView, TabViewDelegate {
 		let newTab = TabView(parentView: container).then { [unowned self] in
 			$0.delegate = self
 			
-			self.addSubview($0)
-            self.sendSubview(toBack: $0)
+			self.tabScrollView.addSubview($0)
+            self.tabScrollView.sendSubview(toBack: $0)
         }
         tabList.append(newTab)
-        didTap(tab: newTab)
-        setUpTabConstraints()
         
+        setUpTabConstraints()
+        didTap(tab: newTab)
         if focusAddressBar && tabList.count > 1 {
             addressBar?.addressField?.becomeFirstResponder()
         }
+        
+        scroll(toTab: newTab, addingTab: true)
+        
+        tabCountButton.updateCount(tabList.count)
         
         return newTab
     }
@@ -94,22 +128,17 @@ class TabContainerView: UIView, TabViewDelegate {
     }
     
     @objc func setUpTabConstraints() {
-        let tabWidth = min(TabContainerView.defaultTabWidth,
-                           (self.frame.width - TabContainerView.standardHeight + CGFloat(tabList.count * 6) - 5) / CGFloat(tabList.count))
+        let tabWidth = TabContainerView.defaultTabWidth
         
         for (i, tab) in tabList.enumerated() {
             tab.snp.remakeConstraints { (make) in
-                make.bottom.equalTo(self)
+                make.top.bottom.equalTo(self.tabScrollView)
                 make.height.equalTo(TabContainerView.defaultTabHeight)
                 if i > 0 {
                     let lastTab = self.tabList[i - 1]
                     make.left.equalTo(lastTab.snp.right).offset(-6)
                 } else {
-                    if #available(iOS 11.0, *) {
-                        make.left.equalTo(self.safeAreaLayoutGuide.snp.left)
-                    } else {
-                        make.left.equalTo(self)
-                    }
+                    make.left.equalTo(self.tabScrollView)
                 }
                 make.width.equalTo(tabWidth)
             }
@@ -117,13 +146,24 @@ class TabContainerView: UIView, TabViewDelegate {
         
         UIView.animate(withDuration: 0.25, animations: {
             self.layoutIfNeeded()
-        })
+        }) { _ in
+            self.tabScrollView.contentSize = CGSize(width: TabContainerView.defaultTabWidth * CGFloat(self.tabList.count) -
+                                               CGFloat((self.tabList.count - 1) * 6),
+                                               height: TabContainerView.defaultTabHeight)
+        }
     }
     
     @objc func setTabColors() {
         for (i, tab) in tabList.enumerated() {
             tab.backgroundColor = (i == selectedTabIndex) ? Colors.radiumGray : Colors.radiumUnselected
         }
+    }
+    
+    func scroll(toTab tab: TabView, addingTab: Bool = false) {
+        guard tabScrollView.contentSize.width > tabScrollView.frame.width else { return }
+        
+        let maxOffset = tabScrollView.contentSize.width - tabScrollView.frame.width + ((addingTab) ? TabContainerView.defaultTabWidth : 0)
+        tabScrollView.setContentOffset(CGPoint(x: min(maxOffset, tab.frame.origin.x), y: 0), animated: true)
     }
 	
 	// MARK: - Tab Delegate
@@ -139,6 +179,8 @@ class TabContainerView: UIView, TabViewDelegate {
 			}
 			
 			switchVisibleWebView(prevTab: prevTab, newTab: tab)
+            
+            scroll(toTab: tab)
 		}
 	}
 	
@@ -154,9 +196,9 @@ class TabContainerView: UIView, TabViewDelegate {
         }
 	}
 	
-	@objc func close(tab: TabView) {
-        guard tabList.count > 1 else { return }
-        guard let indexToRemove = tabList.index(of: tab) else { return }
+	@objc func close(tab: TabView) -> Bool {
+        guard tabList.count > 1 else { return false }
+        guard let indexToRemove = tabList.index(of: tab) else { return false }
         
         tabList.remove(at: indexToRemove)
         tab.removeFromSuperview()
@@ -166,6 +208,10 @@ class TabContainerView: UIView, TabViewDelegate {
         }
         
         setUpTabConstraints()
+        
+        tabCountButton.updateCount(tabList.count)
+        
+        return true
 	}
 	
 	// MARK: - Web Navigation

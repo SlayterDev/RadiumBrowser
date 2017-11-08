@@ -38,7 +38,11 @@ class DoneAccessoryView: UIView {
             self.addSubview($0)
             $0.snp.makeConstraints { (make) -> Void in
                 make.top.equalTo(self)
-                make.right.equalTo(self).offset(-8.0)
+                if #available(iOS 11.0, *) {
+                    make.right.equalTo(self.safeAreaLayoutGuide.snp.right).offset(-8)
+                } else {
+                    make.right.equalTo(self).offset(-8)
+                }
                 make.bottom.equalTo(self)
                 make.width.equalTo(50.0)
             }

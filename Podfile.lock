@@ -1,5 +1,6 @@
 PODS:
   - BSColorUtils (1.0.2)
+  - BulletinBoard (1.3.0)
   - GCDWebServer (3.4.1):
     - GCDWebServer/Core (= 3.4.1)
   - GCDWebServer/Core (3.4.1)
@@ -14,17 +15,22 @@ PODS:
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - SnapKit (3.2.0)
+  - SwiftKeychainWrapper (3.0.1)
+  - SwiftyStoreKit (0.11.0)
   - Then (2.2.0)
   - WaitForIt (1.1.0)
 
 DEPENDENCIES:
   - BSColorUtils (from `https://github.com/SlayterDev/BSColorUtils`)
+  - BulletinBoard
   - GCDWebServer (~> 3.0)
   - Highlightr (from `https://github.com/raspu/Highlightr.git`)
   - LUAutocompleteView
   - RealmSwift (<= 2.10.0)
   - SDWebImage (~> 3.8)
   - SnapKit (<= 3.2.0)
+  - SwiftKeychainWrapper
+  - SwiftyStoreKit
   - Then
   - WaitForIt
 
@@ -44,6 +50,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   BSColorUtils: af322f5fae883bf102fcdf04afc26e56496e2829
+  BulletinBoard: 23c9d98cac654fd484d76f2a0655669974e9bd9c
   GCDWebServer: 1db60034fe0e78a4a8524bd6c7cd97cd3c589870
   Highlightr: 70c4df19e4aa55aa1b4387fb98182abce1dec9da
   LUAutocompleteView: 38bdad1c826a45f7980ce285ba7d566adf0edf1d
@@ -51,9 +58,11 @@ SPEC CHECKSUMS:
   RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
+  SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
+  SwiftyStoreKit: c5cb38110cb01b55b9c5f25d7f69d0083650b2a4
   Then: 823f9813e1d4d0a814a5ba15e9c9d33ec7aca631
   WaitForIt: 5f85af0fece69b5f5a12df4de550cf7eb22664f1
 
-PODFILE CHECKSUM: 3f3aef660ca5ed64d47473ffa018ad76189545ba
+PODFILE CHECKSUM: c21ef39b1a4b21c6deac886b7968f4c46bfd7010
 
 COCOAPODS: 1.4.0.beta.1

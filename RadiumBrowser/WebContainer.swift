@@ -18,6 +18,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	
 	@objc weak var tabView: TabView?
     var favicon: Favicon?
+    var currentScreenshot: UIImage?
     @objc var builtinExtensions: [BuiltinExtension]?
 	
 	@objc var progressView: UIProgressView?
@@ -30,11 +31,14 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
             webView?.removeObserver(self, forKeyPath: "title")
         }
         notificationToken.stop()
+        NotificationCenter.default.removeObserver(self)
 	}
 	
 	@objc init(parent: UIView) {
 		super.init(frame: .zero)
 		
+        NotificationCenter.default.addObserver(self, selector: #selector(adBlockChanged), name: NSNotification.Name.adBlockSettingsChanged, object: nil)
+        
 		self.parentView = parent
 		
         backgroundColor = .white
@@ -72,8 +76,10 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         }
         
         loadBuiltins()
-		
-        let _ = webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
+        
+        loadAdBlocking { [weak self] in
+            let _ = self?.webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
+        }
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -138,6 +144,44 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
             }
         }
     }
+    
+    func loadAdBlocking(completion: @escaping (() -> ())) {
+        if #available(iOS 11.0, *), AdBlockManager.shared.shouldBlockAds() {
+            let group = DispatchGroup()
+            
+            for hostFile in HostFileNames.allValues {
+                group.enter()
+                AdBlockManager.shared.setupAdBlock(forKey: hostFile.rawValue, filename: hostFile.rawValue, webView: webView) {
+                    group.leave()
+                }
+            }
+            
+            group.enter()
+            AdBlockManager.shared.setupAdBlockFromStringLiteral(forWebView: self.webView) {
+                group.leave()
+            }
+            
+            group.notify(queue: .main, execute: {
+                completion()
+            })
+        } else {
+            completion()
+        }
+    }
+    
+    @objc func adBlockChanged() {
+        guard #available(iOS 11.0, *) else { return }
+        
+        let currentRequest = URLRequest(url: webView!.url!)
+        if AdBlockManager.shared.shouldBlockAds() {
+            loadAdBlocking {
+                self.webView?.load(currentRequest)
+            }
+        } else {
+            AdBlockManager.shared.disableAdBlock(forWebView: webView)
+            webView?.load(currentRequest)
+        }
+    }
 	
     // MARK: - View Managment
     
@@ -159,6 +203,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	@objc func removeFromView() {
 		guard let _ = parentView else { return }
 		
+        takeScreenshot()
+        
 		// Remove ourself as the observer
         if isObserving {
             webView?.removeObserver(self, forKeyPath: "estimatedProgress")
@@ -184,6 +230,10 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 			let _ = webView?.load(URLRequest(url: url))
 		}
 	}
+    
+    func takeScreenshot() {
+        currentScreenshot = webView?.screenshot()
+    }
 	
     // MARK: - Webview Delegate
     
@@ -216,7 +266,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         tabView?.tabTitle = webView.title
         tryToGetFavicon(for: webView.url)
         
-        if let tabContainer = tabView?.superview as? TabContainerView, isObserving {
+        if let tabContainer = TabContainerView.currentInstance, isObserving {
             let attrUrl = WebViewManager.shared.getColoredURL(url: webView.url)
             if attrUrl.string == "" {
                 tabContainer.addressBar?.setAddressText(webView.url?.absoluteString)
@@ -229,15 +279,15 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
                  for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if let tabContainer = tabView?.superview as? TabContainerView, navigationAction.targetFrame == nil {
+        if let tabContainer = TabContainerView.currentInstance, navigationAction.targetFrame == nil {
             tabContainer.addNewTab(withRequest: navigationAction.request)
         }
         return nil
     }
     
     func webViewDidClose(_ webView: WKWebView) {
-        if let tabContainer = tabView?.superview as? TabContainerView {
-            tabContainer.close(tab: tabView!)
+        if let tabContainer = TabContainerView.currentInstance {
+            _ = tabContainer.close(tab: tabView!)
         }
     }
     

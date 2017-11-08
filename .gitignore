@@ -61,4 +61,5 @@ fastlane/test_output
 test_output/
 *.app.dSYM.zip
 report.xml
+hosts
 
