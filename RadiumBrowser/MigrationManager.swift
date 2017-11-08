@@ -8,13 +8,14 @@
 
 import UIKit
 import RealmSwift
+import SwiftKeychainWrapper
 
 class MigrationManager: NSObject {
 	@objc static let shared = MigrationManager()
 	
 	@objc func attemptMigration() {
 		let realmConfig = Realm.Configuration(
-			schemaVersion: 5,
+			schemaVersion: 6,
 			migrationBlock: { migration, oldSchemaVersion in
 				if oldSchemaVersion < 1 {
 					migration.enumerateObjects(ofType: ExtensionModel.className()) { _, newObject in
@@ -45,6 +46,13 @@ class MigrationManager: NSObject {
 						newObject?["iconURL"] = ""
 					}
 				}
+                
+                // Using this to grand father current users in for ad blocking
+                if #available(iOS 11.0, *), oldSchemaVersion < 6 {
+                    KeychainWrapper.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
+                    UserDefaults.standard.set(true, forKey: SettingsKeys.needToShowAdBlockAlert)
+                    UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockEnabled)
+                }
 			}
 		)
 		

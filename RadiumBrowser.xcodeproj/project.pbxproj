@@ -52,11 +52,18 @@
 		E612CFC21FAE429200007ACD /* AdBlockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E612CFC11FAE429200007ACD /* AdBlockManager.swift */; };
 		E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */ = {isa = PBXBuildFile; fileRef = E635B6D31FAA026F004C27C0 /* topdomains.txt */; };
 		E635B6D61FAA02C0004C27C0 /* SuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */; };
+		E64F27441FB34E6000EAEB7D /* zeus.json in Resources */ = {isa = PBXBuildFile; fileRef = E64F27431FB34E6000EAEB7D /* zeus.json */; };
+		E64F27461FB34EA300EAEB7D /* tracker.json in Resources */ = {isa = PBXBuildFile; fileRef = E64F27451FB34EA300EAEB7D /* tracker.json */; };
+		E64F27481FB34EF900EAEB7D /* simpleAds.json in Resources */ = {isa = PBXBuildFile; fileRef = E64F27471FB34EF900EAEB7D /* simpleAds.json */; };
+		E64F274A1FB34F5000EAEB7D /* adServerHosts.json in Resources */ = {isa = PBXBuildFile; fileRef = E64F27491FB34F5000EAEB7D /* adServerHosts.json */; };
+		E64F274C1FB3536D00EAEB7D /* ultimateAdBlock.json in Resources */ = {isa = PBXBuildFile; fileRef = E64F274B1FB3536D00EAEB7D /* ultimateAdBlock.json */; };
 		E677E0AA1FB2069D00256072 /* TabCountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E677E0A91FB2069D00256072 /* TabCountButton.swift */; };
 		E677E0AC1FB20A6900256072 /* WKWebViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E677E0AB1FB20A6900256072 /* WKWebViewExtensions.swift */; };
 		E677E0AE1FB20B4100256072 /* TabTrayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E677E0AD1FB20B4100256072 /* TabTrayViewController.swift */; };
 		E677E0B01FB20B8000256072 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E677E0AF1FB20B8000256072 /* TabCollectionViewCell.swift */; };
 		E69EF2F61FB0F2FB002A7CED /* blackHosts.json in Resources */ = {isa = PBXBuildFile; fileRef = E69EF2F51FB0F2FB002A7CED /* blackHosts.json */; };
+		E6A0AD421FB346EC00D6186E /* malwareHosts.json in Resources */ = {isa = PBXBuildFile; fileRef = E6A0AD411FB346EC00D6186E /* malwareHosts.json */; };
+		E6A0AD441FB3493800D6186E /* camelon.json in Resources */ = {isa = PBXBuildFile; fileRef = E6A0AD431FB3493800D6186E /* camelon.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,11 +139,18 @@
 		E612CFC11FAE429200007ACD /* AdBlockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBlockManager.swift; sourceTree = "<group>"; };
 		E635B6D31FAA026F004C27C0 /* topdomains.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = topdomains.txt; sourceTree = "<group>"; };
 		E635B6D51FAA02C0004C27C0 /* SuggestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionManager.swift; sourceTree = "<group>"; };
+		E64F27431FB34E6000EAEB7D /* zeus.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = zeus.json; sourceTree = "<group>"; };
+		E64F27451FB34EA300EAEB7D /* tracker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tracker.json; sourceTree = "<group>"; };
+		E64F27471FB34EF900EAEB7D /* simpleAds.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = simpleAds.json; sourceTree = "<group>"; };
+		E64F27491FB34F5000EAEB7D /* adServerHosts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = adServerHosts.json; sourceTree = "<group>"; };
+		E64F274B1FB3536D00EAEB7D /* ultimateAdBlock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ultimateAdBlock.json; sourceTree = "<group>"; };
 		E677E0A91FB2069D00256072 /* TabCountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCountButton.swift; sourceTree = "<group>"; };
 		E677E0AB1FB20A6900256072 /* WKWebViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewExtensions.swift; sourceTree = "<group>"; };
 		E677E0AD1FB20B4100256072 /* TabTrayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTrayViewController.swift; sourceTree = "<group>"; };
 		E677E0AF1FB20B8000256072 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
 		E69EF2F51FB0F2FB002A7CED /* blackHosts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blackHosts.json; sourceTree = "<group>"; };
+		E6A0AD411FB346EC00D6186E /* malwareHosts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = malwareHosts.json; sourceTree = "<group>"; };
+		E6A0AD431FB3493800D6186E /* camelon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = camelon.json; sourceTree = "<group>"; };
 		FB664E8EC27919571578F55A /* Pods_RadiumBrowserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -346,9 +360,16 @@
 		E635B6D21FAA0245004C27C0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				E64F27491FB34F5000EAEB7D /* adServerHosts.json */,
+				E64F27471FB34EF900EAEB7D /* simpleAds.json */,
+				E64F27451FB34EA300EAEB7D /* tracker.json */,
+				E6A0AD431FB3493800D6186E /* camelon.json */,
+				E6A0AD411FB346EC00D6186E /* malwareHosts.json */,
 				E69EF2F51FB0F2FB002A7CED /* blackHosts.json */,
 				E612CFBF1FAE407300007ACD /* adaway.json */,
+				E64F27431FB34E6000EAEB7D /* zeus.json */,
 				E635B6D31FAA026F004C27C0 /* topdomains.txt */,
+				E64F274B1FB3536D00EAEB7D /* ultimateAdBlock.json */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -467,12 +488,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E64F274A1FB34F5000EAEB7D /* adServerHosts.json in Resources */,
+				E6A0AD441FB3493800D6186E /* camelon.json in Resources */,
 				E612CFC01FAE407300007ACD /* adaway.json in Resources */,
 				E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */,
 				02DF6C551E4795180088BDEB /* Main.storyboard in Resources */,
+				E64F27481FB34EF900EAEB7D /* simpleAds.json in Resources */,
+				E6A0AD421FB346EC00D6186E /* malwareHosts.json in Resources */,
+				E64F274C1FB3536D00EAEB7D /* ultimateAdBlock.json in Resources */,
 				E69EF2F61FB0F2FB002A7CED /* blackHosts.json in Resources */,
 				41A567FD1E40CB3B00470017 /* LaunchScreen.storyboard in Resources */,
 				41A567FA1E40CB3B00470017 /* Assets.xcassets in Resources */,
+				E64F27461FB34EA300EAEB7D /* tracker.json in Resources */,
+				E64F27441FB34E6000EAEB7D /* zeus.json in Resources */,
 				4163EDF81E4BB9D600E02E65 /* Favicons.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

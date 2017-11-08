@@ -18,7 +18,7 @@ class AdBlockManager {
         if UserDefaults.standard.bool(forKey: key) {
             WKContentRuleListStore.default().lookUpContentRuleList(forIdentifier: key) { [weak self] ruleList, error in
                 if let error = error {
-                    print(error.localizedDescription)
+                    print("\(filename).json" + error.localizedDescription)
                     UserDefaults.standard.set(false, forKey: key)
                     self?.setupAdBlock(forKey: key, filename: filename, webView: webView, completion: completion)
                     return
@@ -32,7 +32,8 @@ class AdBlockManager {
             if let jsonPath = Bundle.main.path(forResource: filename, ofType: "json"), let jsonContent = try? String(contentsOfFile: jsonPath, encoding: .utf8) {
                 WKContentRuleListStore.default().compileContentRuleList(forIdentifier: key, encodedContentRuleList: jsonContent) { ruleList, error in
                     if let error = error {
-                        print(error.localizedDescription)
+                        print("\(filename).json" + error.localizedDescription)
+                        completion?()
                         return
                     }
                     if let list = ruleList {
@@ -76,6 +77,7 @@ class AdBlockManager {
             WKContentRuleListStore.default().compileContentRuleList(forIdentifier: SettingsKeys.stringLiteralAdBlock, encodedContentRuleList: jsonString) { contentRuleList, error in
                 if let error = error {
                     print(error.localizedDescription)
+                    completion?()
                     return
                 }
                 if let list = contentRuleList {

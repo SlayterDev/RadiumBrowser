@@ -55,7 +55,7 @@ class SettingsTableViewController: UITableViewController {
         
         rootItem.shouldCompactDescriptionText = true
         rootItem.descriptionText = """
-        Purchasing ad block will use our list of sources to filter out ads being served to you by websites you visit. In addition to blocking unwanted content this will speed up your browsing experience as well as make it safer.
+        Purchasing ad block will use our list of sources to filter out ads being served to you by websites you visit. In addition to blocking unwanted content, this will speed up your browsing experience as well as make it safer.
         PLEASE NOTE: Because ad sources are constantly changing we can't guaruntee every single ad will be blocked. We will continue to add known sources to the app to block more ads as we become aware of them.
         
         Would you like to purchase Ad Blocking?

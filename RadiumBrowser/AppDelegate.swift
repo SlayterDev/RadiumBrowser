@@ -52,11 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         #if DEBUG
-            KeychainWrapper.standard.set(false, forKey: SettingsKeys.adBlockPurchased)
+//            KeychainWrapper.standard.set(false, forKey: SettingsKeys.adBlockPurchased)
         #endif
-        defaults.set(false, forKey: SettingsKeys.adBlockLoaded)
         defaults.set(false, forKey: SettingsKeys.stringLiteralAdBlock)
-        defaults.set(false, forKey: SettingsKeys.blackHostsLoaded)
+        for hostFile in HostFileNames.allValues {
+            defaults.set(false, forKey: hostFile.rawValue)
+        }
         
         mainController = MainViewController()
         self.window?.rootViewController = mainController

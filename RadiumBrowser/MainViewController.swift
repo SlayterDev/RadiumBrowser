@@ -89,6 +89,10 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         autocompleteView.throttleTime = 0.2
 
 		tabContainer?.loadBrowsingSession()
+        
+        if UserDefaults.standard.bool(forKey: SettingsKeys.needToShowAdBlockAlert) {
+            showAdBlockEnabled()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,6 +116,20 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
     
     override func prefersHomeIndicatorAutoHidden() -> Bool {
         return true
+    }
+    
+    func showAdBlockEnabled() {
+        UserDefaults.standard.set(false, forKey: SettingsKeys.needToShowAdBlockAlert)
+        
+        let av = UIAlertController(title: "Ad Block Enabled!", message: "Thank you for being an early adopter of Radium! As a token of my grattitude you have received the new Ad Block add on free of charge! This will block ads from known sources on web pages you visit. Happy browsing!", preferredStyle: .alert)
+        av.addAction(UIAlertAction(title: "Settings", style: .default, handler: { _ in
+            self.showSettings()
+        }))
+        av.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        delay(0.5) {
+            self.present(av, animated: true, completion: nil)
+        }
     }
     
 	@objc func addTab() {

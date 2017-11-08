@@ -21,10 +21,23 @@ struct SettingsKeys {
     static let firstRun = "firstRun"
     static let trackHistory = "trackHistory"
     static let adBlockEnabled = "adBlockEnabled"
-    static let adBlockLoaded = "adBlockLoaded"
-    static let blackHostsLoaded = "blackHostsLoaded"
     static let stringLiteralAdBlock = "stringLiteralAdBlock"
     static let adBlockPurchased = "purchasedAdBlock"
+    static let needToShowAdBlockAlert = "needToShowAdBlockAlert"
+}
+
+enum HostFileNames: String {
+    case adaway
+    case blackHosts
+    case malwareHosts
+    case camelon
+    case zeus
+    case tracker
+    case simpleAds
+    case adServerHosts
+    case ultimateAdBlock
+    
+    static let allValues: [HostFileNames] = [.adaway, .blackHosts, .malwareHosts, .camelon, .zeus, .tracker, .simpleAds, .adServerHosts, .ultimateAdBlock]
 }
 
 let isiPadUI = UI_USER_INTERFACE_IDIOM() == .pad
