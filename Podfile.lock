@@ -1,6 +1,9 @@
 PODS:
   - BSColorUtils (1.0.2)
   - BulletinBoard (1.3.0)
+  - Crashlytics (3.9.3):
+    - Fabric (~> 1.7.2)
+  - Fabric (1.7.2)
   - GCDWebServer (3.4.1):
     - GCDWebServer/Core (= 3.4.1)
   - GCDWebServer/Core (3.4.1)
@@ -23,6 +26,8 @@ PODS:
 DEPENDENCIES:
   - BSColorUtils (from `https://github.com/SlayterDev/BSColorUtils`)
   - BulletinBoard
+  - Crashlytics
+  - Fabric
   - GCDWebServer (~> 3.0)
   - Highlightr (from `https://github.com/raspu/Highlightr.git`)
   - LUAutocompleteView
@@ -51,6 +56,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   BSColorUtils: af322f5fae883bf102fcdf04afc26e56496e2829
   BulletinBoard: 23c9d98cac654fd484d76f2a0655669974e9bd9c
+  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   GCDWebServer: 1db60034fe0e78a4a8524bd6c7cd97cd3c589870
   Highlightr: 70c4df19e4aa55aa1b4387fb98182abce1dec9da
   LUAutocompleteView: 38bdad1c826a45f7980ce285ba7d566adf0edf1d
@@ -63,6 +70,6 @@ SPEC CHECKSUMS:
   Then: 823f9813e1d4d0a814a5ba15e9c9d33ec7aca631
   WaitForIt: 5f85af0fece69b5f5a12df4de550cf7eb22664f1
 
-PODFILE CHECKSUM: c21ef39b1a4b21c6deac886b7968f4c46bfd7010
+PODFILE CHECKSUM: 38166d50a26a5418053fdb30e0b0dc004ba8284b
 
-COCOAPODS: 1.4.0.beta.1
+COCOAPODS: 1.3.1

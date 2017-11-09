@@ -9,10 +9,10 @@
 import Foundation
 import WebKit
 
-extension WKWebView {
+extension UIView {
     func screenshot() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, true, 0)
-        scrollView.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        self.drawHierarchy(in: self.bounds, afterScreenUpdates: true)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return img

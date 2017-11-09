@@ -93,6 +93,8 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         if UserDefaults.standard.bool(forKey: SettingsKeys.needToShowAdBlockAlert) {
             showAdBlockEnabled()
         }
+        
+        addressBar.addressField?.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {

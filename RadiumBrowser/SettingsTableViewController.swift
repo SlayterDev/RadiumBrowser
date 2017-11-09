@@ -192,7 +192,9 @@ class SettingsTableViewController: UITableViewController {
         
         switch section {
         case 1:
-            didSelectAdBlock(withRowIndex: indexPath.row)
+            if !adBlockPurchased() {
+                didSelectAdBlock(withRowIndex: indexPath.row)
+            }
         case 2:
             didSelectClearSection(withRowIndex: indexPath.row)
         case 3:

@@ -13,6 +13,8 @@ import RealmSwift
 import StoreKit
 import SwiftyStoreKit
 import SwiftKeychainWrapper
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 			NSLog("Document Path: %@", documentsPath)
 		#endif
+        
+        Fabric.with([Crashlytics.self])
         
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {

@@ -78,7 +78,9 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         loadBuiltins()
         
         loadAdBlocking { [weak self] in
-            let _ = self?.webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
+            if self?.webView?.url == nil {
+                let _ = self?.webView?.load(URLRequest(url: URL(string: "http://localhost:8080")!))
+            }
         }
 	}
 	
@@ -232,7 +234,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 	}
     
     func takeScreenshot() {
-        currentScreenshot = webView?.screenshot()
+        currentScreenshot = screenshot()
     }
 	
     // MARK: - Webview Delegate
