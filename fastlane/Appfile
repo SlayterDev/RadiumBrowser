@@ -1,0 +1,7 @@
+app_identifier "com.SlayterDevelopment.RadiumBrowser" # The bundle identifier of your app
+apple_id "slayteritunes@gmail.com" # Your Apple email address
+
+team_id "Z67LVNYQSE" # Developer Portal Team ID
+
+# you can even provide different app identifiers, Apple IDs and team names per lane:
+# More information: https://docs.fastlane.tools/advanced/#appfile

@@ -388,6 +388,7 @@
 				414ED6461E43A4F800ECBBD5 /* ShellScript */,
 				98FAF8EA7A76EC5ED8312A05 /* [CP] Embed Pods Frameworks */,
 				465C825ED9071CBBCEF7B04D /* [CP] Copy Pods Resources */,
+				E6747D121FB37399008DC72B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -609,6 +610,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RadiumBrowser/Pods-RadiumBrowser-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		E6747D121FB37399008DC72B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 8d3b134c12cf7e61548f747b1a1be3040da5e9b4 4248e30e74e3f21831641aeff68c7acce22656c22a43b6b761283de1cd6c3f36";
 		};
 /* End PBXShellScriptBuildPhase section */
 
