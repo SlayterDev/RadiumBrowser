@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			NSLog("Document Path: %@", documentsPath)
 		#endif
         
-        Fabric.with([Crashlytics.self])
+        Fabric.with([Crashlytics.self, Answers.self])
         
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
