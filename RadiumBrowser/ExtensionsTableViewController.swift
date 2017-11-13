@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Crashlytics
 
 class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate {
 
@@ -138,6 +139,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
         })
 		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
 			if let nameText = av.textFields?.first?.text, nameText != "" {
+                Answers.logCustomEvent(withName: "Extension Created", customAttributes: ["Script Name": nameText])
 				self.presentEditor(name: nameText, source: nil)
 			}
 		}))
