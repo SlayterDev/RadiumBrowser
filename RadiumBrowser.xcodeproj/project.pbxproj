@@ -64,6 +64,7 @@
 		E69EF2F61FB0F2FB002A7CED /* blackHosts.json in Resources */ = {isa = PBXBuildFile; fileRef = E69EF2F51FB0F2FB002A7CED /* blackHosts.json */; };
 		E6A0AD421FB346EC00D6186E /* malwareHosts.json in Resources */ = {isa = PBXBuildFile; fileRef = E6A0AD411FB346EC00D6186E /* malwareHosts.json */; };
 		E6A0AD441FB3493800D6186E /* camelon.json in Resources */ = {isa = PBXBuildFile; fileRef = E6A0AD431FB3493800D6186E /* camelon.json */; };
+		E6C440A51FBA09A200E6E609 /* CloudToButt.js in Resources */ = {isa = PBXBuildFile; fileRef = E6C440A41FBA09A200E6E609 /* CloudToButt.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,7 @@
 		E69EF2F51FB0F2FB002A7CED /* blackHosts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blackHosts.json; sourceTree = "<group>"; };
 		E6A0AD411FB346EC00D6186E /* malwareHosts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = malwareHosts.json; sourceTree = "<group>"; };
 		E6A0AD431FB3493800D6186E /* camelon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = camelon.json; sourceTree = "<group>"; };
+		E6C440A41FBA09A200E6E609 /* CloudToButt.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = CloudToButt.js; sourceTree = "<group>"; };
 		FB664E8EC27919571578F55A /* Pods_RadiumBrowserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RadiumBrowserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				4163EDF71E4BB9D600E02E65 /* Favicons.js */,
+				E6C440A41FBA09A200E6E609 /* CloudToButt.js */,
 			);
 			name = "Javascript Files";
 			sourceTree = "<group>";
@@ -360,6 +363,15 @@
 		E635B6D21FAA0245004C27C0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				E6C440A31FBA098500E6E609 /* Host Files */,
+				E635B6D31FAA026F004C27C0 /* topdomains.txt */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		E6C440A31FBA098500E6E609 /* Host Files */ = {
+			isa = PBXGroup;
+			children = (
 				E64F27491FB34F5000EAEB7D /* adServerHosts.json */,
 				E64F27471FB34EF900EAEB7D /* simpleAds.json */,
 				E64F27451FB34EA300EAEB7D /* tracker.json */,
@@ -368,10 +380,9 @@
 				E69EF2F51FB0F2FB002A7CED /* blackHosts.json */,
 				E612CFBF1FAE407300007ACD /* adaway.json */,
 				E64F27431FB34E6000EAEB7D /* zeus.json */,
-				E635B6D31FAA026F004C27C0 /* topdomains.txt */,
 				E64F274B1FB3536D00EAEB7D /* ultimateAdBlock.json */,
 			);
-			name = Assets;
+			name = "Host Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -493,6 +504,7 @@
 				E6A0AD441FB3493800D6186E /* camelon.json in Resources */,
 				E612CFC01FAE407300007ACD /* adaway.json in Resources */,
 				E635B6D41FAA026F004C27C0 /* topdomains.txt in Resources */,
+				E6C440A51FBA09A200E6E609 /* CloudToButt.js in Resources */,
 				02DF6C551E4795180088BDEB /* Main.storyboard in Resources */,
 				E64F27481FB34EF900EAEB7D /* simpleAds.json in Resources */,
 				E6A0AD421FB346EC00D6186E /* malwareHosts.json in Resources */,

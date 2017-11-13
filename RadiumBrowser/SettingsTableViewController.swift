@@ -12,6 +12,7 @@ import SwiftyStoreKit
 import BulletinBoard
 import SwiftKeychainWrapper
 import WebKit
+import Crashlytics
 
 enum OptionsTitles: String {
     case trackHistory = "Track History"
@@ -292,10 +293,13 @@ class SettingsTableViewController: UITableViewController {
     
     func makePurchase() {
         bulletinManager.displayActivityIndicator()
+        Answers.logStartCheckout(withPrice: 1.99, currency: "USD", itemCount: 1, customAttributes: nil)
         SwiftyStoreKit.purchaseProduct("com.slayterdevelopment.radium.adblocking") { [weak self] result in
             self?.bulletinManager.dismissBulletin()
             switch result {
             case .success(let purchase):
+                Answers.logPurchase(withPrice: 1.99, currency: "USD", success: true, itemName: "Ad Block", itemType: "IAP", itemId: nil, customAttributes: nil)
+                
                 print("Successfully purchased: \(purchase.productId)")
                 KeychainWrapper.standard.set(true, forKey: SettingsKeys.adBlockPurchased)
                 UserDefaults.standard.set(true, forKey: SettingsKeys.adBlockEnabled)
@@ -315,6 +319,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func purchaseAdBlock() {
+        Answers.logCustomEvent(withName: "Tap purchase", customAttributes: nil)
         bulletinManager.prepare()
         bulletinManager.presentBulletin(above: self)
     }

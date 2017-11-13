@@ -57,5 +57,27 @@ class MigrationManager: NSObject {
 		)
 		
 		Realm.Configuration.defaultConfiguration = realmConfig
+        
+        if !UserDefaults.standard.bool(forKey: "cloudToButtAdded") {
+            if let filePath = Bundle.main.path(forResource: "CloudToButt", ofType: "js"),
+                let content = try? String(contentsOfFile: filePath, encoding: .utf8) {
+                UserDefaults.standard.set(true, forKey: "cloudToButtAdded")
+                
+                let exten = ExtensionModel()
+                exten.id = UUID().uuidString
+                exten.name = "Cloud To Butt"
+                exten.source = content
+                exten.active = false
+                
+                do {
+                    let realm = try Realm()
+                    try realm.write {
+                        realm.add(exten)
+                    }
+                } catch {
+                    print("Realm error: \(error.localizedDescription)")
+                }
+            }
+        }
 	}
 }
