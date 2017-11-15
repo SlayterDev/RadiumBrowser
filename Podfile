@@ -33,6 +33,9 @@ def all_pods
     pod 'SwiftKeychainWrapper'
     pod 'Fabric'
     pod 'Crashlytics'
+    
+    # Facebook crap
+    pod 'FacebookCore'
 
     project 'RadiumBrowser.xcodeproj'
 
