@@ -75,6 +75,8 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Answers.logContentView(withName: "Settings Page", contentType: nil, contentId: nil, customAttributes: nil)
+        
         title = "Settings"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(done))
         
