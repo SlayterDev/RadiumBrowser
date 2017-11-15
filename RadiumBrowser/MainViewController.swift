@@ -8,6 +8,7 @@
 
 import UIKit
 import LUAutocompleteView
+import Crashlytics
 
 class MainViewController: UIViewController, HistoryNavigationDelegate {
 
@@ -171,6 +172,11 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		guard let url = selectedTab.webContainer?.webView?.url else { return }
 		let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
 		activityVC.excludedActivityTypes = [.print]
+        activityVC.completionWithItemsHandler = { _, completed, _, _ in
+            if completed {
+                Answers.logCustomEvent(withName: "Shared Link", customAttributes: nil)
+            }
+        }
 		self.present(activityVC, animated: true, completion: nil)
 	}
     

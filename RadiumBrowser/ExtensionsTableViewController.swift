@@ -23,7 +23,9 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        Answers.logContentView(withName: "Extensions", contentType: nil, contentId: nil, customAttributes: nil)
+        
         title = "Extensions"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         

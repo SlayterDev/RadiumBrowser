@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Crashlytics
 
 protocol HistoryNavigationDelegate: class {
     func didSelectEntry(with url: URL?)
@@ -28,6 +29,8 @@ class HistoryTableViewController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Answers.logContentView(withName: "View History", contentType: nil, contentId: nil, customAttributes: nil)
 		
 		title = "History"
 
@@ -128,6 +131,7 @@ class HistoryTableViewController: UITableViewController {
 		do {
 			try realm.write {
 				realm.delete(history!.filter("id = %@", history![indexPath.row].id))
+                Answers.logCustomEvent(withName: "Delete History Item", customAttributes: nil)
 			}
 		} catch let error as NSError {
 			print("Could not delete object: \(error.localizedDescription)")

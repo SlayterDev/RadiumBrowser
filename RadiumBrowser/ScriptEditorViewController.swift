@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import Highlightr
+import Crashlytics
 
 protocol ScriptEditorDelegate: class {
 	func addScript(named name: String?, source: String?, injectionTime: Int)
@@ -27,7 +28,9 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        Answers.logContentView(withName: "Edit Extension", contentType: nil, contentId: scriptName, customAttributes: nil)
+        
         self.navigationItem.prompt = scriptName
 		
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(self.done(sender:)))
