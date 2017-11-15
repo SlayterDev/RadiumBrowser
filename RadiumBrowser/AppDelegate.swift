@@ -15,6 +15,7 @@ import SwiftyStoreKit
 import SwiftKeychainWrapper
 import Fabric
 import Crashlytics
+import FacebookCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	@objc var mainController: MainViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-		
+        AppEventsLogger.activate(application)
+        
 		#if arch(i386) || arch(x86_64)
 			let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 			NSLog("Document Path: %@", documentsPath)

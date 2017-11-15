@@ -166,7 +166,7 @@ class AddressBar: UIView, UITextFieldDelegate {
 			string.setAttributes([:], range: NSRange(0..<string.length))
 			textField.attributedText = string
 		}
-        if textField.text?.count > 0 {
+        if let text = textField.text, !text.isEmpty {
             textField.selectAll(nil)
         }
     }
