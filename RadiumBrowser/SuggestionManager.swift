@@ -34,7 +34,7 @@ class SuggestionManager {
     var realm: Realm!
     
     deinit {
-        notificationToken.stop()
+        notificationToken.invalidate()
     }
     
     init() {
@@ -49,7 +49,7 @@ class SuggestionManager {
         do {
             self.realm = try Realm()
             self.historyResults = realm.objects(HistoryEntry.self)
-            self.notificationToken = historyResults?.addNotificationBlock { [weak self] _ in
+            self.notificationToken = historyResults?.observe { [weak self] _ in
                 self?.reupdateList()
             }
         } catch let error as NSError {

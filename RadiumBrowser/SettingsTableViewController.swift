@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 import SwiftyStoreKit
-import BulletinBoard
+import BLTNBoard
 import SwiftKeychainWrapper
 import WebKit
 
@@ -48,13 +48,12 @@ class SettingsTableViewController: UITableViewController {
     
     static let identifier = "SettingsIdentifier"
     
-    lazy var bulletinManager: BulletinManager = {
-        let rootItem = PageBulletinItem(title: "Ad Blocking")
+    lazy var bulletinManager: BLTNItemManager = {
+        let rootItem = BLTNPageItem(title: "Ad Blocking")
         if !isiPhone5 {
             rootItem.image = #imageLiteral(resourceName: "NoAds")
         }
         
-        rootItem.shouldCompactDescriptionText = true
         rootItem.descriptionText = """
         Purchasing ad block will use our list of sources to filter out ads being served to you by websites you visit. In addition to blocking unwanted content, this will speed up your browsing experience as well as make it safer.
         PLEASE NOTE: Because ad sources are constantly changing we can't guaruntee every single ad will be blocked. We will continue to add known sources to the app to block more ads as we become aware of them.
@@ -69,7 +68,7 @@ class SettingsTableViewController: UITableViewController {
             item.manager?.dismissBulletin()
         }
         rootItem.alternativeButtonTitle = "Not now"
-        return BulletinManager(rootItem: rootItem)
+        return BLTNItemManager(rootItem: rootItem)
     }()
     
     override func viewDidLoad() {
@@ -317,8 +316,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func purchaseAdBlock() {
-        bulletinManager.prepare()
-        bulletinManager.presentBulletin(above: self)
+        bulletinManager.showBulletin(above: self)
     }
     
     func restorePurchases() {

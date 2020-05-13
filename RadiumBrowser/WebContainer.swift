@@ -30,7 +30,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
             webView?.removeObserver(self, forKeyPath: "estimatedProgress")
             webView?.removeObserver(self, forKeyPath: "title")
         }
-        notificationToken.stop()
+        notificationToken.invalidate()
         NotificationCenter.default.removeObserver(self)
 	}
 	
@@ -68,7 +68,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         
         do {
             let realm = try Realm()
-            self.notificationToken = realm.addNotificationBlock { _, _ in
+            self.notificationToken = realm.observe { _, _ in
                 self.reloadExtensions()
             }
         } catch let error as NSError {

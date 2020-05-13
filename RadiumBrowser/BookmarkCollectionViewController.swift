@@ -39,7 +39,7 @@ class BookmarkCollectionViewController: UICollectionViewController {
 		do {
 			realm = try Realm()
 			bookmarks = realm.objects(Bookmark.self)
-			notificationToken = bookmarks?.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+			notificationToken = bookmarks?.observe { [weak self] (changes: RealmCollectionChange) in
 				guard let collectionView = self?.collectionView else { return }
 				switch changes {
 				case .initial:

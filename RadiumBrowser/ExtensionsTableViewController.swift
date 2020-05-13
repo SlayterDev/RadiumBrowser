@@ -18,7 +18,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
     var realm: Realm!
 	
 	deinit {
-		notificationToken.stop()
+		notificationToken.invalidate()
 	}
 	
     override func viewDidLoad() {
@@ -31,7 +31,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
         
         do {
             self.realm = try Realm()
-			self.notificationToken = realm.addNotificationBlock { _, _ in
+			self.notificationToken = realm.observe { _, _ in
 				DispatchQueue.main.async {
 					self.tableView.reloadSections([1], with: .automatic)
 				}

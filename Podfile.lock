@@ -1,38 +1,36 @@
 PODS:
   - BSColorUtils (1.0.2)
-  - BulletinBoard (1.3.0)
-  - GCDWebServer (3.4.1):
-    - GCDWebServer/Core (= 3.4.1)
-  - GCDWebServer/Core (3.4.1)
-  - Highlightr (1.1.0)
-  - LUAutocompleteView (2.0.0)
-  - Realm (2.10.0):
-    - Realm/Headers (= 2.10.0)
-  - Realm/Headers (2.10.0)
-  - RealmSwift (2.10.0):
-    - Realm (= 2.10.0)
-  - SDWebImage (3.8.2):
-    - SDWebImage/Core (= 3.8.2)
-  - SDWebImage/Core (3.8.2)
-  - SnapKit (3.2.0)
-  - SwiftKeychainWrapper (3.0.1)
-  - SwiftyStoreKit (0.11.0)
-  - Then (2.2.0)
-  - WaitForIt (1.1.0)
+  - BulletinBoard (3.0.0)
+  - GCDWebServer (3.5.4):
+    - GCDWebServer/Core (= 3.5.4)
+  - GCDWebServer/Core (3.5.4)
+  - Highlightr (2.1.0)
+  - LUAutocompleteView (3.0.0)
+  - Realm (4.4.0):
+    - Realm/Headers (= 4.4.0)
+  - Realm/Headers (4.4.0)
+  - RealmSwift (4.4.0):
+    - Realm (= 4.4.0)
+  - SDWebImage (3.8.3):
+    - SDWebImage/Core (= 3.8.3)
+  - SDWebImage/Core (3.8.3)
+  - SnapKit (4.2.0)
+  - SwiftKeychainWrapper (3.4.0)
+  - SwiftyStoreKit (0.14.0)
+  - Then (2.4.0)
 
 DEPENDENCIES:
   - BSColorUtils (from `https://github.com/SlayterDev/BSColorUtils`)
-  - BulletinBoard
+  - BulletinBoard (<= 3.0.0)
   - GCDWebServer (~> 3.0)
-  - Highlightr (from `https://github.com/raspu/Highlightr.git`)
-  - LUAutocompleteView
-  - RealmSwift (<= 2.10.0)
+  - Highlightr (from `https://github.com/raspu/Highlightr.git`, tag `2.1.0`)
+  - LUAutocompleteView (<= 3.0.0)
+  - RealmSwift (<= 4.4.0)
   - SDWebImage (~> 3.8)
-  - SnapKit (<= 3.2.0)
-  - SwiftKeychainWrapper
-  - SwiftyStoreKit
-  - Then
-  - WaitForIt
+  - SnapKit (<= 4.2.0)
+  - SwiftKeychainWrapper (<= 3.4.0)
+  - SwiftyStoreKit (<= 0.14.0)
+  - Then (<= 2.4.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -46,37 +44,36 @@ SPEC REPOS:
     - SwiftKeychainWrapper
     - SwiftyStoreKit
     - Then
-    - WaitForIt
 
 EXTERNAL SOURCES:
   BSColorUtils:
     :git: https://github.com/SlayterDev/BSColorUtils
   Highlightr:
     :git: https://github.com/raspu/Highlightr.git
+    :tag: 2.1.0
 
 CHECKOUT OPTIONS:
   BSColorUtils:
     :commit: 953ec48826fb938045771af49c57087218d8ee9f
     :git: https://github.com/SlayterDev/BSColorUtils
   Highlightr:
-    :commit: c95539e8417448b6ba22d06dd66667cd2046f393
     :git: https://github.com/raspu/Highlightr.git
+    :tag: 2.1.0
 
 SPEC CHECKSUMS:
   BSColorUtils: af322f5fae883bf102fcdf04afc26e56496e2829
-  BulletinBoard: 23c9d98cac654fd484d76f2a0655669974e9bd9c
-  GCDWebServer: 1db60034fe0e78a4a8524bd6c7cd97cd3c589870
-  Highlightr: 70c4df19e4aa55aa1b4387fb98182abce1dec9da
-  LUAutocompleteView: 38bdad1c826a45f7980ce285ba7d566adf0edf1d
-  Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
-  RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
-  SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
-  SwiftyStoreKit: c5cb38110cb01b55b9c5f25d7f69d0083650b2a4
-  Then: 823f9813e1d4d0a814a5ba15e9c9d33ec7aca631
-  WaitForIt: 5f85af0fece69b5f5a12df4de550cf7eb22664f1
+  BulletinBoard: 927f4f9fd22503ceecd71bfc830fd65d5996593a
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
+  Highlightr: 683f05d5223cade533a78528a35c9f06e4caddf8
+  LUAutocompleteView: 41f4b6d8871b66d71070ee00d33070f9b3d293c5
+  Realm: e125f464884cda953ebefe70c671b75b03b81b9b
+  RealmSwift: 33656a42bd300959a081fc13347376bc478071af
+  SDWebImage: a72e880a8fe0f7fc31efe15aaed443c074d2a80c
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
+  SwiftyStoreKit: 448b0282a4df23281c5cfa8555e8cbc01b6424e9
+  Then: 71866660c7af35a7343831f7668e7cd2b62ee0f2
 
-PODFILE CHECKSUM: c21ef39b1a4b21c6deac886b7968f4c46bfd7010
+PODFILE CHECKSUM: 5a0c0224c0d2c50815b3b2924f329c7287f457bc
 
 COCOAPODS: 1.9.1

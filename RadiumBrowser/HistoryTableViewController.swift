@@ -24,7 +24,7 @@ class HistoryTableViewController: UITableViewController {
 	var history: Results<HistoryEntry>?
 	
 	deinit {
-		notificationToken.stop()
+		notificationToken.invalidate()
 	}
 	
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ class HistoryTableViewController: UITableViewController {
 		do {
 			realm = try Realm()
             history = realm.objects(HistoryEntry.self).sorted(byKeyPath: "visitDate", ascending: false)
-            notificationToken = history?.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+            notificationToken = history?.observe { [weak self] (changes: RealmCollectionChange) in
                 guard let tableView = self?.tableView else { return }
                 switch changes {
                 case .initial:

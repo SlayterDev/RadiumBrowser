@@ -13,40 +13,26 @@ def all_pods
     # See "Shared" folder for more shared libraries/resources
 
     # AutoLayout
-    pod 'SnapKit', '<= 3.2.0'
+    pod 'SnapKit', '<= 4.2.0'
     # Then API - initialization
-    pod 'Then'
+    pod 'Then', '<= 2.4.0'
     # Realm database
-    pod 'RealmSwift', '<= 2.10.0'
+    pod 'RealmSwift', '<= 4.4.0'
     # async images
     pod 'SDWebImage', '~> 3.8'
     # Color utilities
     pod 'BSColorUtils', :git => 'https://github.com/SlayterDev/BSColorUtils'
     # UITextView Syntax Highlighting
-    pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git'
+    pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :tag => '2.1.0'
     # Event based actions
-    pod 'WaitForIt'
-    pod 'LUAutocompleteView'
+    pod 'LUAutocompleteView', '<= 3.0.0'
     pod 'GCDWebServer', '~> 3.0'
-    pod 'SwiftyStoreKit'
-    pod 'BulletinBoard'
-    pod 'SwiftKeychainWrapper'
+    pod 'SwiftyStoreKit', '<= 0.14.0'
+    pod 'BulletinBoard', '<= 3.0.0'
+    pod 'SwiftKeychainWrapper', '<= 3.4.0'
 
     project 'RadiumBrowser.xcodeproj'
 
-end
-
-post_install do |installer|
-    # Your list of targets here.
-    myTargets = ['Highlightr', 'SnapKit']
-    
-    installer.pods_project.targets.each do |target|
-        if myTargets.include? target.name
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '3.2'
-            end
-        end
-    end
 end
 
 target 'RadiumBrowser' do
