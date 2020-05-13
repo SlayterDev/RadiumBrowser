@@ -49,6 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.set(true, forKey: SettingsKeys.firstRun)
             performFirstRunTasks()
         }
+        if defaults.string(forKey: SettingsKeys.searchEngineUrl) == nil {
+            defaults.set("https://duckduckgo.com/?q=", forKey: SettingsKeys.searchEngineUrl)
+        }
         
         #if DEBUG
 //            KeychainWrapper.standard.set(false, forKey: SettingsKeys.adBlockPurchased)

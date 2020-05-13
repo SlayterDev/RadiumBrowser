@@ -223,7 +223,8 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
 		var urlString = string
 		if !urlString.isURL() {
 			let searchTerms = urlString.replacingOccurrences(of: " ", with: "+")
-			urlString = "http://google.com/search?q=" + searchTerms
+            let searchUrl = UserDefaults.standard.string(forKey: SettingsKeys.searchEngineUrl)!
+			urlString = searchUrl + searchTerms
 		} else if !urlString.hasPrefix("http://") && !urlString.hasPrefix("https://") {
 			urlString = "http://" + urlString
 		}
@@ -302,13 +303,14 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
     }
     
     func handleError(_ error: NSError) {
-        if let failUrl = error.userInfo["NSErrorFailingURLStringKey"] as? String, let url = URL(string: failUrl), !failUrl.contains("localhost") {
-            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { success in
-                if success {
-                    print("openURL succeeded")
-                }
-            })
-        }
+        print(error.localizedDescription)
+//        if let failUrl = error.userInfo["NSErrorFailingURLStringKey"] as? String, let url = URL(string: failUrl), !failUrl.contains("localhost") {
+//            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { success in
+//                if success {
+//                    print("openURL succeeded")
+//                }
+//            })
+//        }
     }
 	
 	// MARK: - Alert Methods

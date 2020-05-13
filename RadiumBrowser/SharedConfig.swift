@@ -24,6 +24,7 @@ struct SettingsKeys {
     static let stringLiteralAdBlock = "stringLiteralAdBlock"
     static let adBlockPurchased = "purchasedAdBlock"
     static let needToShowAdBlockAlert = "needToShowAdBlockAlert"
+    static let searchEngineUrl = "searchEngineUrl"
 }
 
 enum HostFileNames: String {

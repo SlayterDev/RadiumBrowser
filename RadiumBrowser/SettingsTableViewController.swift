@@ -20,6 +20,28 @@ enum OptionsTitles: String {
     static let allValues: [OptionsTitles] = [.trackHistory]
 }
 
+enum SearchEngineTitles: String {
+    case duckduckgo = "DuckDuckGo"
+    case google = "Google"
+    case bing = "Bing"
+    case yahoo = "Yahoo"
+    
+    static let allValues: [SearchEngineTitles] = [.duckduckgo, .google, .bing, .yahoo]
+    
+    static func getUrl(title: SearchEngineTitles) -> String {
+        switch title {
+        case .duckduckgo:
+            return "https://duckduckgo.com/?q="
+        case .google:
+            return "https://google.com/search?q="
+        case .bing:
+            return "https://bing.com/search?q="
+        case .yahoo:
+            return "https://search.yahoo.com/search?p="
+        }
+    }
+}
+
 enum AdBlockingTitles: String {
     case purchaseAdBlock = "Purchase Ad Blocking"
     case restorePurchases = "Restore Purchases"
@@ -47,6 +69,8 @@ enum LinksTitles: String {
 class SettingsTableViewController: UITableViewController {
     
     static let identifier = "SettingsIdentifier"
+    
+    lazy var currentSearchUrl = UserDefaults.standard.string(forKey: SettingsKeys.searchEngineUrl)
     
     lazy var bulletinManager: BLTNItemManager = {
         let rootItem = BLTNPageItem(title: "Ad Blocking")
@@ -97,25 +121,33 @@ class SettingsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         if #available(iOS 11.0, *) {
-            return 4
+            return 5
         } else {
-            return 3
+            return 4
         }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var counts = [OptionsTitles.allValues.count, DeleteSectionTitles.allValues.count, LinksTitles.allValues.count]
+        var counts = [OptionsTitles.allValues.count, SearchEngineTitles.allValues.count, DeleteSectionTitles.allValues.count, LinksTitles.allValues.count]
         if #available(iOS 11.0, *) {
-            counts.insert((adBlockPurchased()) ? AdBlockingTitles.purchasedValues.count : AdBlockingTitles.unpurchasedValues.count, at: 1)
+            counts.insert((adBlockPurchased()) ? AdBlockingTitles.purchasedValues.count : AdBlockingTitles.unpurchasedValues.count, at: 2)
         }
         
         return counts[section]
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Search Engine"
+        }
+        
+        return ""
+    }
+    
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if #available(iOS 11.0, *) {
             return nil
-        } else if section == 2 {
+        } else if section == 3 {
             return "Upgrade to iOS 11 to have the option to block ads on pages you visit!"
         }
         
@@ -130,7 +162,7 @@ class SettingsTableViewController: UITableViewController {
         var section = indexPath.section
         if #available(iOS 11.0, *) {
             // do nothing
-        } else if section > 0 {
+        } else if section > 1 {
             section += 1
         }
         
@@ -147,6 +179,16 @@ class SettingsTableViewController: UITableViewController {
                 }
             }
         case 1:
+            cell.selectionStyle = .default
+            let engineTitle = SearchEngineTitles.allValues[indexPath.row]
+            cell.textLabel?.text = engineTitle.rawValue
+            
+            if SearchEngineTitles.getUrl(title: engineTitle) == currentSearchUrl {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
+        case 2:
             if adBlockPurchased() {
                 let option = AdBlockingTitles.purchasedValues[indexPath.row]
                 cell.textLabel?.text = option.rawValue
@@ -164,12 +206,12 @@ class SettingsTableViewController: UITableViewController {
                 cell.selectionStyle = .default
                 cell.textLabel?.textAlignment = .center
             }
-        case 2:
+        case 3:
             cell.selectionStyle = .default
             cell.textLabel?.textColor = .red
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = DeleteSectionTitles.allValues[indexPath.row].rawValue
-        case 3:
+        case 4:
             cell.selectionStyle = .none
             cell.textLabel?.textAlignment = .center
             cell.textLabel?.text = LinksTitles.allValues[indexPath.row].rawValue
@@ -186,18 +228,20 @@ class SettingsTableViewController: UITableViewController {
         var section = indexPath.section
         if #available(iOS 11.0, *) {
             // do nothing
-        } else if section > 0 {
+        } else if section > 1 {
             section += 1
         }
         
         switch section {
         case 1:
+            didSelectSearchEngine(withRowIndex: indexPath.row)
+        case 2:
             if !adBlockPurchased() {
                 didSelectAdBlock(withRowIndex: indexPath.row)
             }
-        case 2:
-            didSelectClearSection(withRowIndex: indexPath.row)
         case 3:
+            didSelectClearSection(withRowIndex: indexPath.row)
+        case 4:
             didSelectLinkSection(withRowIndex: indexPath.row)
         default:
             break
@@ -264,6 +308,15 @@ class SettingsTableViewController: UITableViewController {
     @objc func adBlockEnabledChanged(sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: SettingsKeys.adBlockEnabled)
         NotificationCenter.default.post(name: NSNotification.Name.adBlockSettingsChanged, object: nil)
+    }
+    
+    // MARK: - Search Section
+    
+    func didSelectSearchEngine(withRowIndex rowIndex: Int) {
+        let searchUrl = SearchEngineTitles.getUrl(title: SearchEngineTitles.allValues[rowIndex])
+        UserDefaults.standard.set(searchUrl, forKey: SettingsKeys.searchEngineUrl)
+        currentSearchUrl = searchUrl
+        tableView.reloadData()
     }
     
     // MARK: - Links Section
