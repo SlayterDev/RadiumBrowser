@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-import Crashlytics
+
 
 class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate {
 
@@ -23,8 +23,6 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Answers.logContentView(withName: "Extensions", contentType: nil, contentId: nil, customAttributes: nil)
         
         title = "Extensions"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -118,7 +116,7 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
 		}
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         guard let _ = extensions else { return }
         guard let _ = realm else { return }
@@ -141,7 +139,6 @@ class ExtensionsTableViewController: UITableViewController, ScriptEditorDelegate
         })
 		av.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
 			if let nameText = av.textFields?.first?.text, nameText != "" {
-                Answers.logCustomEvent(withName: "Extension Created", customAttributes: ["Script Name": nameText])
 				self.presentEditor(name: nameText, source: nil)
 			}
 		}))

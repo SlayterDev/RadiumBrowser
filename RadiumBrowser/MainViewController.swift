@@ -8,7 +8,7 @@
 
 import UIKit
 import LUAutocompleteView
-import Crashlytics
+
 
 class MainViewController: UIViewController, HistoryNavigationDelegate {
 
@@ -117,7 +117,7 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
         tabContainer?.setUpTabConstraints()
     }
     
-    override func prefersHomeIndicatorAutoHidden() -> Bool {
+    override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
     
@@ -174,7 +174,6 @@ class MainViewController: UIViewController, HistoryNavigationDelegate {
 		activityVC.excludedActivityTypes = [.print]
         activityVC.completionWithItemsHandler = { _, completed, _, _ in
             if completed {
-                Answers.logCustomEvent(withName: "Shared Link", customAttributes: nil)
             }
         }
 		self.present(activityVC, animated: true, completion: nil)

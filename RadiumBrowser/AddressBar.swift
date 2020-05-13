@@ -163,7 +163,7 @@ class AddressBar: UIView, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
 		if let string = textField.attributedText?.mutableCopy() as? NSMutableAttributedString {
-			string.setAttributes([:], range: NSRange(0..<string.length))
+			string.setAttributes(convertToOptionalNSAttributedStringKeyDictionary([:]), range: NSRange(0..<string.length))
 			textField.attributedText = string
 		}
         if let text = textField.text, !text.isEmpty {
@@ -171,4 +171,10 @@ class AddressBar: UIView, UITextFieldDelegate {
         }
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

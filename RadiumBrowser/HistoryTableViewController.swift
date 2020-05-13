@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-import Crashlytics
+
 
 protocol HistoryNavigationDelegate: class {
     func didSelectEntry(with url: URL?)
@@ -29,8 +29,6 @@ class HistoryTableViewController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Answers.logContentView(withName: "View History", contentType: nil, contentId: nil, customAttributes: nil)
 		
 		title = "History"
 
@@ -123,7 +121,7 @@ class HistoryTableViewController: UITableViewController {
     }
 
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		guard editingStyle == .delete else { return }
 		guard let _ = history else { return }
 		guard let _ = realm else { return }
@@ -131,7 +129,6 @@ class HistoryTableViewController: UITableViewController {
 		do {
 			try realm.write {
 				realm.delete(history!.filter("id = %@", history![indexPath.row].id))
-                Answers.logCustomEvent(withName: "Delete History Item", customAttributes: nil)
 			}
 		} catch let error as NSError {
 			print("Could not delete object: \(error.localizedDescription)")
@@ -143,7 +140,13 @@ class HistoryTableViewController: UITableViewController {
         df.dateFormat = "MM/dd/yy hh:mma"
         let dateString = df.string(from: date)
         
-        return NSMutableAttributedString(string: "\(dateString)\((attachDash) ? " - " : "")", attributes: [.foregroundColor: UIColor.gray])
+        return NSMutableAttributedString(string: "\(dateString)\((attachDash) ? " - " : "")", attributes: convertToOptionalNSAttributedStringKeyDictionary(["foregroundColor": UIColor.gray]))
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

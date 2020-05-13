@@ -13,7 +13,7 @@ class BookmarkTableViewCell: UITableViewCell {
     @objc var titleTextField: UITextField?
     @objc var urlTextField: UITextField?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         imageView?.snp.remakeConstraints { (make) in

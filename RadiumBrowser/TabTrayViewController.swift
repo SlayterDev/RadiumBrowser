@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Crashlytics
+
 
 class TabTrayViewController: UIViewController {
     
@@ -17,8 +17,6 @@ class TabTrayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Answers.logContentView(withName: "View Tab Tray", contentType: nil, contentId: nil, customAttributes: nil)
         
         view.backgroundColor = Colors.radiumUnselected
         

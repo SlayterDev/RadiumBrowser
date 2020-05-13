@@ -49,14 +49,14 @@ class WebViewManager: NSObject {
 		let urlString = url.absoluteString as NSString
 		
 		let mutableAttributedString = NSMutableAttributedString(string: urlString as String,
-		                                                        attributes: [NSAttributedStringKey.foregroundColor: UIColor.gray])
+                                                                attributes: convertToOptionalNSAttributedStringKeyDictionary(["foregroundColor": UIColor.gray]))
 		if url.scheme == "https" {
 			let range = urlString.range(of: url.scheme!)
-			mutableAttributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: Colors.urlGreen, range: range)
+			mutableAttributedString.addAttribute(convertToNSAttributedStringKey("foregroundColor"), value: Colors.urlGreen, range: range)
 		}
         
 		let domainRange = urlString.range(of: url.host!)
-		mutableAttributedString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.black, range: domainRange)
+		mutableAttributedString.addAttribute(convertToNSAttributedStringKey("foregroundColor"), value: UIColor.black, range: domainRange)
 		
 		return mutableAttributedString
 	}
@@ -66,4 +66,15 @@ class WebViewManager: NSObject {
         
         return [faviconGetter]
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToNSAttributedStringKey(_ input: String) -> NSAttributedString.Key {
+	return NSAttributedString.Key(rawValue: input)
 }

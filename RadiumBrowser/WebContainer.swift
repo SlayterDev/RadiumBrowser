@@ -303,7 +303,7 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
     
     func handleError(_ error: NSError) {
         if let failUrl = error.userInfo["NSErrorFailingURLStringKey"] as? String, let url = URL(string: failUrl), !failUrl.contains("localhost") {
-            UIApplication.shared.open(url, options: [:], completionHandler: { success in
+            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { success in
                 if success {
                     print("openURL succeeded")
                 }
@@ -366,4 +366,9 @@ class WebContainer: UIView, WKNavigationDelegate, WKUIDelegate {
         
         tabView?.tabImageView?.sd_setImage(with: URL(string: faviconURL), placeholderImage: UIImage(named: "globe"))
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

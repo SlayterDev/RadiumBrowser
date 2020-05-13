@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 import Highlightr
-import Crashlytics
+
 
 protocol ScriptEditorDelegate: class {
 	func addScript(named name: String?, source: String?, injectionTime: Int)
@@ -28,8 +28,6 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Answers.logContentView(withName: "Edit Extension", contentType: nil, contentId: scriptName, customAttributes: nil)
         
         self.navigationItem.prompt = scriptName
 		
@@ -87,17 +85,17 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
         
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(keyboardWillShow(notification:)),
-                                       name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+                                       name: UIResponder.keyboardWillShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(keyboardWillHide(notification:)),
-                                       name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+                                       name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
         
         let notificationCenter = NotificationCenter.default
-		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+		notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+		notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
 	}
 
     override func didReceiveMemoryWarning() {
@@ -167,7 +165,7 @@ class ScriptEditorViewController: UIViewController, UITextViewDelegate {
     
 	@objc func keyboardWillShow(notification: NSNotification) {
 		let userInfo = notification.userInfo!
-		guard let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
+		guard let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
         
 		if isiPadUI {
 			textView?.snp.remakeConstraints { (make) in

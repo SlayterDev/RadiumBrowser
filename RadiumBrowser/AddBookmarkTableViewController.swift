@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-import Crashlytics
+
 
 fileprivate let reuseidentifier = "bookmarkCell"
 
@@ -40,7 +40,7 @@ class AddBookmarkTableViewController: UITableViewController {
 
         tableView.register(BookmarkTableViewCell.self, forCellReuseIdentifier: reuseidentifier)
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 88
     }
 
@@ -71,7 +71,6 @@ class AddBookmarkTableViewController: UITableViewController {
             let realm = try Realm()
             try realm.write {
                 realm.add(bookmark)
-                Answers.logCustomEvent(withName: "Bookmark Added", customAttributes: nil)
             }
         } catch let error {
             logRealmError(error: error)

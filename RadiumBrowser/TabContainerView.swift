@@ -103,7 +103,7 @@ class TabContainerView: UIView, TabViewDelegate {
 			$0.delegate = self
 			
 			self.tabScrollView.addSubview($0)
-            self.tabScrollView.sendSubview(toBack: $0)
+            self.tabScrollView.sendSubviewToBack($0)
         }
         tabList.append(newTab)
         

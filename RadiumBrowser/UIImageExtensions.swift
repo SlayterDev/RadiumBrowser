@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIImage {
-	@objc class func imageFrom(systemItem: UIBarButtonSystemItem) -> UIImage? {
+	@objc class func imageFrom(systemItem: UIBarButtonItem.SystemItem) -> UIImage? {
 		let tempItem = UIBarButtonItem(barButtonSystemItem: systemItem, target: nil, action: nil)
 		
 		// add to toolbar and render it

@@ -13,9 +13,6 @@ import RealmSwift
 import StoreKit
 import SwiftyStoreKit
 import SwiftKeychainWrapper
-import Fabric
-import Crashlytics
-import FacebookCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,15 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	@objc var mainController: MainViewController?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        AppEventsLogger.activate(application)
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
 		#if arch(i386) || arch(x86_64)
 			let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 			NSLog("Document Path: %@", documentsPath)
 		#endif
-        
-        Fabric.with([Crashlytics.self, Answers.self])
         
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
@@ -112,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainController?.tabContainer?.saveBrowsingSession()
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         do {
             let source = try String(contentsOf: url, encoding: .utf8)
             mainController?.openEditor(withSource: source, andName: url.deletingPathExtension().lastPathComponent)

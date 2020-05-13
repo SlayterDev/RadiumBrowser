@@ -90,7 +90,7 @@ class WebServer {
         })
         webServer.addHandler(forMethod: "GET", path: "/noimage", request: GCDWebServerRequest.self, processBlock: { _ in
             let img = #imageLiteral(resourceName: "globe")
-            return GCDWebServerDataResponse(data: UIImagePNGRepresentation(img)!, contentType: "image/png")
+            return GCDWebServerDataResponse(data: img.pngData()!, contentType: "image/png")
         })
         webServer.addHandler(forMethod: "GET", path: "/favicon.ico", request: GCDWebServerRequest.self, processBlock: { _ in
             let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? NSDictionary
@@ -99,7 +99,7 @@ class WebServer {
             // First will be smallest for the device class, last will be the largest for device class
             let lastIcon = iconFiles.lastObject as! NSString
             let icon = UIImage(named: lastIcon as String)!
-            return GCDWebServerDataResponse(data: UIImagePNGRepresentation(icon)!, contentType: "image/png")
+            return GCDWebServerDataResponse(data: icon.pngData()!, contentType: "image/png")
         })
     }
     

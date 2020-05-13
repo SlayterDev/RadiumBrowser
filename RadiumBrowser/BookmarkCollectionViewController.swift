@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-import Crashlytics
+
 
 private let reuseIdentifier = "Cell"
 
@@ -23,8 +23,6 @@ class BookmarkCollectionViewController: UICollectionViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-		Answers.logContentView(withName: "View Bookmakrs", contentType: nil, contentId: nil, customAttributes: nil)
         
 		title = "Bookmarks"
 		

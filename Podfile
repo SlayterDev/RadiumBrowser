@@ -31,11 +31,6 @@ def all_pods
     pod 'SwiftyStoreKit'
     pod 'BulletinBoard'
     pod 'SwiftKeychainWrapper'
-    pod 'Fabric'
-    pod 'Crashlytics'
-    
-    # Facebook crap
-    pod 'FacebookCore'
 
     project 'RadiumBrowser.xcodeproj'
 
