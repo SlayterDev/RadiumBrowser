@@ -49,14 +49,14 @@ class WebViewManager: NSObject {
 		let urlString = url.absoluteString as NSString
 		
 		let mutableAttributedString = NSMutableAttributedString(string: urlString as String,
-                                                                attributes: convertToOptionalNSAttributedStringKeyDictionary(["foregroundColor": UIColor.gray]))
+                                                                attributes: [.foregroundColor: UIColor.gray])
 		if url.scheme == "https" {
 			let range = urlString.range(of: url.scheme!)
-			mutableAttributedString.addAttribute(convertToNSAttributedStringKey("foregroundColor"), value: Colors.urlGreen, range: range)
+            mutableAttributedString.addAttribute(.foregroundColor, value: Colors.urlGreen, range: range)
 		}
         
 		let domainRange = urlString.range(of: url.host!)
-		mutableAttributedString.addAttribute(convertToNSAttributedStringKey("foregroundColor"), value: UIColor.black, range: domainRange)
+        mutableAttributedString.addAttribute(.foregroundColor, value: UIColor.black, range: domainRange)
 		
 		return mutableAttributedString
 	}

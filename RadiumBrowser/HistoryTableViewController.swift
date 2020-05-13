@@ -140,7 +140,7 @@ class HistoryTableViewController: UITableViewController {
         df.dateFormat = "MM/dd/yy hh:mma"
         let dateString = df.string(from: date)
         
-        return NSMutableAttributedString(string: "\(dateString)\((attachDash) ? " - " : "")", attributes: convertToOptionalNSAttributedStringKeyDictionary(["foregroundColor": UIColor.gray]))
+        return NSMutableAttributedString(string: "\(dateString)\((attachDash) ? " - " : "")", attributes: [.foregroundColor: UIColor.gray])
     }
     
 }

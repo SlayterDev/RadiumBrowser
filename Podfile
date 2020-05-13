@@ -13,23 +13,23 @@ def all_pods
     # See "Shared" folder for more shared libraries/resources
 
     # AutoLayout
-    pod 'SnapKit', '<= 4.2.0'
+    pod 'SnapKit'
     # Then API - initialization
-    pod 'Then', '<= 2.4.0'
+    pod 'Then'
     # Realm database
-    pod 'RealmSwift', '<= 4.4.0'
+    pod 'RealmSwift'
     # async images
     pod 'SDWebImage', '~> 3.8'
     # Color utilities
     pod 'BSColorUtils', :git => 'https://github.com/SlayterDev/BSColorUtils'
     # UITextView Syntax Highlighting
-    pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git', :tag => '2.1.0'
+    pod 'Highlightr', :git => 'https://github.com/raspu/Highlightr.git'
     # Event based actions
-    pod 'LUAutocompleteView', '<= 3.0.0'
+    pod 'LUAutocompleteView'
     pod 'GCDWebServer', '~> 3.0'
-    pod 'SwiftyStoreKit', '<= 0.14.0'
-    pod 'BulletinBoard', '<= 3.0.0'
-    pod 'SwiftKeychainWrapper', '<= 3.4.0'
+    pod 'SwiftyStoreKit'
+    pod 'BulletinBoard'
+    pod 'SwiftKeychainWrapper'
 
     project 'RadiumBrowser.xcodeproj'
 
