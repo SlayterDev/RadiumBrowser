@@ -455,19 +455,19 @@
 					41A567EE1E40CB3B00470017 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = Z67LVNYQSE;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 					};
 					41A568021E40CB3B00470017 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = Z67LVNYQSE;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 41A567EE1E40CB3B00470017;
 					};
 					41A5680D1E40CB3B00470017 = {
 						CreatedOnToolsVersion = 8.2.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 41A567EE1E40CB3B00470017;
 					};
@@ -478,6 +478,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -818,7 +819,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "RadiumBrowser/RadiumBrowser-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -836,7 +837,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "RadiumBrowser/RadiumBrowser-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -852,7 +853,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RadiumBrowser.app/RadiumBrowser";
 			};
 			name = Debug;
@@ -869,7 +870,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RadiumBrowser.app/RadiumBrowser";
 			};
 			name = Release;
@@ -884,7 +885,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowserUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = RadiumBrowser;
 			};
 			name = Debug;
@@ -899,7 +900,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.slayter.RadiumBrowserUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = RadiumBrowser;
 			};
 			name = Release;

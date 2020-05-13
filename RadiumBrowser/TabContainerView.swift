@@ -170,7 +170,7 @@ class TabContainerView: UIView, TabViewDelegate {
 	
 	@objc func didTap(tab: TabView) {
 		let prevIndex = selectedTabIndex
-		if let index = tabList.index(of: tab) {
+		if let index = tabList.firstIndex(of: tab) {
 			selectedTabIndex = index
 			
 			var prevTab: TabView?
@@ -198,7 +198,7 @@ class TabContainerView: UIView, TabViewDelegate {
 	
 	@objc func close(tab: TabView) -> Bool {
         guard tabList.count > 1 else { return false }
-        guard let indexToRemove = tabList.index(of: tab) else { return false }
+        guard let indexToRemove = tabList.firstIndex(of: tab) else { return false }
         
         tabList.remove(at: indexToRemove)
         tab.removeFromSuperview()
